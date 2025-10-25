@@ -1,5 +1,5 @@
 package com.examly.springapp.repository;
 
-public class AppointmentRepo {
+public class FeedbackRepo {
     
 }
