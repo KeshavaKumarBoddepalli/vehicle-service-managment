@@ -1,12 +1,16 @@
 package com.examly.springapp.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.examly.springapp.model.VehicleMaintenance;
 import com.examly.springapp.repository.VehicleServiceRepo;
 
+
+@Service
 public class VehicleServiceImpl implements VehicleService{
 
     @Autowired
@@ -20,25 +24,38 @@ public class VehicleServiceImpl implements VehicleService{
     @Override
     public void deleteService(Long serviceId) {
         VehicleMaintenance found= vrepo.findById(serviceId).orElse(null);
+        if (found != null){
+            vrepo.delete(found);
+        }     
     }
 
     @Override
     public List<VehicleMaintenance> getAllServices() {
-        // TODO Auto-generated method stub
-        return null;
+        return vrepo.findAll();
     }
 
     @Override
-    public VehicleMaintenance getServiceById(Long serviceId) {
-        // TODO Auto-generated method stub
+    public Optional<VehicleMaintenance> getServiceById(Long serviceId) {
+        return vrepo.findById(serviceId);
+    }
+ 
+    @Override
+    public VehicleMaintenance updateService(Long serviceId , VehicleMaintenance service) {
+        VehicleMaintenance found=vrepo.findById(serviceId).orElse(null);
+        if(found!=null)
+        {           
+            found.setServiceName(service.getServiceName());
+            found.setServicePrice(service.getServicePrice());
+            found.setTypeOfVehicle(service.getTypeOfVehicle());
+            return vrepo.save(found);
+        }
         return null;
     }
 
-    @Override
-    public VehicleMaintenance updateService(Long serviceId) {
-        // TODO Auto-generated method stub
-        return null;
-    }
     
+    @Override
+    public List<VehicleMaintenance> findByServiceName(String serviceName) {
+        return vrepo.findByServiceName(serviceName);
+    }
 
 }
