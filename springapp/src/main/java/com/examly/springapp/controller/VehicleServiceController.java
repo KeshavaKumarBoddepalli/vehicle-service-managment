@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/services")
-public class ServiceController {
+public class VehicleServiceController {
 
     @Autowired
     private VehicleService vehicleService;
