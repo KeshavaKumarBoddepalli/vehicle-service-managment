@@ -12,5 +12,5 @@ public class VehicleMaintenance {
     String serviceName;
     int servicePrice;
     String typeOfVehicle;
-    String helloword;
+    
 }
