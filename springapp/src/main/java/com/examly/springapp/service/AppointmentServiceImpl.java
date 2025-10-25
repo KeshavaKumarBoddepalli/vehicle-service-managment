@@ -1,6 +1,5 @@
 package com.examly.springapp.service;
 
-import java.lang.StackWalker.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,7 +55,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         return appointmentRepo.save(existingAppointment);
        }else{
-        throw new RuntimeException("Apponitment not found");
+        throw new RuntimeException("Appointment not found");
        }
     }
 }
