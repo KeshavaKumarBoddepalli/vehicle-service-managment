@@ -1,5 +1,61 @@
 package com.examly.springapp.service;
 
-public class VehicleServiceImpl {
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.examly.springapp.model.VehicleMaintenance;
+import com.examly.springapp.repository.VehicleServiceRepo;
+
+
+@Service
+public class VehicleServiceImpl implements VehicleService{
+
+    @Autowired
+    private VehicleServiceRepo vrepo;
+
+    @Override
+    public VehicleMaintenance addService(VehicleMaintenance service) {
+       return vrepo.save(service);
+    }
+
+    @Override
+    public void deleteService(Long serviceId) {
+        VehicleMaintenance found= vrepo.findById(serviceId).orElse(null);
+        if (found != null){
+            vrepo.delete(found);
+        }     
+    }
+
+    @Override
+    public List<VehicleMaintenance> getAllServices() {
+        return vrepo.findAll();
+    }
+
+    @Override
+    public Optional<VehicleMaintenance> getServiceById(Long serviceId) {
+        return vrepo.findById(serviceId);
+    }
+ 
+    @Override
+    public VehicleMaintenance updateService(Long serviceId , VehicleMaintenance service) {
+        VehicleMaintenance found=vrepo.findById(serviceId).orElse(null);
+        if(found!=null)
+        {           
+            found.setServiceName(service.getServiceName());
+            found.setServicePrice(service.getServicePrice());
+            found.setTypeOfVehicle(service.getTypeOfVehicle());
+            return vrepo.save(found);
+        }
+        return null;
+    }
+
+    
+    @Override
+    public List<VehicleMaintenance> findByServiceName(String serviceName) {
+        return vrepo.findByServiceName(serviceName);
+    }
 
 }
