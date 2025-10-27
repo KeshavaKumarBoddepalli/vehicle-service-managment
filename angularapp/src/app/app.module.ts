@@ -12,7 +12,7 @@ import { AdminviewuserdetailsComponent } from './components/adminviewuserdetails
 import { AuthguardComponent } from './components/authguard/authguard.component';
 import { ErrorComponent } from './components/error/error.component';
 import { HomeComponent } from './components/home/home.component';
-import { LginComponent } from './components/lgin/lgin.component';
+//import { LginComponent } from './components/lgin/lgin.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -35,7 +35,7 @@ import { UserviewfeedbackComponent } from './components/userviewfeedback/uservie
     AuthguardComponent,
     ErrorComponent,
     HomeComponent,
-    LginComponent,
+    //LginComponent,
     LoginComponent,
     NavbarComponent,
     ProfileComponent,
