@@ -20,7 +20,7 @@ public class AppointmentController {
     private AppointmentService appointmentService;
  
     @PostMapping
-    @PreAuthorize("hasRole('USER')")
+    // @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Appointment> addAppointment(@RequestBody Appointment appointment) {
         try {
             Appointment savedAppointment = appointmentService.addAppointment(appointment);
@@ -31,7 +31,7 @@ public class AppointmentController {
     }
  
     @GetMapping("/user/{userId}")
-    @PreAuthorize("hasRole('USER')")
+    // @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<Appointment>> getAppointmentsForUser(@PathVariable int userId) {
         List<Appointment> appointments = appointmentService.getAppointmentsByUserId(userId);
         return ResponseEntity.ok(appointments);
