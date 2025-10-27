@@ -1,15 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Feedback } from 'src/app/models/feedback.model';
+import { AuthService } from 'src/app/services/auth.service';
+import { FeedbackService } from 'src/app/services/feedback.service';
 @Component({
   selector: 'app-userviewfeedback',
   templateUrl: './userviewfeedback.component.html',
   styleUrls: ['./userviewfeedback.component.css']
 })
 export class UserviewfeedbackComponent implements OnInit {
-
-  constructor() { }
+  userFeedbacks: Feedback[]=[];
+  constructor(private feedbackService: FeedbackService, private authService: AuthService) { }
 
   ngOnInit(): void {
+    // const userId = this.authService.getLoggedInUser().userId;
+    const userId = 101; 
+    this.feedbackService.getFeedbackByUserId(userId).subscribe({
+      next: (data)=>{
+        this.userFeedbacks=data;
+      },
+      error: (error)=>{
+        console.error('Error fetching user feedback:', error);
+      }
+    });
   }
 
 }
