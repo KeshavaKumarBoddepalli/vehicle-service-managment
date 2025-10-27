@@ -12,7 +12,7 @@ public interface UserService {
     UserDetails loadUserByUsername(String username);
     List<User>findAllUsers();
     User getByUserId(int userId);
-    void deleteUser(int userId);
+    boolean deleteUser(int userId);
     User updateUser(User user);
     User getUserByName(String name);
     
