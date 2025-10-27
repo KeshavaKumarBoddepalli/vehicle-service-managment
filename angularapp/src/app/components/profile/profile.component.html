@@ -1,1 +1,9 @@
-<p>profile works!</p>
+<div class="profile-card">
+    <img [src]="user.avatar" alt="User Avatar" class="avatar" />
+    <h2>User Profile</h2>
+  
+    <p *ngIf="user.username"><strong>Username:</strong> {{ user.username }}</p>
+    <p *ngIf="user.email"><strong>Email:</strong> {{ user.email }}</p>
+    <p *ngIf="user.mobile"><strong>Mobile Number:</strong> {{ user.mobile }}</p>
+  </div>
+  
