@@ -8,10 +8,10 @@ import com.examly.springapp.model.VehicleMaintenance;
 public interface VehicleService {
 
     VehicleMaintenance addService(VehicleMaintenance service);
-    VehicleMaintenance updateService(Long serviceId, VehicleMaintenance service);
-    void deleteService(Long serviceId);
+    VehicleMaintenance updateService(Long id, VehicleMaintenance service);
+    void deleteService(Long id);
     List <VehicleMaintenance> getAllServices();
-    Optional<VehicleMaintenance> getServiceById(Long serviceId);
+    Optional<VehicleMaintenance> getServiceById(Long id);
     List<VehicleMaintenance> findByServiceName(String serviceName);
 
     
