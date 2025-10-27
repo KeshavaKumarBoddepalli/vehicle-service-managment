@@ -51,7 +51,7 @@ public class FeedbackController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Feedback>> getFeedbackByUserId(@PathVariable Long userId){
+    public ResponseEntity<List<Feedback>> getFeedbackByUserId(@PathVariable int userId){
         List<Feedback> feedbackList = feedbackService.getFeedbackByUserId(userId);
         if(feedbackList.isEmpty()){
             return ResponseEntity.noContent().build();
