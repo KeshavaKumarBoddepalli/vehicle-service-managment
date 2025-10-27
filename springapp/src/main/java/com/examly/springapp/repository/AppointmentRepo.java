@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.examly.springapp.model.Appointment;
 
 @Repository
-public interface AppointmentRepo extends JpaRepository<Appointment,Long>{
-
-    List<Appointment> findByUserUserId(int userId);
+public interface AppointmentRepo extends JpaRepository<Appointment, Long> {
+    List<Appointment> findByUserUserId(long userId);
 }
