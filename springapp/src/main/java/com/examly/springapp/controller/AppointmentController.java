@@ -1,6 +1,5 @@
 package com.examly.springapp.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,9 +15,11 @@ import java.util.Optional;
 @RequestMapping("/api/appointment")
 public class AppointmentController {
  
-    @Autowired
     private AppointmentService appointmentService;
- 
+    public AppointmentController(AppointmentService appointmentService) {
+        this.appointmentService = appointmentService;
+    }
+
     @PostMapping
     // @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Appointment> addAppointment(@RequestBody Appointment appointment) {
@@ -38,7 +39,7 @@ public class AppointmentController {
     }
  
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+   @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Appointment>> getAllAppointments() {
         List<Appointment> appointments = appointmentService.getAllAppointments();
         return ResponseEntity.ok(appointments);
@@ -59,7 +60,7 @@ public class AppointmentController {
     }
  
     @DeleteMapping("/{appointmentId}")
-    @PreAuthorize("hasRole('ADMIN')")
+   @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteAppointment(@PathVariable Long appointmentId) {
         
         Optional<Appointment> appointment = appointmentService.getAppointmentById(appointmentId);
