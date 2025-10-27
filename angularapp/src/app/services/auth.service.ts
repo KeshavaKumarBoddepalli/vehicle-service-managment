@@ -9,7 +9,8 @@ export class AuthService {
   logout() {
       
   }
-  getRole() {
+  getRole():string {
+    return 'user';
       
   }
 
@@ -19,9 +20,11 @@ export class AuthService {
   }
 
 
-  isLoggedIn() {
+  isLoggedIn():boolean {
+    return false;
       
   }
   
 
 }
+
