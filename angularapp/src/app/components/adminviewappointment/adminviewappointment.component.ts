@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Appointment } from 'src/app/models/appointment.model';
+import { AppointmentService } from 'src/app/services/appointment.service';
 
 @Component({
   selector: 'app-adminviewappointment',
@@ -7,9 +10,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminviewappointmentComponent implements OnInit {
 
-  constructor() { }
+  appointment:Appointment;
+
+  constructor(private service:AppointmentService, private router:Router){ }
 
   ngOnInit(): void {
+  }
+
+  getAppointments(){
+   
+  }
+
+  getAppointmentsByUser(userId:number){
+   
+  }
+
+  addAppointment(appointment:Appointment){
+   
+  }
+
+  updateAppointment(appointmentld:number, appointment:Appointment){
+   
+  }
+
+  deleteAppointment(appointmentld:number){
+    
   }
 
 }
