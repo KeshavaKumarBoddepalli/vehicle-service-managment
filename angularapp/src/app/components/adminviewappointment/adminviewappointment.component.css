@@ -1,0 +1,69 @@
+.container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+   
+  h2 {
+    color: #333;
+    font-weight: 600;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    display: inline-block;
+  }
+   
+  /* Make table text easier to read */
+  .table {
+    font-size: 0.95rem;
+  }
+   
+  .table th {
+    background-color: #343a40;
+    color: #fff;
+  }
+   
+  /* Styling for the "No data" message */
+  .no-data-message {
+    background-color: #fff;
+    border: 1px dashed #ccc;
+    border-radius: 8px;
+    padding: 30px;
+    margin-top: 20px;
+  }
+   
+  .no-data-message h3 {
+    color: #888;
+    font-weight: 500;
+  }
+   
+  /* Style for the action buttons */
+  .btn-danger {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+  }
+   
+  /* Style for the status dropdown */
+  .form-select-sm {
+    font-weight: bold;
+  }
+   
+  /* Colors for status dropdown options (might not work in all browsers) */
+  .text-warning { color: #ffc107 !important; }
+  .text-success { color: #198754 !important; }
+  .text-danger { color: #dc3545 !important; }
+   
+  /* Apply colors to the select element itself based on value */
+  select.form-select-sm {
+    font-weight: bold;
+  }
+   
+  select.form-select-sm option[value="Pending"] {
+    color: #ffc107;
+  }
+  select.form-select-sm option[value="Approved"] {
+    color: #198754;
+  }
+  select.form-select-sm option[value="Rejected"] {
+    color: #dc3545;
+  }

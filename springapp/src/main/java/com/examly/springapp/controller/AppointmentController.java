@@ -39,7 +39,7 @@ public class AppointmentController {
     }
  
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+   @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<Appointment>> getAllAppointments() {
         List<Appointment> appointments = appointmentService.getAllAppointments();
         return ResponseEntity.ok(appointments);
@@ -60,7 +60,7 @@ public class AppointmentController {
     }
  
     @DeleteMapping("/{appointmentId}")
-    @PreAuthorize("hasRole('ADMIN')")
+   @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteAppointment(@PathVariable Long appointmentId) {
         
         Optional<Appointment> appointment = appointmentService.getAppointmentById(appointmentId);
