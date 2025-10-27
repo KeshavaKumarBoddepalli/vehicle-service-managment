@@ -5,6 +5,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.examly.springapp.config.JwtUtils;
+import com.examly.springapp.model.LoginAuthenticationDto;
 import com.examly.springapp.model.User;
+import com.examly.springapp.model.UserDto;
 import com.examly.springapp.service.UserServiceImpl;
 
 @RestController
@@ -21,6 +29,14 @@ import com.examly.springapp.service.UserServiceImpl;
 public class UserController {
     @Autowired
     private UserServiceImpl userService;
+    @Autowired
+    AuthenticationManager manager;
+
+    @Autowired
+    JwtUtils jwtUtils;
+
+    @Autowired
+    UserDetailsService userDetailsService;
 
     @PostMapping("/register")
     public ResponseEntity<?>registerUser(@RequestBody User user){
@@ -30,6 +46,25 @@ public class UserController {
         }
         return ResponseEntity.status(201).body(created);
     }
+    @PostMapping("/login")
+     public ResponseEntity<?> login(@RequestBody UserDto userDto){
+         
+        Authentication authentication = manager.authenticate(new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword())) ;
+        UserDetails userDetails = userDetailsService.loadUserByUsername(userDto.getUsername());
+
+        if(authentication.isAuthenticated())  {
+        User user = userService.findByUsername(userDto.getUsername());
+        LoginAuthenticationDto data = new LoginAuthenticationDto();
+        data.setToken(jwtUtils.generateToken(userDetails));
+        data.setUsername(user.getUsername());
+        data.setUserRole(user.getUserRole());
+        data.setUserId(user.getUserId());
+          return ResponseEntity.status(200).body(data);
+        }
+         else
+          return ResponseEntity.status(404).body("Not Found");
+     }
+
 
     @GetMapping("/user")
     public ResponseEntity<List<User>>getAllUser(){
@@ -60,8 +95,8 @@ public class UserController {
 
     @GetMapping("/name/{name}")
     public ResponseEntity<?>getUserByName(@PathVariable String name){
-        Optional<User> user=userService.getUserByName(name);
-        if(user.isPresent()){
+        User user=userService.getUserByName(name);
+        if(user==null){
             return ResponseEntity.status(200).body(user);
         }
         return ResponseEntity.status(404).build();

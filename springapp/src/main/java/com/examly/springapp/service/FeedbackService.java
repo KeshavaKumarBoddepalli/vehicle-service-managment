@@ -8,6 +8,6 @@ public interface FeedbackService {
     public Feedback getFeedbackById(Long feedbackId);
     public List<Feedback> getAllFeedback();
     public Feedback deleteFeedback(Long feedbackId);
-    public List<Feedback> getFeedbackByUserId(Long userId);
+    public List<Feedback> getFeedbackByUserId(int userId);
 }
 

@@ -4,12 +4,20 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+import com.examly.springapp.config.UserPrinciple;
+import org.springframework.security.core.userdetails.UserDetails;
 import com.examly.springapp.model.User;
 
 import com.examly.springapp.repository.UserRepo;
+import com.examly.springapp.config.UserPrinciple;
 
-public class UserServiceImpl implements UserService {
+@Service
+public class UserServiceImpl implements UserService , UserDetailsService {
     @Autowired
     private UserRepo urepo;
 
@@ -42,14 +50,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUserByName(String name) {
-        return urepo.findByUserName(name);
+    public User getUserByName(String name) {
+        return urepo.findByUsername(name);
     }
 
     @Override
-    public User loadUserByUsername(String username) {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         
-        return null;
+        // return null;
+        User user = urepo.findByUsername(username);
+        if(user == null) throw new UsernameNotFoundException("Not Found");
+        return new UserPrinciple(user);
+
     }
 
     @Override
@@ -59,5 +71,9 @@ public class UserServiceImpl implements UserService {
             return null;
         }
         return urepo.save(user);
+    }
+    // @Override
+    public User findByUsername(String username) {
+      return urepo.findByUsername(username);
     }
 }
