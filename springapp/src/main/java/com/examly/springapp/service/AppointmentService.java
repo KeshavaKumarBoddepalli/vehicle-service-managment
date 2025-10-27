@@ -21,3 +21,5 @@ public interface AppointmentService {
  
     Appointment updateAppointmentStatus(Long appointmentId, String status);
 }
+ 
+ 
