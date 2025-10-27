@@ -1,98 +1,88 @@
 package com.examly.springapp.model;
-
+ 
+import jakarta.persistence.*;
 import java.time.LocalDate;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-
+ 
 @Entity
 public class Appointment {
-
+ 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long appointmentId;
-
+ 
     @ManyToOne
     @JoinColumn(name = "serviceId")
     private VehicleMaintenance service;
-
+ 
     private LocalDate appointmentDate;
-
-    private String loaction;
-
+ 
+    private String location;
+ 
     private String status;
-
+ 
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
-
-    public Appointment() {
-    }
-
-    public Appointment(Long appointmentId, VehicleMaintenance service, LocalDate appointmentDate, String loaction,
-             User user) {
-        this.appointmentId = appointmentId;
+ 
+    public Appointment() {}
+ 
+    public Appointment(VehicleMaintenance service, LocalDate appointmentDate, String location, User user) {
         this.service = service;
         this.appointmentDate = appointmentDate;
-        this.loaction = loaction;
+        this.location = location;
         this.status = "Pending";
         this.user = user;
     }
-
+ 
+    // Getters and Setters
     public Long getAppointmentId() {
         return appointmentId;
     }
-
+ 
     public void setAppointmentId(Long appointmentId) {
         this.appointmentId = appointmentId;
     }
-
+ 
     public VehicleMaintenance getService() {
         return service;
     }
-
+ 
     public void setService(VehicleMaintenance service) {
         this.service = service;
     }
-
-    public LocalDate getApponitmentDate() {
+ 
+    public LocalDate getAppointmentDate() {
         return appointmentDate;
     }
-
-    public void setApponitmentDate(LocalDate apponitmentDate) {
+ 
+    public void setAppointmentDate(LocalDate appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
-
-    public String getLoaction() {
-        return loaction;
+ 
+    public String getLocation() {
+        return location;
     }
-
-    public void setLoaction(String loaction) {
-        this.loaction = loaction;
+ 
+    public void setLocation(String location) {
+        this.location = location;
     }
-
+ 
     public String getStatus() {
         return status;
     }
-
+ 
     public void setStatus(String status) {
         this.status = status;
     }
-
+ 
     public User getUser() {
         return user;
     }
-
+ 
     public void setUser(User user) {
         this.user = user;
     }
-
-    
-
-
-
-    
+   
 }
+ 
+ 

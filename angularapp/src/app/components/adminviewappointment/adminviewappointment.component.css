@@ -1,0 +1,173 @@
+/* General Container and Title */
+.appointment-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f8f9fa; /* Light background */
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+ 
+.section-title {
+  text-align: center;
+  font-size: 2.2em;
+  color: #343a40; /* Darker text for heading */
+  margin-bottom: 30px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  position: relative;
+}
+ 
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: #007bff; /* Accent color */
+  border-radius: 2px;
+}
+ 
+/* Table Styling */
+.table-wrapper {
+  overflow-x: auto; /* Ensures table is scrollable on smaller screens */
+}
+ 
+.appointment-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #ffffff; /* White table background */
+  border-radius: 8px;
+  overflow: hidden; /* Ensures rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+ 
+.appointment-table th,
+.appointment-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6; /* Light gray border */
+  font-size: 0.9em;
+  color: #495057; /* Slightly dark gray text */
+}
+ 
+.appointment-table th {
+  background-color: #d9dcdf; /* Primary blue for headers */
+  color: #000000;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border-bottom: 2px solid #0056b3; /* Darker blue border */
+}
+ 
+.appointment-table tbody tr:hover {
+  background-color: #e9ecef; /* Light gray on hover */
+}
+ 
+/* Status Dropdown Styling */
+.status-dropdown {
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  background-color: #f8f9fa;
+  font-size: 0.85em;
+  font-weight: bold;
+  cursor: pointer;
+  -webkit-appearance: none; /* Remove default arrow on WebKit browsers */
+  -moz-appearance: none;    /* Remove default arrow on Firefox */
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200%20-13%20-5.7H18.3a17.6%2017.6%200%200%200%20-13%205.7%2017.6%2017.6%200%200%200%200%2024.1l139.7%20139.7a17.6%2017.6%200%200%200%2024.1%200l139.7%20-139.7a17.6%2017.6%200%200%200%200%20-24.1z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 10px;
+  padding-right: 25px; /* Make space for the custom arrow */
+}
+ 
+/* Specific styling for the dropdown based on selected status */
+.status-dropdown.status-pending {
+  background-color: rgb(253, 255, 150); /* Light yellow */
+  color: #090909; /* Dark yellow text */
+  border-color: #ffeeba;
+}
+ 
+.status-dropdown.status-approved {
+  background-color: rgb(143, 255, 169);
+  color: #0d0e0d; /* Dark green text */
+  border-color: #c3e6cb;
+}
+ 
+.status-dropdown.status-rejected {
+  background-color: #ff8b95; /* Light red */
+  color: #0f0e0e; /* Dark red text */
+  border-color: #f5c6cb;
+}
+ 
+ 
+/* Action Buttons */
+.action-button {
+  padding: 7px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8em;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  min-width: 70px; /* Ensure buttons have consistent width */
+  text-align: center;
+}
+ 
+.delete-button {
+  background-color: #dc3545; /* Bootstrap red */
+  color: #ffffff;
+}
+ 
+.delete-button:hover {
+  background-color: #c82333; /* Darker red on hover */
+  transform: translateY(-2px);
+}
+ 
+/* No Appointments Message */
+.no-appointments-message {
+  text-align: center;
+  padding: 50px;
+  background-color: #ffffff;
+  border: 1px dashed #e0e0e0;
+  border-radius: 8px;
+  margin-top: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+ 
+.no-appointments-message h3 {
+  color: #6c757d; /* Muted gray text */
+  font-size: 1.5em;
+  font-weight: 500;
+}
+ 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .appointment-container {
+    margin: 20px;
+    padding: 20px;
+  }
+ 
+  .section-title {
+    font-size: 1.8em;
+  }
+ 
+  .appointment-table th,
+  .appointment-table td {
+    padding: 10px;
+    font-size: 0.85em;
+  }
+ 
+  .action-button {
+    padding: 6px 10px;
+    font-size: 0.75em;
+    min-width: 60px;
+  }
+}
+ 
