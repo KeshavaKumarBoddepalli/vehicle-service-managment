@@ -1,5 +1,7 @@
 package com.examly.springapp.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -8,6 +10,7 @@ import jakarta.persistence.Id;
 public class VehicleMaintenance {
     @Id
     @GeneratedValue
+    @JsonProperty("id")
     long serviceId;
     String serviceName;
     int servicePrice;

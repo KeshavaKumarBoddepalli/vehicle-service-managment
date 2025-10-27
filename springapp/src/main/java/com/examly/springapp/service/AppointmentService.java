@@ -1,9 +1,9 @@
 package com.examly.springapp.service;
 
+import com.examly.springapp.model.Appointment;
+
 import java.util.List;
 import java.util.Optional;
-
-import com.examly.springapp.model.Appointment;
 
 public interface AppointmentService {
 
@@ -11,12 +11,13 @@ public interface AppointmentService {
 
     void deleteAppointment(Long appointmentId);
 
-    Optional<Appointment>getAppointmentById(Long appointmentId);
+    Optional<Appointment> getAppointmentById(Long appointmentId);
 
     List<Appointment> getAllAppointments();
 
-    List<Appointment> getAppointmentsByUserId(int userId);
+    List<Appointment> getAppointmentsByUserId(Long userId);
 
-    Appointment updateAppointment(Long appointmentId,Appointment appointment );
-    
+    Appointment updateAppointment(Long appointmentId, Appointment appointment);
+
+    Appointment updateAppointmentStatus(Long appointmentId, String status);
 }
