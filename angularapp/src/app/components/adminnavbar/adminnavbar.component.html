@@ -1,1 +1,27 @@
-<p>adminnavbar works!</p>
+
+<div class="nav-container">
+
+  <ul *ngIf="isUserLoggedIn()">
+    <li>{{ service.getAuthenticatedUser() }} ({{ service.getRole() }})</li>
+    <li><a routerLink="/">Home</a></li>
+
+
+    <ng-container *ngIf="isAdmin()">
+      <li><a routerLink="/services">Services</a></li>
+      <li><a routerLink="/appointments">Appointments</a></li>
+      <li><a routerLink="/feedbacks">Feedbacks</a></li>
+      <li><a routerLink="/customers">Customer</a></li>
+    </ng-container> 
+
+    
+      <li><a (click)="confirmLogout()">Logout</a></li>
+    </ul>
+
+  <div *ngIf="showLogoutPopup">
+    <p>Are you sure you want to logout?</p>
+    <button (click)="logout()">Yes</button>
+    <button (click)="cancelLogout()">No</button>
+  </div>
+
+
+</div>

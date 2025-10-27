@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AppointmentService } from '../../services/appointment.service';
-import { Appointment } from '../../models/appointment.model';
- 
+import { Appointment } from 'src/app/models/appointment.model';
+import { AppointmentService } from 'src/app/services/appointment.service';
+
 @Component({
   selector: 'app-adminviewappointment',
   templateUrl: './adminviewappointment.component.html',
@@ -11,7 +11,7 @@ export class AdminviewappointmentComponent implements OnInit {
  
   appointments: Appointment[] = [];
   errorMessage: string = '';
-  // Array to populate the status dropdown
+
   statuses: string[] = ['Pending', 'Approved', 'Rejected'];
  
   constructor(private appointmentService: AppointmentService) { }
@@ -32,9 +32,9 @@ export class AdminviewappointmentComponent implements OnInit {
     );
   }
  
-  /**
-   * Called when the admin changes the status dropdown for an appointment.
-   */
+  
+   // Called when the admin changes the status dropdown for an appointment.
+   
   onStatusChange(appointment: Appointment): void {
     if (!appointment.appointmentId) {
       console.error('Appointment ID is missing');
@@ -60,9 +60,9 @@ export class AdminviewappointmentComponent implements OnInit {
     );
   }
  
-  /**
-   * Called when the admin clicks the "Delete" button.
-   */
+  
+   //Called when the admin clicks the "Delete" button.
+   
   deleteAppointment(appointmentId: number | undefined): void {
     if (appointmentId === undefined) {
       console.error('Invalid appointment ID');
