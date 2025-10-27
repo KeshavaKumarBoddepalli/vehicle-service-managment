@@ -10,6 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -101,5 +102,21 @@ public class UserController {
         }
         return ResponseEntity.status(404).build();
     }
+
+@DeleteMapping("/user/{id}")
+public ResponseEntity<String> deleteUserById(@PathVariable int id) {
+    boolean deleted = userService.deleteUser(id);
+    if (deleted) {
+        return ResponseEntity.ok("User deleted successfully.");
+    } else {
+        return ResponseEntity.status(404).body("User not found.");
+    }
+}
+
+
+
+
+
+
     
 }

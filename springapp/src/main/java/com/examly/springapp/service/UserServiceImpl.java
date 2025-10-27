@@ -27,11 +27,14 @@ public class UserServiceImpl implements UserService , UserDetailsService {
     }
 
     @Override
-    public void deleteUser(int userId) {
+    public boolean deleteUser(int userId) {
           User found= urepo.findById(userId).orElse(null);
             if (found != null){
+
             urepo.delete(found);
+            return true;
         }
+        return false;
         
     }
 
