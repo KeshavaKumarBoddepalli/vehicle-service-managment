@@ -4,11 +4,22 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  constructor() { }
+  private loggedInUser: any = null
+  constructor() {
+    const userData = localStorage.getItem('loggedInUser');
+    if (userData) {
+      this.loggedInUser = JSON.parse(userData);
+    }
+  }
 
   logout() {
       
   }
+  
+  getLoggedInUser(): any {
+    return this.loggedInUser;
+  }
+
   getRole():string {
     return 'user';
       

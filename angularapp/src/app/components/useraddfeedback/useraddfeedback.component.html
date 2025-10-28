@@ -1,1 +1,37 @@
-<p>useraddfeedback works!</p>
+<div class="feedback-form-container">
+    <h2>Submit Your Feedback</h2>
+  
+    <form (ngSubmit)="submitFeedback()" #feedbackForm="ngForm" class="feedback-form">
+      <!-- Message -->
+      <div class="form-group">
+        <label for="message">Message:</label>
+        <textarea
+          id="message"
+          name="message"
+          [(ngModel)]="newFeedback.message"
+          required
+          placeholder="Write your feedback here..."
+        ></textarea>
+      </div>
+  
+      <!-- Rating -->
+      <div class="form-group">
+        <label for="rating">Rating:</label>
+        <input
+          type="number"
+          id="rating"
+          name="rating"
+          [(ngModel)]="newFeedback.rating"
+          min="1"
+          max="5"
+          required
+          placeholder="Enter rating (1-5)"
+        />
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="btn-submit" [disabled]="feedbackForm.invalid">
+        Submit Feedback
+      </button>
+    </form>
+  </div>

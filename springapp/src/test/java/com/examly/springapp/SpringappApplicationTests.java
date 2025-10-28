@@ -377,40 +377,40 @@ void backend_testUpdateVehicleMaintenanceServiceWithRoleValidation() throws Exce
  
  
  
-    @Test
-        @Order(10)
-        void backend_testAddAppointmentWithRoleValidation() throws Exception {
-            Assertions.assertNotNull(admintoken, "Admin token should not be null");
-            Assertions.assertNotNull(usertoken, "User token should not be null");
-    
-            String requestBody = "{"
-                + "\"appointmentId\": 1,"
-                + "\"appointmentDate\": \"2025-03-10\","
-                + "\"location\": \"New York\","
-                + "\"status\": \"Pending\","
-                + "\"user\": {\"userId\": 2},"
-                + "\"service\": {\"serviceId\": 1}"
-                + "}";
-    
-            HttpHeaders userHeaders = createHeaders();
-            userHeaders.set("Authorization", "Bearer " + usertoken);
-            HttpEntity<String> userRequest = new HttpEntity<>(requestBody, userHeaders);
-    
-            ResponseEntity<String> userResponse = restTemplate.exchange("/api/appointment", HttpMethod.POST, userRequest, String.class);
-    
-            JsonNode responseBody = objectMapper.readTree(userResponse.getBody());
-    
-            Assertions.assertEquals(HttpStatus.CREATED, userResponse.getStatusCode());
-            Assertions.assertEquals("New York", responseBody.get("location").asText());
-            Assertions.assertEquals("Pending", responseBody.get("status").asText());
-    
-            HttpHeaders adminHeaders = createHeaders();
-            adminHeaders.set("Authorization", "Bearer " + admintoken);
-            HttpEntity<String> adminRequest = new HttpEntity<>(requestBody, adminHeaders);
-    
-            ResponseEntity<String> adminResponse = restTemplate.exchange("/api/appointment", HttpMethod.POST, adminRequest, String.class);
-            Assertions.assertEquals(HttpStatus.FORBIDDEN, adminResponse.getStatusCode());
-        }
+@Test
+    @Order(10)
+    void backend_testAddAppointmentWithRoleValidation() throws Exception {
+        Assertions.assertNotNull(admintoken, "Admin token should not be null");
+        Assertions.assertNotNull(usertoken, "User token should not be null");
+ 
+        String requestBody = "{"
+            + "\"appointmentId\": 1,"
+            + "\"appointmentDate\": \"2025-03-10\","
+            + "\"location\": \"New York\","
+            + "\"status\": \"Pending\","
+            + "\"user\": {\"userId\": 2},"
+            + "\"service\": {\"serviceId\": 1}"
+            + "}";
+ 
+        HttpHeaders userHeaders = createHeaders();
+        userHeaders.set("Authorization", "Bearer " + usertoken);
+        HttpEntity<String> userRequest = new HttpEntity<>(requestBody, userHeaders);
+ 
+        ResponseEntity<String> userResponse = restTemplate.exchange("/api/appointment", HttpMethod.POST, userRequest, String.class);
+ 
+        JsonNode responseBody = objectMapper.readTree(userResponse.getBody());
+ 
+        Assertions.assertEquals(HttpStatus.CREATED, userResponse.getStatusCode());
+        Assertions.assertEquals("New York", responseBody.get("location").asText());
+        Assertions.assertEquals("Pending", responseBody.get("status").asText());
+ 
+        HttpHeaders adminHeaders = createHeaders();
+        adminHeaders.set("Authorization", "Bearer " + admintoken);
+        HttpEntity<String> adminRequest = new HttpEntity<>(requestBody, adminHeaders);
+ 
+        ResponseEntity<String> adminResponse = restTemplate.exchange("/api/appointment", HttpMethod.POST, adminRequest, String.class);
+        Assertions.assertEquals(HttpStatus.FORBIDDEN, adminResponse.getStatusCode());
+    }
  
  
     @Test

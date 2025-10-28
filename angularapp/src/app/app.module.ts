@@ -22,7 +22,7 @@ import { AdminviewappointmentComponent } from './components/adminviewappointment
 // import { UsernavbarComponent } from './components/usernavbar/usernavbar.component';
 // import { UserviewappointmentComponent } from './components/userviewappointment/userviewappointment.component';
 // import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -52,6 +52,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [],
