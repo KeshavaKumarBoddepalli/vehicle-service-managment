@@ -10,10 +10,10 @@ import { FeedbackService } from 'src/app/services/feedback.service';
 export class UserviewfeedbackComponent implements OnInit {
   userFeedbacks: Feedback[]=[];
   constructor(private feedbackService: FeedbackService, private authService: AuthService) { }
-
+ 
   ngOnInit(): void {
     // const userId = this.authService.getLoggedInUser().userId;
-    const userId = 101; 
+    const userId = 101;
     this.feedbackService.getFeedbackByUserId(userId).subscribe({
       next: (data)=>{
         this.userFeedbacks=data;
@@ -23,5 +23,6 @@ export class UserviewfeedbackComponent implements OnInit {
       }
     });
   }
-
+ 
 }
+ 
