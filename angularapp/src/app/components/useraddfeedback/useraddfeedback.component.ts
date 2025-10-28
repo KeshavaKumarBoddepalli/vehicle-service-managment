@@ -13,7 +13,7 @@ export class UseraddfeedbackComponent implements OnInit {
     rating: 0
   };
   constructor(private feedbackService: FeedbackService) { }
-
+ 
   ngOnInit(): void {
   }
   submitFeedback(){
@@ -28,5 +28,6 @@ export class UseraddfeedbackComponent implements OnInit {
       }
     })
   }
-
+ 
 }
+ 
