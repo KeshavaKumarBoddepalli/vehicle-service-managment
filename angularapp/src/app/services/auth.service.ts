@@ -2,18 +2,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { User } from '../models/user.model';
+
+export const AUTHENTICATED_USER = 'authenticatedUser';
+export const TOKEN = 'token';
+export const PAGE_ID = 'pageId';
+export const USER_ID = 'userId';
+export const ROLE = 'role';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  register(value: any):Observable<any> {
-    throw new Error('Method not implemented.');
-  }
-  login(username: string, password: string):Observable<any> {
-    throw new Error('Method not implemented.');
-  }
-  constructor() { }
 
 
   public baseUrl = "https://8080-acedbabebccdb334276216cebfbccone.premiumproject.examly.io/api/user";
@@ -31,7 +32,7 @@ export class AuthService {
         data => {
           localStorage.setItem(USER_ID, "" + data.userId);
           localStorage.setItem(AUTHENTICATED_USER, username);
-          localStorage.setItem(TOKEN, `Bearer ${data.token}`);
+          // localStorage.setItem(TOKEN, `Bearer ${data.token}`);
           localStorage.setItem(ROLE, data.userRole);
           return data;
         }
