@@ -38,7 +38,6 @@ import { RouterModule } from '@angular/router';
     AuthguardComponent,
     ErrorComponent,
     HomeComponent,
-    //LginComponent,
     LoginComponent,
     NavbarComponent,
     ProfileComponent,
