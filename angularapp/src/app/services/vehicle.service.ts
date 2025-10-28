@@ -8,7 +8,7 @@ import { VehicleMaintenance } from '../models/vehicle-maintenance.model';
 })
 export class VehicleService {
 
-  apiUrl="https://8080-cecdfddacafbdafffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io";
+  apiUrl="https://8080-cddcccedbacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/services";
   constructor(private http:HttpClient) { }
 
   getAllServices(): Observable<any> {
