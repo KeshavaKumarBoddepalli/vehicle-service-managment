@@ -1,5 +1,4 @@
 export interface User {
-    token: any;
     userId?:number;
     email?:string;
     password?:string;
