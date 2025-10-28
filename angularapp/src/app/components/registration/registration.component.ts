@@ -68,7 +68,6 @@ export class RegistrationComponent implements OnInit {
        this.registerForm.markAllAsTouched();
      }
    }
-
-  
+     
 
 }
