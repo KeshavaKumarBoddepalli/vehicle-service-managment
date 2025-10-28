@@ -11,13 +11,13 @@ export class AdminnavbarComponent {
 
   constructor(public service: AuthService) {}
 
-  // isUserLoggedIn(): boolean {
-  //   return this.service.isLoggedIn();
-  // }
+  isUserLoggedIn(): boolean {
+    return this.service.isLoggedIn();
+  }
 
-  // isAdmin(): boolean {
-  //   return this.service.getRole() === 'admin';
-  // }
+  isAdmin(): boolean {
+    return this.service.getRole() === 'admin';
+  }
 
   confirmLogout(): void {
     this.showLogoutPopup = true;
