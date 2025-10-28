@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AdminaddserviceComponent } from './components/adminaddservice/adminaddservice.component';
-import { AdminnavbarComponent } from './components/adminnavbar/adminnavbar.component';
+//import { AdminaddserviceComponent } from './components/adminaddservice/adminaddservice.component';
+//import { AdminnavbarComponent } from './components/adminnavbar/adminnavbar.component';
 import { AdminviewappointmentComponent } from './components/adminviewappointment/adminviewappointment.component';
 import { AdminviewfeedbackComponent } from './components/adminviewfeedback/adminviewfeedback.component';
 import { AdminviewserviceComponent } from './components/adminviewservice/adminviewservice.component';
@@ -12,7 +12,6 @@ import { AdminviewuserdetailsComponent } from './components/adminviewuserdetails
 import { AuthguardComponent } from './components/authguard/authguard.component';
 import { ErrorComponent } from './components/error/error.component';
 import { HomeComponent } from './components/home/home.component';
-//import { LginComponent } from './components/lgin/lgin.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -22,7 +21,7 @@ import { UseraddfeedbackComponent } from './components/useraddfeedback/useraddfe
 import { UsernavbarComponent } from './components/usernavbar/usernavbar.component';
 import { UserviewappointmentComponent } from './components/userviewappointment/userviewappointment.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -38,7 +37,6 @@ import { RouterModule } from '@angular/router';
     AuthguardComponent,
     ErrorComponent,
     HomeComponent,
-    //LginComponent,
     LoginComponent,
     NavbarComponent,
     ProfileComponent,
@@ -54,7 +52,7 @@ import { RouterModule } from '@angular/router';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    RouterModule
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
