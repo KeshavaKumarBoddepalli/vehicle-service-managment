@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent implements OnInit {
+export  class RegistrationComponent implements OnInit {
   registerForm: FormGroup;
    users: User[] = [];
  
