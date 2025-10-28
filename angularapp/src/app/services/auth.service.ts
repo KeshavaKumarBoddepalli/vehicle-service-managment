@@ -1,34 +1,3 @@
-// import { Injectable } from '@angular/core';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class AuthService {
-//   register(value: any) {
-//     throw new Error('Method not implemented.');
-//   }
-//   constructor() { }
-
-//   logout() {
-      
-//   }
-//   getRole():string {
-//     return 'user';
-      
-//   }
-
-  
-//   getAuthenticatedUser(){
-
-//   }
-
-
-//   isLoggedIn():boolean {
-//     return false;
-      
-//   }
-// }
-
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -70,12 +39,12 @@ export class AuthService {
       )
     );
   }
-  
+
   getRole(): string {
     return this.getAuthenticatedRole();
   }
 
-  isLoggedin(): boolean {
+  isLoggedIn(): boolean {
     let user = localStorage.getItem(AUTHENTICATED_USER);
     return !(user == null);
   }
