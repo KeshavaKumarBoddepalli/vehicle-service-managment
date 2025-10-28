@@ -7,7 +7,7 @@ import com.examly.springapp.repository.AppointmentRepo;
 import com.examly.springapp.repository.UserRepo;
 import com.examly.springapp.repository.VehicleServiceRepo;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,14 +16,19 @@ import java.util.Optional;
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
 
-    @Autowired
+    
     private AppointmentRepo appointmentRepo;
-
-    @Autowired
     private UserRepo userRepo;
-
-    @Autowired
     private VehicleServiceRepo vehicleServiceRepo;
+    
+
+    public AppointmentServiceImpl(AppointmentRepo appointmentRepo, UserRepo userRepo,
+            VehicleServiceRepo vehicleServiceRepo) {
+        this.appointmentRepo = appointmentRepo;
+        this.userRepo = userRepo;
+        this.vehicleServiceRepo = vehicleServiceRepo;
+    }
+
 
     @Override
     public Appointment addAppointment(Appointment appointment) {

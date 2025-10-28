@@ -25,7 +25,7 @@
           <td>{{ i + 1 }}</td>
           <td>{{ app.service?.serviceName }}</td>
           <td>{{ app.service?.cost | currency:'INR':'symbol':'1.0-0' }}</td>
-          <!-- Assuming VehicleMaintenance has a 'vehicleType' field. Adjust if your model differs. --><td>{{ app.service?.typeOfVehicle || 'N/A' }}</td>
+          <td>{{ app.service?.typeOfVehicle || 'N/A' }}</td>
           <td>{{ app.appointmentDate | date:'dd/MM/yyyy' }}</td>
           <td>{{ app.location }}</td>
           <td>{{ app.user?.username }}</td>
