@@ -1,9 +1,16 @@
 <div class="fullscreen-wrapper">
+  <!-- Main Content -->
+  <div class="main-container">
+    <!-- Left Image Section -->
+    <div class="image-section"></div>
+
+    <!-- Right Login Form Section -->
+
     <form #loginForm="ngForm" (ngSubmit)="login()">
     <h2 class="text-center text-primary">Login</h2>
     <div>
     <label for="username">Username:</label>
-    <input type="text" id="username" name="username" [(ngModel)]="username" #usernameInput="ngModel" required>
+    <input type="text" class="underline-input" id="username" name="username" [(ngModel)]="username" #usernameInput="ngModel" required>
     <div *ngIf="usernameInput.invalid && usernameInput.touched" class="error-message">
     <div *ngIf="usernameInput.errors?.required">Username is required</div>
     </div>
