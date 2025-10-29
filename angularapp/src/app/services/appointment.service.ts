@@ -8,29 +8,27 @@ import { Appointment } from '../models/appointment.model';
 })
 export class AppointmentService {
 
-  public apiUrl="https://8080-cddcccedbacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/appointment";
+  private apiUrl = "https://8080-cddcccedbacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/appointment";
 
-  constructor(private http:HttpClient){ }
+  constructor(private http: HttpClient) {}
 
-  getAppointments():Observable<any>{
+  getAppointments(): Observable<any> {
     return this.http.get<any>(this.apiUrl);
   }
 
-  getAppointmentsByUser(userId:number):Observable<any>{
+  getAppointmentsByUser(userId: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${userId}`);
   }
 
-  addAppointment(appointment:Appointment):Observable<any>{
-    return this.http.post<any>(this.apiUrl,appointment);
+  addAppointment(appointment: Appointment): Observable<any> {
+    return this.http.post<any>(this.apiUrl, appointment);
   }
 
-  updateAppointment(appointmentld:number, appointment:Appointment):Observable<any>{
-    return this.http.post<any>(`${this.apiUrl}/${appointmentld}`,appointment);
+  updateAppointment(appointmentId: number, appointment: Appointment): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${appointmentId}`, appointment);
   }
 
-  deleteAppointment(appointmentld:number):Observable<any>{
-    return this.http.delete<any>(`${this.apiUrl}/${appointmentld}`);
+  deleteAppointment(appointmentId: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${appointmentId}`);
   }
-
-
 }
