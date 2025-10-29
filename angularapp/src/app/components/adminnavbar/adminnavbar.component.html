@@ -4,7 +4,7 @@
 
   <ul *ngIf="isUserLoggedIn()">
    
-    <li class="admin-box">Admin / {{ service.getRole() }}</li>
+    <li class="admin-box"> {{service.getAuthenticatedUser()}} / {{ service.getRole() }}</li>
 
     
     <li><a routerLink="/">Home</a></li>
@@ -23,4 +23,5 @@
     <button (click)="logout()">Yes</button>
     <button (click)="cancelLogout()">No</button>
   </div>
+
 </div>
