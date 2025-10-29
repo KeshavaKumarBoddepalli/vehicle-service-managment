@@ -1,0 +1,79 @@
+/* Container styling */
+.container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  /* Title */
+  .title {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+  }
+  
+  /* Table styling */
+  .service-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  
+  .service-table th, .service-table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .service-table thead th {
+    background-color: #343a40;
+    color: #fff;
+  }
+  
+  .service-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Buttons */
+  .btn {
+    padding: 6px 12px;
+    margin: 0 4px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  
+  .edit-btn {
+    background-color: #3498db;
+    color: #fff;
+  }
+  
+  .edit-btn:hover {
+    background-color: #2980b9;
+  }
+  
+  .delete-btn {
+    background-color: #e74c3c;
+    color: #fff;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  /* No data message */
+  .no-data {
+    text-align: center;
+    margin-top: 2rem;
+    color: #888;
+    font-size: 1.2rem;
+  }
+  
