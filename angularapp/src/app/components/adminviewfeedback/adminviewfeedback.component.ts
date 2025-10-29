@@ -23,15 +23,20 @@ export class AdminviewfeedbackComponent implements OnInit {
       }
     });
   }
-  deleteFeedback(feedbackId: number){
-    this.feedbackService.deleteFeedback(feedbackId).subscribe({
-      next: ()=>{
-        this.loadFeedbacks();
-      },
-      error: (error)=>{
-        console.error('Error deleting feedback:', error);
-      }
-    });
+  deleteFeedback(feedbackId: number) {
+    if (confirm('Are you sure you want to delete this feedback?')) {
+      this.feedbackService.deleteFeedback(feedbackId).subscribe({
+        next: () => {
+          alert('Feedback deleted successfully!');
+          setTimeout(() => {
+            this.loadFeedbacks();
+          }, 500); // wait 500ms before reloading
+        },
+        error: (error) => {
+          console.error('Error deleting feedback:', error);
+        }
+      });
+    }
   }
   updateFeedback(feedbackId: number, feedback: Feedback){
     this.feedbackService.updateFeedback(feedbackId, feedback).subscribe({

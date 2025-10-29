@@ -87,12 +87,15 @@ export class UseraddappointmentComponent implements OnInit {
       return;
     }
 
-    const newAppointment: Appointment = {
-      service: item.service,
-      appointmentDate: item.appointmentDate,
-      location: item.location,
-      user: this.currentUser
-    };
+    const formattedDate = new Date(item.appointmentDate).toISOString().split('T')[0]; // "yyyy-MM-dd"
+
+const newAppointment: Appointment = {
+  service: { serviceId: item.service.serviceId } as VehicleMaintenance,
+  appointmentDate: formattedDate,
+  location: item.location,
+  user: { userId: this.currentUser!.userId } as User
+};
+
 
     this.appointmentService.addAppointment(newAppointment).subscribe(
       (savedAppointment) => {
@@ -104,7 +107,7 @@ export class UseraddappointmentComponent implements OnInit {
       },
       (error) => {
         this.errorMessage = 'Failed to book this appointment. Please try again.';
-        console.error('Error booking appointment:', error);
+        //console.error('Error booking appointment:', error);
       }
     );
   }

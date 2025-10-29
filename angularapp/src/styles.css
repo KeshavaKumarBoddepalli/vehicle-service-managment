@@ -9,4 +9,9 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
   }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
   
