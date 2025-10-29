@@ -8,27 +8,27 @@ import { VehicleMaintenance } from '../models/vehicle-maintenance.model';
 })
 export class VehicleService {
 
-  public apiUrl="https://8080-cddcccedbacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/services";
-  constructor(private http:HttpClient) { }
+  public apiUrl = "https://8080-cddcccedbacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/services";
 
-  getAllServices(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}`);
+  constructor(private http: HttpClient) {}
+
+  getAllServices(): Observable<VehicleMaintenance[]> {
+    return this.http.get<VehicleMaintenance[]>(this.apiUrl);
   }
 
-  addService(service: VehicleMaintenance):Observable<any>{
-    return this.http.post<any>(`${this.apiUrl}`,service)
+  addService(service: VehicleMaintenance): Observable<any> {
+    return this.http.post<any>(this.apiUrl, service);
   }
 
-  updateService(serviceId:number, updatedService:VehicleMaintenance):Observable<any>{
-    return this.http.put<any>(`${this.apiUrl}/${serviceId}`,updatedService)
+  updateService(serviceId: number, updatedService: VehicleMaintenance): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${serviceId}`, updatedService);
   }
 
-  deleteService(serviceid:number):Observable<any>{
-    return this.http.delete<any>(`${this.apiUrl}/${serviceid}`)
+  deleteService(serviceId: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${serviceId}`);
   }
 
-  getServiceByName(serviveName:string):Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/${serviveName}`)
+  getServiceByName(serviceName: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${serviceName}`);
   }
-
 }
