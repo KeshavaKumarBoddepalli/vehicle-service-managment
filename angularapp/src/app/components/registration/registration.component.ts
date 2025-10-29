@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent implements OnInit {
+export  class RegistrationComponent implements OnInit {
   registerForm: FormGroup;
    users: User[] = [];
  
@@ -58,8 +58,8 @@ export class RegistrationComponent implements OnInit {
          },
          (error) => {
            this.registerForm.reset();
-           alert("Registration not done");
-           this.router.navigate(['/error'], {
+           alert("Registration not done, We're sorry, but an error occurred. Please try again later.");
+           this.router.navigate(['/home'], {
              queryParams: { errorMsg: 'Registration not done due to existing emailId' }
            });
          }
