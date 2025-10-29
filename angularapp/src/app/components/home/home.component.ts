@@ -1,16 +1,34 @@
+// import { Component, OnInit } from '@angular/core';
+
+// @Component({
+//   selector: 'app-home',
+//   templateUrl: './home.component.html',
+//   styleUrls: ['./home.component.css']
+// })
+
+// export class HomeComponent {
+//   userRole: string = ''; 
+
+//   constructor() {  
+//     this.userRole = localStorage.getItem('role') || '';
+//   }
+// }
+
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+export class HomeComponent implements OnInit {
+  userRole: string = '';
 
-export class HomeComponent {
-  userRole: string = ''; 
+  constructor(private authService: AuthService) {}
 
-  constructor() {  
-    this.userRole = localStorage.getItem('role') || '';
+  ngOnInit(): void {
+    this.userRole = this.authService.getRole(); 
   }
 }
-
