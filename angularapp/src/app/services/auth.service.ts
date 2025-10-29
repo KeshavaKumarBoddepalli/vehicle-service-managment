@@ -21,10 +21,10 @@ export class AuthService {
  
   private loggedInUser: any = null
   constructor(private http: HttpClient) {
-    const userData = localStorage.getItem('loggedInUser');
-    if (userData) {
-      this.loggedInUser = JSON.parse(userData);
-    }
+    // const userData = localStorage.getItem('loggedInUser');
+    // if (userData) {
+    //   this.loggedInUser = JSON.parse(userData);
+    // }
    }
   register(user : User) : Observable<any> {
     return this.http.post(`${this.baseUrl}/register`,user);
