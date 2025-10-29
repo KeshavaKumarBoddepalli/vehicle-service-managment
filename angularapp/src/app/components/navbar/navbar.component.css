@@ -1,11 +1,12 @@
 .nav-container {
-    background-color: #fffcfc38; 
+    background-color: #01000038; 
     padding: 5px 25px;
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
+ 
   
   .nav-container h1 a {
     color: white;
