@@ -12,16 +12,16 @@ export class UserviewfeedbackComponent implements OnInit {
   constructor(private feedbackService: FeedbackService, private authService: AuthService) { }
  
   ngOnInit(): void {
-    const userId = this.authService.getLoggedInUser().userId;
+    // const userId = this.authService.getLoggedInUser().userId;
    
-    this.feedbackService.getFeedbackByUserId(userId).subscribe({
-      next: (data)=>{
-        this.userFeedbacks=data;
-      },
-      error: (error)=>{
-        console.error('Error fetching user feedback:', error);
-      }
-    });
+    // this.feedbackService.getFeedbackByUserId(userId).subscribe({
+    //   next: (data)=>{
+    //     this.userFeedbacks=data;
+    //   },
+    //   error: (error)=>{
+    //     console.error('Error fetching user feedback:', error);
+    //   }
+    // });
   }
  
 }
