@@ -19,7 +19,7 @@ import { AdminnavbarComponent } from './components/adminnavbar/adminnavbar.compo
 import { UsernavbarComponent } from './components/usernavbar/usernavbar.component';
 
 const routes: Routes = [
-  {path:'',redirectTo:'home',pathMatch:'full'}, 
+  {path:'',redirectTo:'adminaddservice',pathMatch:'full'}, 
   {path:'home',component:HomeComponent},
   {path: 'registration', component: RegistrationComponent },
   {path: 'login', component: LoginComponent },
