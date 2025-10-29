@@ -21,8 +21,8 @@ public class CrosConfig {
                         .allowedOrigins(
                             //"https://8081-cecdfddacafbdafffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/",
                             "http://127.0.0.1:3000",
-                            "https://8081-dcaafddcbffffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/",
-                            "https://8080-dcaafddcbffffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/"
+                            "https://8081-dcaafddcbffffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/"
+                           
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
