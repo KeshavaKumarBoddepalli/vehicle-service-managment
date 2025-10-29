@@ -59,7 +59,7 @@ export  class RegistrationComponent implements OnInit {
          (error) => {
            this.registerForm.reset();
            alert("Registration not done, We're sorry, but an error occurred. Please try again later.");
-           this.router.navigate(['/home'], {
+           this.router.navigate(['/error'], {
              queryParams: { errorMsg: 'Registration not done due to existing emailId' }
            });
          }
