@@ -1,104 +1,102 @@
+
 <div class="fullscreen-wrapper">
-         <!-- Main Content -->
-        <div class="main-container">
-        <!-- Left Image Section -->
-        <div class="image-section"></div>
-    
-        <!-- Right Login Form Section -->
-    
-        <div class="container p-4 bg-white rounded shadow" style="max-width: 500px; width: 100%;">
-                <h2 class="text-center">Registration</h2>
-                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+       
+       <div class="main-container">
+       
+       <div class="image-section"></div>
+       <div class="container p-4 bg-white rounded shadow" style="max-width: 500px; width: 100%;">
+               <h2 class="text-center">Registration</h2>
+               <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
-                        Username*<br>
-                        <input type="text" id="username" name="username" formControlName="username"><br>
-                        <div *ngIf="registerForm.controls.username?.touched && registerForm.controls.username?.invalid"
-                                class="text-danger">
-                                <div *ngIf="registerForm.controls.username.errors?.required">
-                                        Username is required.
-                                </div>
-                                <div *ngIf="registerForm.controls.username.errors?.minlength">
-                                        Username must be at least 5 characters long.
-                                </div>
-                                <div *ngIf="registerForm.controls.username.errors?.maxlength">
-                                        Username must not exceed 10 characters.
-                                </div>
-                                <div *ngIf="registerForm.controls.username.errors?.pattern">
-                                        Username must start with a letter and contain only letters, numbers, or
-                                        underscores.
-                                </div>
-                        </div><br>
+                       Username*<br>
+                       <input type="text" id="username" name="username" formControlName="username"><br>
+                       <div *ngIf="registerForm.controls.username?.touched && registerForm.controls.username?.invalid"
+                               class="text-danger">
+                               <div *ngIf="registerForm.controls.username.errors?.required">
+                                       Username is required.
+                               </div>
+                               <div *ngIf="registerForm.controls.username.errors?.minlength">
+                                       Username must be at least 5 characters long.
+                               </div>
+                               <div *ngIf="registerForm.controls.username.errors?.maxlength">
+                                       Username must not exceed 10 characters.
+                               </div>
+                               <div *ngIf="registerForm.controls.username.errors?.pattern">
+                                       Username must start with a letter and contain only letters, numbers, or
+                                       underscores.
+                               </div>
+                       </div><br>
 
-                        Email*<br>
-                        <input type="text" name="email" formControlName="email"><br>
-                        <div *ngIf="registerForm.controls.email?.touched && registerForm.controls.email?.invalid"
-                                class="text-danger">
-                                <div *ngIf="registerForm.controls.email.errors?.required">
-                                        Email is required.
-                                </div>
-                                <div *ngIf="registerForm.controls.email.errors?.email">
-                                        Please enter a valid email address.
-                                </div>
-                                <div *ngIf="registerForm.controls.email.errors?.pattern">
-                                        Email format is invalid.
-                                </div>
-                        </div><br>
+                       Email*<br>
+                       <input type="text" name="email" formControlName="email"><br>
+                       <div *ngIf="registerForm.controls.email?.touched && registerForm.controls.email?.invalid"
+                               class="text-danger">
+                               <div *ngIf="registerForm.controls.email.errors?.required">
+                                       Email is required.
+                               </div>
+                               <div *ngIf="registerForm.controls.email.errors?.email">
+                                       Please enter a valid email address.
+                               </div>
+                               <div *ngIf="registerForm.controls.email.errors?.pattern">
+                                       Email format is invalid.
+                               </div>
+                       </div><br>
 
 
-                        Password*<br>
-                        <input type="password" id="password" name="password" formControlName="password"><br>
-                        <div *ngIf="registerForm.controls.password?.touched && registerForm.controls.password?.invalid"
-                                class="text-danger">
-                                <div *ngIf="registerForm.controls.password.errors?.required">
-                                        Password is required.
-                                </div>
-                                <div *ngIf="registerForm.controls.password.errors?.minlength">
-                                        Password must be at least 8 characters long.
-                                </div>
-                                <div *ngIf="registerForm.controls.password.errors?.pattern">
-                                        Password must contain at least one uppercase letter, one lowercase letter, one
-                                        number, and one special character.
-                                </div>
-                        </div><br>
+                       Password*<br>
+                       <input type="password" id="password" name="password" formControlName="password"><br>
+                       <div *ngIf="registerForm.controls.password?.touched && registerForm.controls.password?.invalid"
+                               class="text-danger">
+                               <div *ngIf="registerForm.controls.password.errors?.required">
+                                       Password is required.
+                               </div>
+                               <div *ngIf="registerForm.controls.password.errors?.minlength">
+                                       Password must be at least 8 characters long.
+                               </div>
+                               <div *ngIf="registerForm.controls.password.errors?.pattern">
+                                       Password must contain at least one uppercase letter, one lowercase letter, one
+                                       number, and one special character.
+                               </div>
+                       </div><br>
 
-                        Confirm Password*<br>
-                        <input type="password" id="confirmPassword" name="confirmPassword"
-                                formControlName="confirmPassword"><br>
-                        <div *ngIf="registerForm.get('confirmPassword')?.touched" class="text-danger">
-                                <div *ngIf="registerForm.get('confirmPassword')?.errors?.required">
-                                        Confirm Password is required.
-                                </div>
-                                <div *ngIf="registerForm.hasError('mismatch')">
-                                        Passwords do not match.
-                                </div>
-                        </div><br>
+                       Confirm Password*<br>
+                       <input type="password" id="confirmPassword" name="confirmPassword"
+                               formControlName="confirmPassword"><br>
+                       <div *ngIf="registerForm.get('confirmPassword')?.touched" class="text-danger">
+                               <div *ngIf="registerForm.get('confirmPassword')?.errors?.required">
+                                       Confirm Password is required.
+                               </div>
+                               <div *ngIf="registerForm.hasError('mismatch')">
+                                       Passwords do not match.
+                               </div>
+                       </div><br>
 
-                        Mobile Number*<br>
-                        <input type="text" id="mobileNumber" name="mobileNumber" formControlName="mobileNumber"><br>
-                        <div *ngIf="registerForm.controls.mobileNumber?.touched && registerForm.controls.mobileNumber?.invalid"
-                                class="text-danger">
-                                <div *ngIf="registerForm.controls.mobileNumber.errors?.required">
-                                        Mobile number is required.
-                                </div>
-                                <div *ngIf="registerForm.controls.mobileNumber.errors?.pattern">
-                                        Enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9.
-                                </div>
-                        </div><br>
+                       Mobile Number*<br>
+                       <input type="text" id="mobileNumber" name="mobileNumber" formControlName="mobileNumber"><br>
+                       <div *ngIf="registerForm.controls.mobileNumber?.touched && registerForm.controls.mobileNumber?.invalid"
+                               class="text-danger">
+                               <div *ngIf="registerForm.controls.mobileNumber.errors?.required">
+                                       Mobile number is required.
+                               </div>
+                               <div *ngIf="registerForm.controls.mobileNumber.errors?.pattern">
+                                       Enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9.
+                               </div>
+                       </div><br>
 
 
-                        Role*<br>
-                        <select name="userRole" formControlName="userRole">
-                                <option value="">-- Select Role --</option>
-                                <option value="ADMIN">Admin</option>
-                                <option value="USER">User</option>
-                        </select><br>
-                        <div *ngIf="registerForm.controls.userRole?.touched && registerForm.controls.userRole?.invalid"
-                                class="text-danger">
-                                Role is required.
-                        </div><br>
+                       Role*<br>
+                       <select name="userRole" formControlName="userRole">
+                               <option value="">-- Select Role --</option>
+                               <option value="ADMIN">Admin</option>
+                               <option value="USER">User</option>
+                       </select><br>
+                       <div *ngIf="registerForm.controls.userRole?.touched && registerForm.controls.userRole?.invalid"
+                               class="text-danger">
+                               Role is required.
+                       </div><br>
 
-                        <button type="submit" class="btn btn-primary"
-                                [disabled]="registerForm.invalid">Register</button>
-                </form>
-        </div>
+                       <button type="submit" class="btn btn-primary"
+                               [disabled]="registerForm.invalid">Register</button>
+               </form>
+       </div>
 </div>
