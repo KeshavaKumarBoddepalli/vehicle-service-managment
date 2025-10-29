@@ -1,7 +1,6 @@
 <!-- Conditionally show navbar based on role -->
 <app-navbar></app-navbar>
-<app-adminnavbar *ngIf="isAdmin()"></app-adminnavbar>
-<app-usernavbar *ngIf="isUser()"></app-usernavbar>
+<router-outlet></router-outlet>
 
 <!-- Main content rendered by router -->
 <router-outlet></router-outlet>
