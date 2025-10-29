@@ -1,30 +1,30 @@
+
+
+
 <div class="fullscreen-wrapper">
-  <!-- Main Content -->
-  <div class="main-container">
-    <!-- Left Image Section -->
-    <div class="image-section"></div>
-
-    <!-- Right Login Form Section -->
-
-    <form #loginForm="ngForm" (ngSubmit)="login()">
-    <h2 class="text-center text-primary">Login</h2>
-    <div>
-    <label for="username">Username:</label>
-    <input type="text" class="underline-input" id="username" name="username" [(ngModel)]="username" #usernameInput="ngModel" required>
-    <div *ngIf="usernameInput.invalid && usernameInput.touched" class="error-message">
-    <div *ngIf="usernameInput.errors?.required">Username is required</div>
-    </div>
-    </div><br>
-    <div>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" [(ngModel)]="password" #passwordInput="ngModel" required>
-    <div *ngIf="passwordInput.invalid && passwordInput.touched" class="error-message">
-                Password is required
-    </div>
-    </div>
-    <button type="submit" [disabled]="loginForm.invalid || isSubmitting">Login</button>
-    <div>
-    <a routerLink="/registration">Don't have an account? Register here</a>
-    </div>
-    </form>
+    
+    <div class="main-container">
+      
+      <div class="image-section"></div> 
+      <form #loginForm="ngForm" (ngSubmit)="login()">
+      <h2 class="text-center text-primary">Login</h2>
+      <div>
+      <label for="username">Username:</label>
+      <input type="text" class="underline-input" id="username" name="username" [(ngModel)]="username" #usernameInput="ngModel" required>
+      <div *ngIf="usernameInput.invalid && usernameInput.touched" class="error-message">
+      <div *ngIf="usernameInput.errors?.required">Username is required</div>
+      </div>
+      </div><br>
+      <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" [(ngModel)]="password" #passwordInput="ngModel" required>
+      <div *ngIf="passwordInput.invalid && passwordInput.touched" class="error-message">
+                  Password is required
+      </div>
+      </div>
+      <button type="submit" [disabled]="loginForm.invalid || isSubmitting">Login</button>
+      <div>
+      <a routerLink="/registration">Don't have an account? Register here</a>
+      </div>
+      </form>
 </div>
