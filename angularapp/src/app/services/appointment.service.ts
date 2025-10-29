@@ -8,7 +8,7 @@ import { Appointment } from '../models/appointment.model';
 })
 export class AppointmentService {
 
-  public apiUrl="https://8080-cddcccedbacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/appointment";
+  public apiUrl="https://8080-cecdfddacafbdafffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/appointment";
 
   constructor(private http:HttpClient){ }
 
