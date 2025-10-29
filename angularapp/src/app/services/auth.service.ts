@@ -16,7 +16,7 @@ export const ROLE = 'role';
 export class AuthService {
  
  
-  public baseUrl = "https://8080-dcaafddcbffffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/apigit";
+  public baseUrl = "https://8080-dcaafddcbffffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api";
  
   private loggedInUser: any = null
   constructor(private http: HttpClient) {
