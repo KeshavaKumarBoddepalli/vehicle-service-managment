@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+showLogoutPopup=false;
   constructor(private service:AuthService){}
 
   isUserLoggedIn(): any {

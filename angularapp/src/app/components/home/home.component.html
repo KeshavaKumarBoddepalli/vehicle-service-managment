@@ -1,4 +1,4 @@
-<!-- Content for guests (not logged in) -->
+
 <div *ngIf="!userRole">
   <div class="container">
     <h1>Vehicle Service</h1>
@@ -14,7 +14,7 @@
   </div>
 </div>
 
-<!-- Content for USER role -->
+
 <div *ngIf="userRole === 'USER'">
   <div class="container">
     <h1>Vehicle Service</h1>
@@ -46,7 +46,7 @@
   </footer>
 </div>
 
-<!-- Content for ADMIN role -->
+
 <div *ngIf="userRole === 'ADMIN'">
   <div class="container">
     <h1>Vehicle Service</h1>
