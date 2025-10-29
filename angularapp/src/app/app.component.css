@@ -1,0 +1,8 @@
+
+nav {
+    position: relative; /* Ensure navbar stays above content */
+    z-index: 1000;       /* Bring navbar to front */
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    color: white;        /* Text visible on dark background */
+    padding: 10px 20px;
+}
