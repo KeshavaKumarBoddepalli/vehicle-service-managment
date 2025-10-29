@@ -15,6 +15,16 @@ export const ROLE = 'role';
   providedIn: 'root'
 })
 export class AuthService {
+<<<<<<< HEAD
+  private loggedInUser: any = null
+  constructor() {
+    const userData = localStorage.getItem('loggedInUser');
+    if (userData) {
+      this.loggedInUser = JSON.parse(userData);
+    }
+  }
+=======
+>>>>>>> origin/main
 
 
   public baseUrl = "https://8080-cecdfddacafbdafffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api";
@@ -55,9 +65,20 @@ export class AuthService {
   getAuthenticatedUserId(): number {
     return parseInt(localStorage.getItem(USER_ID) || "0");
   }
+<<<<<<< HEAD
+  
+  getLoggedInUser(): any {
+    return this.loggedInUser;
+  }
+
+  getRole():string {
+    return 'user';
+      
+=======
 
   getAuthenticatedUser() {
     return localStorage.getItem(AUTHENTICATED_USER);
+>>>>>>> origin/main
   }
 
   getAuthenticatedRole() {
