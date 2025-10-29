@@ -1,102 +1,158 @@
-h2 {
-    text-align: center;
-    color: #2a588a;
-    margin-bottom: 1.5rem;
-    /* font-size: 2rem;
-    font-weight:bold; */
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+header {
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+}
+
+header h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 16px;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+}
+
+/* Main container */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background-color: #f9f9f9;
+}
+
+/* Left image section */
+.image-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-section img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Right login form */
+.login-section {
+  flex: 1;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+}
+
+.login-section h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #ccc;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: not-allowed; /* Disabled look */
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.register-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+      flex-direction: column;
   }
-   
-  .fullscreen-wrapper {
-    background: linear-gradient(to right, #74ebd5, #3f5c68);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
+
+  .image-section {
+      margin-bottom: 20px;
   }
-   
-  form {
-    background-color: rgba(255, 255, 255, 0.97);
-    padding: 40px;
-    width: 100%;
-    max-width: 500px;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    transition: transform 0.3s ease;
-  }
-   
-  form:hover {
-    transform: scale(1.01);
-  }
-   
-  form div {
-    margin-bottom: 24px;
-  }
-   
-  label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #2a7db1;
-    font-size: 15px;
-  }
-   
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-sizing: border-box;
-    font-size: 15px;
-    transition: border-color 0.3s ease;
-  }
-   
-  input[type="text"]:focus,
-  input[type="password"]:focus {
-    border-color: #2a7db1;
-    outline: none;
-    box-shadow: 0 0 5px rgba(42, 125, 177, 0.5);
-  }
-   
-  .error-message {
-    color: #dc3545;
-    font-size: 14px;
-    margin-top: 5px;
-  }
-   
-  button[type="submit"] {
-    background-color: #2a7db1;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-   
-  button[type="submit"]:hover {
-    background-color: #1e5f8c;
-  }
-   
-  button[type="submit"]:disabled {
-    background-color: #a0c4e3;
-    cursor: not-allowed;
-  }
-   
-  a[routerLink="/register"] {
-    display: block;
-    text-align: center;
-    margin-top: 20px;
-    color: #2a7db1;
-    text-decoration: none;
-    font-weight: bold;
-  }
-   
-  a[routerLink="/register"]:hover {
-    text-decoration: underline;
-  }
+}
+.fullscreen-wrapper form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fullscreen-wrapper label {
+  font-weight: bold;
+}
+
+.fullscreen-wrapper input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
