@@ -2,7 +2,7 @@
         <div class="container p-4 bg-white rounded shadow" style="max-width: 500px; width: 100%;">
                 <h2 class="text-center">Registration</h2>
                 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
- 
+
                         Username*<br>
                         <input type="text" id="username" name="username" formControlName="username"><br>
                         <div *ngIf="registerForm.controls.username?.touched && registerForm.controls.username?.invalid"
@@ -21,7 +21,7 @@
                                         underscores.
                                 </div>
                         </div><br>
- 
+
                         Email*<br>
                         <input type="text" name="email" formControlName="email"><br>
                         <div *ngIf="registerForm.controls.email?.touched && registerForm.controls.email?.invalid"
@@ -36,8 +36,8 @@
                                         Email format is invalid.
                                 </div>
                         </div><br>
- 
- 
+
+
                         Password*<br>
                         <input type="password" id="password" name="password" formControlName="password"><br>
                         <div *ngIf="registerForm.controls.password?.touched && registerForm.controls.password?.invalid"
@@ -53,7 +53,7 @@
                                         number, and one special character.
                                 </div>
                         </div><br>
- 
+
                         Confirm Password*<br>
                         <input type="password" id="confirmPassword" name="confirmPassword"
                                 formControlName="confirmPassword"><br>
@@ -65,7 +65,7 @@
                                         Passwords do not match.
                                 </div>
                         </div><br>
- 
+
                         Mobile Number*<br>
                         <input type="text" id="mobileNumber" name="mobileNumber" formControlName="mobileNumber"><br>
                         <div *ngIf="registerForm.controls.mobileNumber?.touched && registerForm.controls.mobileNumber?.invalid"
@@ -77,8 +77,8 @@
                                         Enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9.
                                 </div>
                         </div><br>
- 
- 
+
+
                         Role*<br>
                         <select name="userRole" formControlName="userRole">
                                 <option value="">-- Select Role --</option>
@@ -89,7 +89,7 @@
                                 class="text-danger">
                                 Role is required.
                         </div><br>
- 
+
                         <button type="submit" class="btn btn-primary"
                                 [disabled]="registerForm.invalid">Register</button>
                 </form>
