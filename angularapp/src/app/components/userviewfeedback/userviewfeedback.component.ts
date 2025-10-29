@@ -12,8 +12,8 @@ export class UserviewfeedbackComponent implements OnInit {
   constructor(private feedbackService: FeedbackService, private authService: AuthService) { }
  
   ngOnInit(): void {
-    // const userId = this.authService.getLoggedInUser().userId;
-    const userId = 101;
+    const userId = this.authService.getLoggedInUser().userId;
+   
     this.feedbackService.getFeedbackByUserId(userId).subscribe({
       next: (data)=>{
         this.userFeedbacks=data;

@@ -1,4 +1,18 @@
+<<<<<<< HEAD
 <app-navbar></app-navbar>
+=======
+<!-- <app-navbar></app-navbar>
+<router-outlet></router-outlet>
+ -->
 
-<!-- Main content rendered by router -->
+
+<app-navbar *ngIf="!isUserLoggedIn()"></app-navbar>
+
+
+<app-adminnavbar *ngIf="isUserLoggedIn() && isAdmin()"></app-adminnavbar>
+
+<app-usernavbar *ngIf="isUserLoggedIn() && isUser()"></app-usernavbar>
+
+>>>>>>> origin/main
+
 <router-outlet></router-outlet>

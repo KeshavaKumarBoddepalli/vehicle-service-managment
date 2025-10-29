@@ -1,74 +1,112 @@
-.container {
-    max-width: 500px;
-    width: 100%;
-    padding: 2rem;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin: 2rem auto;
-  }
-  h2 {
-    text-align: center;
-    color: #134d8b;
-    margin-bottom: 1.5rem;
-  }
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  input[type="text"],
-  input[type="password"],
-  select {
-    width: 100%;
-    padding: 0.5rem;
-    margin-top: 0.25rem;
-    margin-bottom: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  input:focus,
-  select:focus {
-    border-color: #007bff;
-    outline: none;
-  }
-  .error-message {
-    font-size: 0.875rem;
-    color: #dc3545;
-    margin-top: -0.5rem;
-    margin-bottom: 0.75rem;
-  }
-  button[type="submit"] {
-    padding: 0.6rem 1rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  button[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  button[type="submit"]:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-  }
+/* Fullscreen wrapper */
+.fullscreen-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+header {
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  font-size: 20px;
+}
+
+header .header-left {
+  font-weight: bold;
+}
+
+header .header-right a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+/* Main container */
+.main-container {
+  display: flex;
+  gap:50px;
+  flex: 1;
+}
+
+/* Left image section */
+.image-section {
+  flex: 2;
+  height:auto;
+  background:url('/assets/loginpage.png') no-repeat center center;
+  background-size: contain;
+
+}
+
+/* Right form section */
+.form-section {
+  flex: 0.5;
+  height:auto;
+  background-color: #ffffff;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: -4px 0 8px rgba(0,0,0,0.1);
+}
+
+h2.text-center.text-primary {
+  text-align: center;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  color:#2d7ed4;
+  margin-bottom: 5px;
+  
+}
+label::after {
+  content: " *"; /* Adds a star after the label text */
+  color: red;    /* Makes the star red */
+  font-weight: bold;
+}
+
+input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border:1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
  
-  .text-danger{
-    color: red;
-    font-size: 0.9rem;
-  }
- 
-  .fullscreen-wrapper {
-    background: linear-gradient(to right, #74ebd5, #3f5c68);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  /* .fa-eye, .fa-eye-slash {
-    font-size: 18px;
-    color: #555;
-  } */
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}

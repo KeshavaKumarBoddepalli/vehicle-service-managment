@@ -16,7 +16,7 @@ export class UsernavbarComponent {
     }
   
     isCustomer(): boolean {
-      return this.service.getRole() === 'user';
+      return this.service.getRole() === 'USER';
     }
   
     confirmLogout(): void {
@@ -26,10 +26,27 @@ export class UsernavbarComponent {
     cancelLogout(): void {
       this.showLogoutPopup = false;
     }
+    showAppointmentsDropdown = false;
+    showFeedbackDropdown = false;
+
+  toggleAppointmentsDropdown() {
+    this.showAppointmentsDropdown = !this.showAppointmentsDropdown;
+    this.showFeedbackDropdown = false;
+  }
+
+  toggleFeedbackDropdown() {
+    this.showFeedbackDropdown = !this.showFeedbackDropdown;
+    this.showAppointmentsDropdown = false;
+  }
   
-    logout(): void {
+  logout(): void {
       this.service.logout();
       this.showLogoutPopup = false;
-    }
+  }
+
+  closeAllDropdowns() {
+    this.showAppointmentsDropdown = false;
+    this.showFeedbackDropdown = false;
+  }
   
 }

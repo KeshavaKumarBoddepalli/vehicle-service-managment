@@ -1,6 +1,7 @@
+// 
+
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
-// import { YourAuthService } from ''; // Update with actual path
 
 @Component({
   selector: 'app-root',
@@ -8,13 +9,16 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'angularapp';
   userRole: string = '';
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.userRole = this.authService.getRole(); // Make sure this returns 'ADMIN' or 'USER'
+    this.userRole = this.authService.getRole(); 
+  }
+
+  isUserLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 
   isAdmin(): boolean {
