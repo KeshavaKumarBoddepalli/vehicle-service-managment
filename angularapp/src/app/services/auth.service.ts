@@ -36,7 +36,7 @@ export class AuthService {
         data => {
           localStorage.setItem(USER_ID, "" + data.userId);
           localStorage.setItem(AUTHENTICATED_USER, username);
-          // localStorage.setItem(TOKEN, `Bearer ${data.token}`);
+          localStorage.setItem(TOKEN, `Bearer ${data.token}`);
           localStorage.setItem(ROLE, data.userRole);
           return data;
         }
