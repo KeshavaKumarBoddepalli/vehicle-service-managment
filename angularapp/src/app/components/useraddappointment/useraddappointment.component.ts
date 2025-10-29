@@ -5,9 +5,8 @@ import { User } from 'src/app/models/user.model';
 import { VehicleMaintenance } from 'src/app/models/vehicle-maintenance.model';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
-import { AuthService } from 'src/app/services/auth.service'; // Uncomment if using AuthService
+import { AuthService } from 'src/app/services/auth.service';
 
-// Helper interface to manage the form data for each row
 export interface ServiceBookingForm {
   service: VehicleMaintenance;
   appointmentDate: string;
@@ -21,15 +20,12 @@ export interface ServiceBookingForm {
 })
 export class UseraddappointmentComponent implements OnInit {
 
-  // --- Pagination Properties ---
   currentPage: number = 1;
   itemsPerPage: number = 5;
 
-  // --- Data Arrays ---
   public allBookingForms: ServiceBookingForm[] = [];
   public paginatedBookingForms: ServiceBookingForm[] = [];
 
-  // --- State Properties ---
   currentUser: User | null = null;
   errorMessage: string = '';
   successMessage: string = '';
@@ -37,7 +33,7 @@ export class UseraddappointmentComponent implements OnInit {
   constructor(
     private appointmentService: AppointmentService,
     private vehicleService: VehicleService,
-    private authService: AuthService // Use this if authentication is implemented
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -63,20 +59,23 @@ export class UseraddappointmentComponent implements OnInit {
     this.vehicleService.getAllServices().subscribe(
       (services) => {
         if (services && Array.isArray(services)) {
-          this.allBookingForms = services.map(s => ({
-            service: s,
+          this.allBookingForms = services.map((s: any) => ({
+            service: {
+              serviceId: s.id, // map 'id' from backend to 'serviceId'
+              serviceName: s.serviceName,
+              servicePrice: s.servicePrice,
+              typeOfVehicle: s.typeOfVehicle
+            },
             appointmentDate: '',
             location: ''
           }));
           this.updatePaginatedItems();
         } else {
           this.errorMessage = 'No services found.';
-          console.warn('Unexpected response:', services);
         }
       },
       (error) => {
         this.errorMessage = 'Failed to load services. Please try again later.';
-        console.error('Error fetching services:', error);
       }
     );
   }
@@ -87,15 +86,18 @@ export class UseraddappointmentComponent implements OnInit {
       return;
     }
 
-    const formattedDate = new Date(item.appointmentDate).toISOString().split('T')[0]; // "yyyy-MM-dd"
+    const formattedDate = new Date(item.appointmentDate).toISOString().split('T')[0];
 
-const newAppointment: Appointment = {
-  service: { serviceId: item.service.serviceId } as VehicleMaintenance,
-  appointmentDate: formattedDate,
-  location: item.location,
-  user: { userId: this.currentUser!.userId } as User
-};
+    const newAppointment: Appointment = {
+      service: { serviceId: item.service.serviceId } as VehicleMaintenance,
+      appointmentDate: formattedDate,
+      location: item.location,
+      user: { userId: this.currentUser!.userId, username: this.currentUser!.username } as User,
+      status: 'Pending'
+    };
 
+    console.log('Selected service:', item.service);
+    console.log('Payload being sent:', newAppointment);
 
     this.appointmentService.addAppointment(newAppointment).subscribe(
       (savedAppointment) => {
@@ -106,8 +108,8 @@ const newAppointment: Appointment = {
         setTimeout(() => this.successMessage = '', 3000);
       },
       (error) => {
+        console.error('Error response:', error);
         this.errorMessage = 'Failed to book this appointment. Please try again.';
-        //console.error('Error booking appointment:', error);
       }
     );
   }

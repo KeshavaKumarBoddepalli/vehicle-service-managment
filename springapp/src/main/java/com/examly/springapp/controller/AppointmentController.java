@@ -1,3 +1,4 @@
+
 package com.examly.springapp.controller;
 
 import org.springframework.http.HttpStatus;
@@ -24,10 +25,6 @@ public class AppointmentController {
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Appointment> addAppointment(@RequestBody Appointment appointment) {
         try {
-            // Force values to match test expectations
-            appointment.setLocation("New York"); // test expects "New York"
-            appointment.setStatus("Pending");
-
             Appointment savedAppointment = appointmentService.addAppointment(appointment);
             if (savedAppointment == null) {
                 return ResponseEntity.badRequest().body(null);
@@ -35,14 +32,12 @@ public class AppointmentController {
             return ResponseEntity.status(HttpStatus.CREATED).body(savedAppointment);
         } catch (IllegalArgumentException e) {
             System.out.println("Validation failed: " + e.getMessage());
-            return ResponseEntity.badRequest().body(null); // Return 400 instead of 500
+            return ResponseEntity.badRequest().body(null);
         } catch (Exception e) {
             System.out.println("Unexpected error: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-
-
 
     @GetMapping("/{userId}")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
