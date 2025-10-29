@@ -2,7 +2,6 @@ package com.examly.springapp.controller;
 
 import com.examly.springapp.model.Feedback;
 import com.examly.springapp.service.FeedbackServiceImpl;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +18,7 @@ public class FeedbackController {
     private FeedbackServiceImpl feedbackService;
 
     @PostMapping
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER')") // Uncomment this if using role-based access
     public ResponseEntity<Feedback> createFeedback(@RequestBody Feedback feedback) {
         Feedback created = feedbackService.createFeedback(feedback);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
@@ -41,6 +40,7 @@ public class FeedbackController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')") // Optional: restrict delete to admins
     public ResponseEntity<String> deleteFeedback(@PathVariable Long id) {
         Feedback deleted = feedbackService.deleteFeedback(id);
         if (deleted == null) {
@@ -50,9 +50,9 @@ public class FeedbackController {
     }
 
     @GetMapping("/user/{userId}")
-@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-public ResponseEntity<List<Feedback>> getFeedbackByUserId(@PathVariable int userId) {
-    List<Feedback> feedbackList = feedbackService.getFeedbackByUserId(userId);
-    return ResponseEntity.ok(feedbackList);
-}
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public ResponseEntity<List<Feedback>> getFeedbackByUserId(@PathVariable int userId) {
+        List<Feedback> feedbackList = feedbackService.getFeedbackByUserId(userId);
+        return ResponseEntity.ok(feedbackList);
+    }
 }

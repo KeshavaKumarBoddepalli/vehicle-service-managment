@@ -15,6 +15,12 @@ export class UseraddfeedbackComponent implements OnInit {
   constructor(private feedbackService: FeedbackService) { }
  
   ngOnInit(): void {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      this.newFeedback.user = { userId: parseInt(userId) };
+    } else {
+      console.error('User ID not found in localStorage');
+    }
   }
   submitFeedback(){
     this.feedbackService.createFeedback(this.newFeedback).subscribe({
