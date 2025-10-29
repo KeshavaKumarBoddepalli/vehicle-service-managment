@@ -26,7 +26,7 @@ login() {
       next: (response) => {
         this.isSubmitting = false;
         alert('Login successful!');
-        this.router.navigate(['/adminaddservice']);
+        this.router.navigate(['/home']);
       },
       error: (error) => {
         this.isSubmitting = false;

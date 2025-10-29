@@ -1,12 +1,15 @@
+<<<<<<< HEAD
 
 
 
+=======
+ 
+>>>>>>> origin/main
 <app-navbar *ngIf="!isUserLoggedIn()"></app-navbar>
-
-
+ 
+ 
 <app-adminnavbar *ngIf="isUserLoggedIn() && isAdmin()"></app-adminnavbar>
-
+ 
 <app-usernavbar *ngIf="isUserLoggedIn() && isUser()"></app-usernavbar>
-
-
+ 
 <router-outlet></router-outlet>

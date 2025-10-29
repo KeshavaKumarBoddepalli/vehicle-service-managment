@@ -15,14 +15,17 @@ export const ROLE = 'role';
   providedIn: 'root'
 })
 export class AuthService {
-  
 
 
-  public baseUrl = "https://8080-cecdfddacafbdafffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api";
-
+  public baseUrl = "https://8080-cddcccedbacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api";
  
-  constructor(private http: HttpClient) { }
-
+  private loggedInUser: any = null
+  constructor(private http: HttpClient) {
+    // const userData = localStorage.getItem('loggedInUser');
+    // if (userData) {
+    //   this.loggedInUser = JSON.parse(userData);
+    // }
+   }
   register(user : User) : Observable<any> {
     return this.http.post(`${this.baseUrl}/register`,user);
   }

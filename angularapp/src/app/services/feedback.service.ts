@@ -6,7 +6,7 @@ import { Feedback } from '../models/feedback.model';
   providedIn: 'root'
 })
 export class FeedbackService {
-  apiUrl="https://8080-facafcdbdfacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/feedback";
+  apiUrl="https://8080-cddcccedbacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/feedback";
   constructor(private http : HttpClient) { }
   createFeedback(feedback: Feedback): Observable<any>{
     return this.http.post<any>(`${this.apiUrl}`, feedback);
