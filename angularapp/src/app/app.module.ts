@@ -53,6 +53,7 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     RouterModule,
     ReactiveFormsModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
