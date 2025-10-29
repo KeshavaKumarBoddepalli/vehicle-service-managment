@@ -1,0 +1,96 @@
+/* Container styling */
+.feedback-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+  }
+  
+  /* Heading */
+  h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: 600;
+  }
+  
+  /* Table styling */
+  .feedback-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow-x: auto;
+  }
+  
+  .feedback-table th,
+  .feedback-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .feedback-table th {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  .feedback-table tr:hover {
+    background-color: #f1f1f1;
+    transition: background 0.3s ease;
+  }
+  
+  /* Buttons */
+  .btn {
+    padding: 8px 14px;
+    margin: 0 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.3s ease;
+  }
+  
+  .btn.update {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  .btn.update:hover {
+    background-color: #218838;
+  }
+  
+  .btn.delete {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  .btn.delete:hover {
+    background-color: #c82333;
+  }
+  
+  /* No data message */
+  .no-data {
+    text-align: center;
+    color: #6c757d;
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .feedback-table th,
+    .feedback-table td {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .btn {
+      font-size: 12px;
+      padding: 6px 10px;
+    }
+  }

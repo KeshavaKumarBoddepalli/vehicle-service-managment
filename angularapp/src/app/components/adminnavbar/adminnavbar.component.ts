@@ -16,7 +16,7 @@ export class AdminnavbarComponent {
   }
 
   isAdmin(): boolean {
-    return this.service.getRole() === 'admin';
+    return this.service.getRole() === 'ADMIN';
   }
 
   confirmLogout(): void {

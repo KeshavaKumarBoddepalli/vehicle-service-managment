@@ -34,9 +34,7 @@ const routes: Routes = [
   {path:'userviewappointment',component:UserviewappointmentComponent},
   {path:'userviewfeedback',component:UserviewfeedbackComponent},
   {path:'error',component:ErrorComponent},
-  {path:'navbar',component:NavbarComponent},
-  {path:'adminnavbar',component:AdminnavbarComponent},
-  {path:'usernavbar',component:UsernavbarComponent}
+ 
 ];
 
 @NgModule({
