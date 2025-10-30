@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Router } from '@angular/router';
 import { Feedback } from 'src/app/models/feedback.model';
 import { FeedbackService } from 'src/app/services/feedback.service';
 @Component({
@@ -13,9 +12,7 @@ export class UseraddfeedbackComponent implements OnInit {
     user: {} as any,
     message: '',
     rating:null
-    rating:null
   };
-  constructor(private feedbackService: FeedbackService, private router:Router) { }
   constructor(private feedbackService: FeedbackService, private router:Router) { }
  
   ngOnInit(): void {

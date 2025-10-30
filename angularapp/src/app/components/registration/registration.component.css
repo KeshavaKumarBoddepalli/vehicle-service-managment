@@ -1,9 +1,16 @@
 
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; 
+}
+
 .fullscreen-wrapper {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  margin: 0;
+  width:100vw;
   font-family: Arial, sans-serif;
 }
  
@@ -31,28 +38,30 @@ header .header-right a {
 
 .main-container {
   display: flex;
-  gap:50px;
+  gap:30px;
   flex: 1;
+  overflow:hidden;
 }
  
 .image-section {
   flex: 2;
   height:auto;
   background:url('/assets/loginpage.png') no-repeat center center;
-  background-size: contain;
+  background-size: cover;
  
 }
  
 
 .form-section {
-  flex: 0.5;
-  height:auto;
+  flex: 1;
+  max-width:150px;
   background-color: #ffffff;
-  padding: 40px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   box-shadow: -4px 0 8px rgba(0,0,0,0.1);
+  box-sizing:border-box;
 }
  
 h2.text-center.text-primary {
@@ -64,7 +73,7 @@ h2.text-center.text-primary {
 label {
   font-weight: bold;
   display: block;
-  color:#2d7ed4;
+  color:#ff5722;
   margin-bottom: 5px;
  
 }
