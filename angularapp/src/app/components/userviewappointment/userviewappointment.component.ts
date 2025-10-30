@@ -1,58 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { Appointment } from 'src/app/models/appointment.model';
 import { AppointmentService } from 'src/app/services/appointment.service';
+import { AuthService } from 'src/app/services/auth.service';
 
-// import { AuthService } from '../../services/auth.service'; // Uncomment when ready
- 
 @Component({
   selector: 'app-userviewappointment',
   templateUrl: './userviewappointment.component.html',
   styleUrls: ['./userviewappointment.component.css']
 })
 export class UserviewappointmentComponent implements OnInit {
- 
-  // This holds the complete list of appointments from the server
+
   allMyAppointments: Appointment[] = [];
-  
-  // This holds the list to be displayed in the table (after filtering)
   filteredAppointments: Appointment[] = [];
-  
   errorMessage: string = '';
-  currentUserId: number = 1; // Placeholder: Replace with real user ID from AuthService
- 
-  // Properties for the filter
+  successMessage: string = '';
+  currentUserId: number = 0;
+
   selectedStatus: string = 'All';
   statuses: string[] = ['All', 'Pending', 'Approved', 'Rejected'];
- 
+
   constructor(
-    private appointmentService: AppointmentService
-    // private authService: AuthService // Uncomment when AuthService is ready
-  ) { }
- 
+    private appointmentService: AppointmentService,
+    private authService: AuthService
+  ) {}
+
   ngOnInit(): void {
-    // In a real app, you'd get the user ID from the authService first
-    // this.authService.getLoggedInUser().subscribe(user => {
-    //   if(user && user.userId) {
-    //     this.currentUserId = user.userId;
-    //     this.loadAppointmentsForUser(this.currentUserId);
-    //   }
-    // });
- 
-    // Using placeholder ID for now
+    this.currentUserId = this.authService.getAuthenticatedUserId();
     if (this.currentUserId) {
       this.loadAppointmentsForUser(this.currentUserId);
+    } else {
+      this.errorMessage = 'User not logged in.';
     }
   }
- 
+
   loadAppointmentsForUser(userId: number): void {
     this.appointmentService.getAppointmentsByUser(userId).subscribe(
       (data) => {
         this.allMyAppointments = data;
-        this.filteredAppointments = data; // Initially, show all
-        
-        if (data.length === 0) {
-          // This message is now handled by the 'noAppointments' template
-        }
+        this.filteredAppointments = data;
       },
       (error) => {
         this.errorMessage = 'Failed to load your appointments. Please try again.';
@@ -60,10 +45,7 @@ export class UserviewappointmentComponent implements OnInit {
       }
     );
   }
- 
-  /**
-   * Called when the user changes the value in the "Filter by Status" dropdown.
-   */
+
   onFilterChange(): void {
     if (this.selectedStatus === 'All') {
       this.filteredAppointments = this.allMyAppointments;

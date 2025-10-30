@@ -13,13 +13,13 @@
       </thead>
       <tbody>
         <tr *ngFor="let feedback of allFeedbacks">
-          <td>{{ feedback.id }}</td>
-          <td>{{ feedback.userName }}</td>
-          <td>{{ feedback.comments }}</td>
+          <td>{{ feedback.feedbackId }}</td>
+          <td>{{ feedback.user.username }}</td>
+          <!-- <td>{{ feedback.comments }}</td> -->
           <td>{{ feedback.rating }}</td>
           <td>
-            <button class="btn update" (click)="updateFeedback(feedback.id, feedback)">Update</button>
-            <button class="btn delete" (click)="deleteFeedback(feedback.id)">Delete</button>
+            <button class="btn update" (click)="updateFeedback(feedback.feedbackId, feedback)">Update</button>
+            <button class="btn delete" (click)="deleteFeedback(feedback.feedbackId)">Delete</button>
           </td>
         </tr>
       </tbody>

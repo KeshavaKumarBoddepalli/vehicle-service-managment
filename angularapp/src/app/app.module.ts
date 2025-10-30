@@ -21,8 +21,9 @@ import { UsernavbarComponent } from './components/usernavbar/usernavbar.componen
 import { UserviewappointmentComponent } from './components/userviewappointment/userviewappointment.component';
 import { UserviewfeedbackComponent } from './components/userviewfeedback/userviewfeedback.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -53,9 +54,14 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     RouterModule,
     ReactiveFormsModule
-    
   ],
-  providers: [],
+  providers: [
+    {
+    provide: HTTP_INTERCEPTORS,
+          useClass: AuthInterceptor,
+          multi: true
+    }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,58 +1,47 @@
 <div class="container my-4">
-    <div class="header-row">
-      <h2 class="section-title">My Appointments</h2>
-    </div>
-   
-    <div class="filter-container">
-      <label for="statusFilter">Filter by Status:</label>
-      <select id="statusFilter" class="form-select"
-              [(ngModel)]="selectedStatus"
-              (change)="onFilterChange()">
-        <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
-      </select>
-    </div>
-   
-    <div *ngIf="errorMessage" class="alert alert-danger">
-      {{ errorMessage }}
-    </div>
-   
-    <div *ngIf="filteredAppointments.length > 0; else noAppointments" class="table-wrapper">
-      <table class="appointment-table">
-        <thead>
-          <tr>
-            <th>S. NO</th>
-            <th>Service Name</th>
-            <th>Service Price</th>
-            <th>Vehicle Type</th>
-            <th>Location</th>
-            <th>Appointment Date</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let app of filteredAppointments; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ app.service?.serviceName }}</td>
-            <td>{{ app.service?.cost }}</td> <td>{{ app.service?.vehicleType || 'N/A' }}</td> <td>{{ app.location }}</td>
-            <td>{{ app.appointmentDate | date:'dd/MM/yyyy' }}</td>
-            <td>
-              <span class="status-text" [ngClass]="{
-                'status-approved': app.status === 'Approved',
-                'status-pending': app.status === 'Pending',
-                'status-rejected': app.status === 'Rejected'
-              }">
-                {{ app.status }}
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-   
-    <ng-template #noAppointments>
-      <div *ngIf="!errorMessage" class="no-appointments-message">
-        <h3>No appointments available.</h3>
-      </div>
-    </ng-template>
-   
+  <h2 class="section-title">My Appointments</h2>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
   </div>
+
+  <div class="filter-section mb-3">
+    <label for="statusFilter" class="form-label">Filter by Status:</label>
+    <select id="statusFilter" [(ngModel)]="selectedStatus" (change)="onFilterChange()" class="form-select">
+      <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+    </select>
+  </div>
+
+  <div *ngIf="filteredAppointments.length > 0; else noAppointments">
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Service Name</th>
+          <th>Price</th>
+          <th>Vehicle Type</th>
+          <th>Appointment Date</th>
+          <th>Location</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let app of filteredAppointments; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ app.service.serviceName }}</td>
+          <td>{{ app.service.servicePrice }}</td>
+          <td>{{ app.service.typeOfVehicle || 'N/A' }}</td>
+          <td>{{ app.appointmentDate }}</td>
+          <td>{{ app.location }}</td>
+          <td>{{ app.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noAppointments>
+    <div class="no-data-message">
+      <h4>No appointments found.</h4>
+    </div>
+  </ng-template>
+</div>
