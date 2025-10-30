@@ -35,6 +35,7 @@ export class AdminviewserviceComponent implements OnInit {
 
   deleteService(serviceId: number): void {
     if (confirm('Are you sure you want to delete this service?')) {
+      console.log(serviceId);
       this.vehicleService.deleteService(serviceId).subscribe(
         () => {
           this.services = this.services.filter(s => s.serviceId !== serviceId);

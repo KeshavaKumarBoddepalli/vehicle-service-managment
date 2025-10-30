@@ -27,6 +27,7 @@ export class VehicleService {
   deleteService(serviceId: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${serviceId}`);
   }
+  
 
   getServiceByName(serviceName: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${serviceName}`);
