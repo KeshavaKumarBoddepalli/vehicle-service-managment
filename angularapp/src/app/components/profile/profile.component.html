@@ -6,7 +6,7 @@
       <img [src]="profileImage" alt="Profile Image" class="profile-img" />
       <p><strong>Username:</strong> {{ username }}</p>
       <p><strong>Email:</strong> {{ email }}</p>
-      <p><strong>Mobile Number:</strong> {{ mobile }}</p>
+      <p><strong>Mobile Number:</strong> {{ mobileNumber }}</p>
     </div>
   
     <!-- Edit Mode -->
@@ -20,7 +20,7 @@
       <small *ngIf="emailError" class="error">Enter a valid email</small>
   
       <label>Mobile Number:</label>
-      <input type="text" [(ngModel)]="mobile" />
+      <input type="text" [(ngModel)]="mobileNumber" />
       <small *ngIf="mobileError" class="error">Enter a valid mobile number</small>
   
       <button (click)="updateProfile()">Update Profile</button>
