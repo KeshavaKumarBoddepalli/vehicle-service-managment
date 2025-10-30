@@ -74,12 +74,12 @@ export class AdminviewuserdetailsComponent implements OnInit {
       return;
     }
  
-    // 2. Confirm before deleting (good practice)
+   
     if (!confirm('Are you sure you want to delete this user?')) {
       return;
     }
  
-    // 3. Call the service
+    
     this.userService.deleteUser(userId).subscribe({
       next: () => {
         this.allCustomers = this.allCustomers.filter(user => user.userId !== userId);

@@ -58,9 +58,9 @@ public class AppointmentController {
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<Appointment> updateAppointment(
             @PathVariable Long appointmentId,
-            @RequestBody Map<String, String> requestBody) {
+            @RequestBody Appointment appointment) {
 
-        String status = requestBody.get("status");
+        String status = appointment.getStatus();
         Appointment updatedAppointment = appointmentService.updateAppointmentStatus(appointmentId, status);
 
         if (updatedAppointment == null) {
