@@ -14,7 +14,7 @@ import { VehicleService } from 'src/app/services/vehicle.service';
       public service: any = {
         serviceName: '',
         servicePrice: null,
-        typeOfVehicle: '' // Default value for the select
+        vehicleType: '' // Default value for the select
       };
      
       // List of options for the dropdown
@@ -36,7 +36,7 @@ import { VehicleService } from 'src/app/services/vehicle.service';
           // Create the payload from the form model
           const newService: VehicleMaintenance = {
             ...this.service,
-            // Assuming the back`end auto-generates the ID, so we don't send one
+            // Assuming the backend auto-generates the ID, so we don't send one
           };
      
           this.vehicleService.addService(newService).subscribe({
@@ -65,7 +65,7 @@ import { VehicleService } from 'src/app/services/vehicle.service';
         this.serviceForm.resetForm({
             serviceName: '',
             servicePrice: null,
-            typeOfVehicle: ''
+            vehicleType: ''
         });
       }
     }

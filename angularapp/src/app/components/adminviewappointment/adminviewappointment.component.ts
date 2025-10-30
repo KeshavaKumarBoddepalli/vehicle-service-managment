@@ -34,18 +34,12 @@ export class AdminviewappointmentComponent implements OnInit {
  
 
   onStatusChange(appointment: Appointment): void {
-    if (!appointment.appointmentId || !appointment.status) {
-      console.error('Missing appointment ID or status');
+    if (!appointment.appointmentId) {
+      console.error('Appointment ID is missing');
       return;
     }
-  
-    this.appointmentService.updateAppointment(appointment.appointmentId, {
-      status: appointment.status,
-      service: undefined,
-      appointmentDate: '',
-      location: '',
-      user: undefined
-    }).subscribe(
+ 
+    this.appointmentService.updateAppointment(appointment.appointmentId, appointment).subscribe(
       (updatedFromServer) => {
         const index = this.appointments.findIndex(a => a.appointmentId === updatedFromServer.appointmentId);
         if (index !== -1) {
@@ -56,6 +50,7 @@ export class AdminviewappointmentComponent implements OnInit {
       (error) => {
         this.errorMessage = 'Failed to update status. Please try again.';
         console.error('Error updating status:', error);
+        // On error, reload all data to revert UI changes
         this.loadAllAppointments();
       }
     );
