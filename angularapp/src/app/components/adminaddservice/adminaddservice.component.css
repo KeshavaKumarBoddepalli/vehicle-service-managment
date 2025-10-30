@@ -1,112 +1,155 @@
-/* Container for the form */
+
 .form-container {
-  max-width: 500px;
-  margin: 40px auto;
-  padding: 25px;
-  background-color: #f9f9f9;
+  width: 400px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 25px 30px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
 }
 
-/* Heading */
-h2 {
+.form-container h2 {
   text-align: center;
   margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: bold;
   color: #333;
 }
 
-/* Form group spacing */
+
 .form-group {
   margin-bottom: 15px;
+  text-align: left;
 }
 
-/* Label styling */
-label {
-  font-weight: bold;
+.form-group label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
 }
 
-/* Input and select styling */
 .form-control {
   width: 100%;
-  padding: 8px 10px;
+  padding: 10px;
+  font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 14px;
+  box-sizing: border-box;
 }
 
-/* Error message styling */
-.error-message {
-  color: red;
-  font-size: 0.85em;
-  margin-top: 5px;
+.form-control:focus {
+  border-color: #007bff;
+  outline: none;
 }
 
-/* Submit button styling */
+
+.error-message small {
+  color: #dc3545;
+  font-size: 12px;
+}
+
 .btn-submit {
   width: 100%;
   padding: 10px;
   background-color: #007bff;
-  color: white;
-  font-weight: bold;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.btn-submit:hover {
-  background-color: #0056b3;
-}
-
 .btn-submit:disabled {
-  background-color: #cccccc;
+  background-color: #ccc;
   cursor: not-allowed;
 }
 
-/* Popup overlay */
+.btn-submit:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+
 .popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 9999;
 }
 
-/* Popup box */
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+
 .popup {
-  background-color: white;
-  padding: 30px;
+  background: #fff;
+  padding: 25px 30px;
   border-radius: 8px;
   text-align: center;
-  max-width: 400px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  width: 350px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Success icon (optional if using Font Awesome) */
-.popup-icon {
-  font-size: 48px;
-  color: #28a745;
-  margin-bottom: 15px;
+.popup h3 {
+  margin-bottom: 12px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
 }
 
-/* OK button in popup */
+.popup p {
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: #555;
+}
+
+
 .btn-ok {
-  margin-top: 15px;
-  padding: 8px 20px;
-  background-color: #28a745;
-  color: white;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 500;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .btn-ok:hover {
-  background-color: #218838;
+  background-color: #0056b3;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

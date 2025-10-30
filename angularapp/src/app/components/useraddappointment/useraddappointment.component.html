@@ -1,15 +1,31 @@
+<div *ngIf="showSuccessPopup" class="popup-backdrop" (click)="closePopup()">
+  <div class="popup-dialog" (click)="$event.stopPropagation()">
+    <div class="popup-content">
+      <div class="popup-body">
+        <p class="mb-0">{{ successMessage }}</p>
+      </div>
+      <div class="popup-actions">
+        <button type="button" class="btn btn-primary btn-sm" (click)="closePopup()">OK</button>
+      </div>
+      <button type="button" class="popup-close" aria-label="Close" (click)="closePopup()">&times;</button>
+    </div>
+  </div>
+</div>
+ 
+ 
+ 
 <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show popup-alert" role="alert">
   <strong>Success!</strong> {{ successMessage }}
   <button type="button" class="btn-close" (click)="successMessage = ''"></button>
 </div>
-
+ 
 <div class="container my-4">
   <h2 class="section-title">Available Services</h2>
-
+ 
   <div *ngIf="errorMessage && !successMessage" class="alert alert-danger">
     {{ errorMessage }}
   </div>
-
+ 
   <div *ngIf="allBookingForms.length > 0; else noServices" class="table-wrapper">
     <table class="table align-middle">
       <thead class="table-dark-header">
@@ -60,7 +76,7 @@
       </tbody>
     </table>
   </div>
-
+ 
   <nav *ngIf="getTotalPages() > 1" class="pagination-container">
     <ul class="pagination">
       <li class="page-item" *ngFor="let page of getPageNumbers()">
@@ -72,10 +88,11 @@
       </li>
     </ul>
   </nav>
-
+ 
   <ng-template #noServices>
     <div *ngIf="!errorMessage" class="no-data-message">
       <h3>Oops! No Services found.</h3>
     </div>
   </ng-template>
+ 
 </div>
