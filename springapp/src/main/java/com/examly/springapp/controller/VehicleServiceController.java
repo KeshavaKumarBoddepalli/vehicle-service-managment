@@ -19,7 +19,6 @@ public class VehicleServiceController {
     @Autowired
     private VehicleService vehicleService;
 
-    // ✅ Admin-only: Add a new service
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<VehicleMaintenance> addService(@RequestBody VehicleMaintenance service) {
@@ -30,7 +29,7 @@ public class VehicleServiceController {
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
-    // ✅ Public: Get all services
+   
     @GetMapping
     public ResponseEntity<List<VehicleMaintenance>> getAllServices() {
         List<VehicleMaintenance> services = vehicleService.getAllServices();
@@ -40,7 +39,6 @@ public class VehicleServiceController {
         return ResponseEntity.ok(services);
     }
 
-    // ✅ Public: Get service by name
     @GetMapping("/service")
     public ResponseEntity<List<VehicleMaintenance>> getServiceByName(@RequestParam String serviceName) {
         List<VehicleMaintenance> services = vehicleService.findByServiceName(serviceName);
@@ -50,7 +48,7 @@ public class VehicleServiceController {
         return ResponseEntity.ok(services);
     }
 
-    // ✅ Admin-only: Update a service
+   
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<VehicleMaintenance> updateService(@PathVariable Long id, @RequestBody VehicleMaintenance service) {
@@ -61,7 +59,7 @@ public class VehicleServiceController {
         return ResponseEntity.ok(updated);
     }
 
-    // ✅ Admin-only: Delete a service
+    
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteService(@PathVariable Long id) {
@@ -73,7 +71,7 @@ public class VehicleServiceController {
         return ResponseEntity.noContent().build();
     }
 
-    // ✅ Public: Get service by ID
+   
     @GetMapping("/{id}")
     public ResponseEntity<VehicleMaintenance> getServiceById(@PathVariable Long id) {
         Optional<VehicleMaintenance> found = vehicleService.getServiceById(id);

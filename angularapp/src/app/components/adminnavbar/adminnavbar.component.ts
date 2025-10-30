@@ -35,9 +35,6 @@ export class AdminnavbarComponent {
     this.router.navigate(['/']);
   }
 
-  
-
-
 
 toggleSerDropdown(): void {
   this.showSerDropdown = !this.showSerDropdown;

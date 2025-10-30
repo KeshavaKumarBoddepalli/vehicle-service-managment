@@ -57,15 +57,17 @@ public class UserServiceImpl implements UserService , UserDetailsService {
         return urepo.findByUsername(name);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        
-        // return null;
-        User user = urepo.findByUsername(username);
-        if(user == null) throw new UsernameNotFoundException("Not Found");
-        return new UserPrinciple(user);
-
+    
+@Override
+public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    User user = urepo.findByUsername(username);
+    if (user == null) {
+        System.out.println("User not found: " + username);
+        throw new UsernameNotFoundException("User not found: " + username);
     }
+    return new UserPrinciple(user);
+}
+
 
     @Override
     public User updateUser(User user) {

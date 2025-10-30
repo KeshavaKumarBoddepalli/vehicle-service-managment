@@ -47,7 +47,7 @@ export class AdminviewserviceComponent implements OnInit {
   }
 
   editService(service: VehicleMaintenance): void {
-    // Placeholder for edit logic
+    
     alert('Edit service: ' + service.serviceName);
   }
 }

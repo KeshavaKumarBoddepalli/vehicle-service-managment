@@ -1,4 +1,4 @@
-/* Container styling */
+
 .container {
     max-width: 900px;
     margin: 2rem auto;
@@ -8,7 +8,7 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
   
-  /* Title */
+  
   .title {
     text-align: center;
     font-size: 1.8rem;
@@ -16,7 +16,7 @@
     color: #2c3e50;
   }
   
-  /* Table styling */
+ 
   .service-table {
     width: 100%;
     border-collapse: collapse;
@@ -41,7 +41,6 @@
     background-color: #f1f1f1;
   }
   
-  /* Buttons */
   .btn {
     padding: 6px 12px;
     margin: 0 4px;
@@ -69,7 +68,7 @@
     background-color: #c0392b;
   }
   
-  /* No data message */
+  
   .no-data {
     text-align: center;
     margin-top: 2rem;

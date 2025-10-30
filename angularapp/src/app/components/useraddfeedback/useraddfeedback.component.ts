@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Feedback } from 'src/app/models/feedback.model';
 import { FeedbackService } from 'src/app/services/feedback.service';
 @Component({
@@ -10,9 +11,9 @@ export class UseraddfeedbackComponent implements OnInit {
   newFeedback: Feedback ={
     user: {} as any,
     message: '',
-    rating: 0
+    rating:null
   };
-  constructor(private feedbackService: FeedbackService) { }
+  constructor(private feedbackService: FeedbackService, private router:Router) { }
  
   ngOnInit(): void {
     const userId = localStorage.getItem('userId');
@@ -26,6 +27,7 @@ export class UseraddfeedbackComponent implements OnInit {
     this.feedbackService.createFeedback(this.newFeedback).subscribe({
       next: ()=>{
         alert('Feedback is submitted successfully!');
+        this.router.navigate(['/userviewfeedback'])
         this.newFeedback.message='';
         this.newFeedback.rating=0;
       },
@@ -33,6 +35,17 @@ export class UseraddfeedbackComponent implements OnInit {
         console.error('Error in adding feedback:', error);
       }
     })
+  }
+
+  validateRating(event: any) {
+    const value = event.target.valueAsNumber;
+    if (value > 5) {
+      this.newFeedback.rating = 5;
+    } else if (value < 1) {
+      this.newFeedback.rating = 1;
+    } else {
+      this.newFeedback.rating = value;
+    }
   }
  
 }

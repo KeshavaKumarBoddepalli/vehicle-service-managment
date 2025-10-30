@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class UsernavbarComponent {
     showLogoutPopup = false;
 
-    constructor(public service: AuthService) {}
+    constructor(public service: AuthService, private router:Router) {}
   
     isUserLoggedIn(): boolean {
       return this.service.isLoggedIn();
@@ -42,6 +43,7 @@ export class UsernavbarComponent {
   logout(): void {
       this.service.logout();
       this.showLogoutPopup = false;
+      this.router.navigate(['/home']);
   }
 
   closeAllDropdowns() {
