@@ -82,5 +82,6 @@ public class AppointmentController {
         } else {
             return ResponseEntity.notFound().build();
         }
+        
     }
 }
