@@ -36,7 +36,9 @@ export class UseraddappointmentComponent implements OnInit {
     private authService: AuthService
   ) {}
 
+  today: string = '';
   ngOnInit(): void {
+    this.today = new Date().toISOString().split('T')[0];
     this.loadCurrentUser();
     this.loadServices();
   }
