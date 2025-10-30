@@ -5,6 +5,7 @@
     {{ errorMessage }}
   </div>
  
+  <!-- Main Content Table -->
   <div *ngIf="appointments.length > 0; else noAppointments" class="table-wrapper">
     <table class="appointment-table">
       <thead>
@@ -21,17 +22,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let app of appointments; let i = index">
-          <td>{{ i + 1 }}</td>
+        <!-- Use paginatedAppointments here instead of appointments -->
+        <tr *ngFor="let app of paginatedAppointments; let i = index">
+          <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
           <td>{{ app.service?.serviceName }}</td>
           <td>{{ app.service?.servicePrice | currency:'INR':'symbol':'1.0-0' }}</td>
           <td>{{ app.service?.typeOfVehicle || 'N/A' }}</td>
           <td>{{ app.appointmentDate | date:'dd/MM/yyyy' }}</td>
           <td>{{ app.location }}</td>
           <td>{{ app.user?.username }}</td>
-          
+         
+          <!-- Status Dropdown: No (change) event needed anymore -->
           <td>
-            <select [(ngModel)]="app.status" (change)="onStatusChange(app)"
+            <select [(ngModel)]="app.status"
                     [ngClass]="{
                       'status-pending': app.status === 'Pending',
                       'status-approved': app.status === 'Approved',
@@ -42,8 +45,14 @@
             </select>
           </td>
  
-          <td>
-            <button (click)="deleteAppointment(app.appointmentId)" class="action-button delete-button">
+          <!-- Action Buttons -->
+          <td class="action-cell">
+            <!-- Update button calls onStatusChange with the current `app` object -->
+            <button (click)="onStatusChange(app)" class="action-button update-button">
+              Update
+            </button>
+            <!-- Delete button now calls requestDeleteAppointment -->
+            <button (click)="requestDeleteAppointment(app.appointmentId)" class="action-button delete-button">
               Delete
             </button>
           </td>
@@ -52,10 +61,51 @@
     </table>
   </div>
  
+  <!-- Pagination Controls -->
+  <div *ngIf="totalPages > 1" class="pagination-controls">
+    <button (click)="prevPage()" [disabled]="currentPage === 1" class="pagination-button">
+      &laquo; Prev
+    </button>
+    <span class="pagination-info">
+      Page {{ currentPage }} of {{ totalPages }}
+    </span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-button">
+      Next &raquo;
+    </button>
+  </div>
+ 
+  <!-- No Appointments Template -->
   <ng-template #noAppointments>
     <div *ngIf="!errorMessage" class="no-appointments-message">
       <h3>Oops! No Appointment found.</h3>
     </div>
   </ng-template>
  
+</div>
+ 
+<!--
+  MODALS & POPUPS
+  These live outside the main container.
+-->
+ 
+<!-- Success Popup (Toast) -->
+<div class="success-popup" [class.show]="showSuccessPopup">
+  {{ successMessage }}
+  <button (click)="closeSuccessPopup()" class="close-popup-btn">&times;</button>
+</div>
+ 
+<!-- Delete Confirmation Modal -->
+<div *ngIf="showDeleteModal" class="modal-overlay">
+  <div class="modal-content">
+    <h3 class="modal-title">Confirm Deletion</h3>
+    <p>Are you sure you want to delete this appointment? This action cannot be undone.</p>
+    <div class="modal-buttons">
+      <button (click)="cancelDelete()" class="modal-button cancel-button">
+        Cancel
+      </button>
+      <button (click)="confirmDelete()" class="modal-button confirm-delete-button">
+        Confirm Delete
+      </button>
+    </div>
+  </div>
 </div>
