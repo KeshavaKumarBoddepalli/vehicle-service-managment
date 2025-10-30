@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -59,17 +61,22 @@ public class VehicleServiceController {
         return ResponseEntity.ok(updated);
     }
 
+    // ✅ Admin-only: Delete a service
     
-    @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Void> deleteService(@PathVariable Long id) {
-        Optional<VehicleMaintenance> serviceOpt = vehicleService.getServiceById(id);
-        if (serviceOpt.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        vehicleService.deleteService(id);
-        return ResponseEntity.noContent().build();
+@DeleteMapping("/{id}")
+@PreAuthorize("hasRole('ADMIN')")
+public ResponseEntity<Void> deleteService(@PathVariable Long id) {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    System.out.println("User roles: " + auth.getAuthorities());
+
+    Optional<VehicleMaintenance> serviceOpt = vehicleService.getServiceById(id);
+    if (serviceOpt.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
+    vehicleService.deleteService(id);
+    return ResponseEntity.noContent().build();
+}
+
 
    
     @GetMapping("/{id}")

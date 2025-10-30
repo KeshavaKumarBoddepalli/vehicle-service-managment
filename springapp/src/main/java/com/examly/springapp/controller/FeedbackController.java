@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/feedback")
@@ -39,15 +41,16 @@ public class FeedbackController {
         return ResponseEntity.ok(feedbackList);
     }
 
-    @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')") // Optional: restrict delete to admins
-    public ResponseEntity<String> deleteFeedback(@PathVariable Long id) {
-        Feedback deleted = feedbackService.deleteFeedback(id);
-        if (deleted == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok("Feedback deleted successfully with ID: " + id);
-    }
+    
+@DeleteMapping("/{id}")
+@PreAuthorize("hasRole('ADMIN')")
+public ResponseEntity<Map<String, String>> deleteFeedback(@PathVariable Long id) {
+    feedbackService.deleteFeedback(id);
+    Map<String, String> response = new HashMap<>();
+    response.put("message", "Feedback deleted successfully with ID: " + id);
+    return ResponseEntity.ok(response);
+}
+
 
     @GetMapping("/user/{userId}")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")

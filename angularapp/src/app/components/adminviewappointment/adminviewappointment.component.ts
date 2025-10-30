@@ -63,7 +63,7 @@ export class AdminviewappointmentComponent implements OnInit {
       console.error('Invalid appointment ID');
       return;
     }
- 
+  
     if (confirm('Are you sure you want to delete this appointment?')) {
       this.appointmentService.deleteAppointment(appointmentId).subscribe(
         () => {

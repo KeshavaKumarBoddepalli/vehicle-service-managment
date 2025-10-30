@@ -5,8 +5,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.examly.springapp.model.VehicleMaintenance;
+import com.examly.springapp.repository.AppointmentRepo;
 import com.examly.springapp.repository.VehicleServiceRepo;
 
 
@@ -16,18 +18,27 @@ public class VehicleServiceImpl implements VehicleService{
     @Autowired
     private VehicleServiceRepo vrepo;
 
+    @Autowired
+    private AppointmentRepo appointmentRepo;
+
     @Override
     public VehicleMaintenance addService(VehicleMaintenance service) {
        return vrepo.save(service);
     }
-
+    
+    @Transactional
     @Override
     public void deleteService(Long serviceId) {
-        VehicleMaintenance found= vrepo.findById(serviceId).orElse(null);
-        if (found != null){
+        // Step 1: Delete all appointments linked to this service
+        appointmentRepo.deleteByServiceId(serviceId);
+    
+        // Step 2: Delete the service itself
+        VehicleMaintenance found = vrepo.findById(serviceId).orElse(null);
+        if (found != null) {
             vrepo.delete(found);
-        }     
+        }
     }
+
 
     @Override
     public List<VehicleMaintenance> getAllServices() {

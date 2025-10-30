@@ -37,6 +37,7 @@ export class UseraddfeedbackComponent implements OnInit {
     })
   }
 
+ 
   validateRating(event: any) {
     const value = event.target.valueAsNumber;
     if (value > 5) {
@@ -49,4 +50,3 @@ export class UseraddfeedbackComponent implements OnInit {
   }
  
 }
- 
