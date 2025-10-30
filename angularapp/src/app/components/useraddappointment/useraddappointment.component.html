@@ -1,3 +1,20 @@
+
+<div *ngIf="showSuccessPopup" class="popup-backdrop" (click)="closePopup()">
+  <div class="popup-dialog" (click)="$event.stopPropagation()">
+    <div class="popup-content">
+      <div class="popup-body">
+        <p class="mb-0">{{ successMessage }}</p>
+      </div>
+      <div class="popup-actions">
+        <button type="button" class="btn btn-primary btn-sm" (click)="closePopup()">OK</button>
+      </div>
+      <button type="button" class="popup-close" aria-label="Close" (click)="closePopup()">&times;</button>
+    </div>
+  </div>
+</div>
+
+
+
 <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show popup-alert" role="alert">
   <strong>Success!</strong> {{ successMessage }}
   <button type="button" class="btn-close" (click)="successMessage = ''"></button>
@@ -78,4 +95,6 @@
       <h3>Oops! No Services found.</h3>
     </div>
   </ng-template>
+
 </div>
+
