@@ -1,109 +1,98 @@
 import { Component, OnInit } from '@angular/core';
-import { UserdetailsService } from '../../services/userdetails.service';
-
-interface UiUser {
-  id: number;
-  username: string;
-  email: string;
-  role: string;
-  mobile: string;
-}
-
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { User } from 'src/app/models/user.model';
+import { UserdetailsService } from 'src/app/services/userdetails.service';
+ 
 @Component({
   selector: 'app-adminviewuserdetails',
   templateUrl: './adminviewuserdetails.component.html',
   styleUrls: ['./adminviewuserdetails.component.css']
 })
 export class AdminviewuserdetailsComponent implements OnInit {
-  users: UiUser[] = [];
-  loading = false;
-  lastError: string | null = null;
-
  
-  searchQuery: string = '';
-
-  constructor(private userDetailsService: UserdetailsService) {}
-
+  allCustomers: User[] = [];
+  filteredCustomers: User[] = [];
+  searchForm: FormGroup;
+  userNotFound: boolean = false;
+ 
+  // Inject FormBuilder and your UserService
+  constructor(private fb: FormBuilder, private userService: UserdetailsService) { }
+ 
   ngOnInit(): void {
-    // this.loadUsers();
+    // Initialize the search form
+    this.searchForm = this.fb.group({
+      username: ['']
+    });
+    // Load customers on component load
+    this.loadCustomers();
   }
-
-  // private loadUsers(): void {
-  //   this.loading = true;
-  //   this.lastError = null;
-
-  //   this.userDetailsService.getAllUsers().subscribe({
-  //     next: (res: any) => {
-  //       const list = Array.isArray(res) ? res : (res?.data ?? res?.users ?? []);
-  //       this.users = (list ?? []).map(this.mapApiToUi);
-  //       this.loading = false;
-  //     },
-  //     error: (err) => {
-  //       this.lastError = this.stringifyHttpError(err);
-  //       this.users = [];
-  //       this.loading = false;
-  //     }
-  //   });
-  // }
-
-  
-  // onSearch(): void {
-  //   const query = this.searchQuery.trim();
-  //   if (!query) {
-  //     alert('Please enter a username to search.');
-  //     return;
-  //   }
-
-  //   this.loading = true;
-  //   this.lastError = null;
-
-  //   this.userDetailsService.getUserByName(query).subscribe({
-  //     next: (res: any) => {
-  //       const user = this.mapApiToUi(res);
-  //       this.users = [user]; // Show only searched user
-  //       this.loading = false;
-  //     },
-  //     error: (err) => {
-  //       this.lastError = 'User not found or error occurred.';
-  //       this.users = [];
-  //       this.loading = false;
-  //     }
-  //   });
-  // }
-
-  // onDelete(user: UiUser): void {
-  //   const ok = confirm(`Delete user "${user.username}"?`);
-  //   if (!ok) return;
-
-  //   this.userDetailsService.deleteUser(user.id).subscribe({
-  //     next: () => {
-  //       this.users = this.users.filter(u => u.id !== user.id);
-  //     },
-  //     error: () => {
-  //       alert('Failed to delete user.');
-  //     }
-  //   });
-  // }
-
-  // trackById(_i: number, item: UiUser) {
-  //   return item.id;
-  // }
-
-  // private mapApiToUi = (api: any): UiUser => {
-  //   return {
-  //     id: Number(api?.id ?? api?.userId ?? 0),
-  //     username: api?.username ?? api?.name ?? api?.fullName ?? '',
-  //     email: api?.email ?? '',
-  //     role: api?.role ?? api?.userRole ?? 'USER',
-  //     mobile: api?.mobile ?? api?.mobileNumber ?? api?.phone ?? ''
-  //   };
-  // };
-
-  // private stringifyHttpError(err: any): string {
-  //   if (!err) return 'Unknown error';
-  //   if (err.error && typeof err.error === 'string') return err.error;
-  //   if (err.error && err.error.message) return err.error.message;
-  //   if (err.message) return err.message;
-  //   try { return JSON.stringify(err); } catch { return 'Error occurred'; }
-  // }
+ 
+  /**
+   * Fetches all users and filters for 'USER' role
+   */
+  loadCustomers(): void {
+    this.userService.getAllUsers().subscribe({
+      next: (users: User[]) => {
+        // Ensure filtering is case-insensitive (USER vs user)
+        this.allCustomers = users.filter(user => user.userRole?.toUpperCase() === 'USER');
+        this.filteredCustomers = [...this.allCustomers]; // Set the display list
+      },
+      error: (err) => {
+        console.error('Error fetching users:', err);
+        // You could show an error message to the admin here
+      }
+    });
+  }
+ 
+  /**
+   * Filters the customer list based on the search form value
+   */
+  onSearch(): void {
+    const searchTerm = this.searchForm.get('username')?.value.toLowerCase().trim();
+ 
+    if (!searchTerm) {
+      this.filteredCustomers = [...this.allCustomers];
+      this.userNotFound = false;
+      return;
+    }
+ 
+    this.filteredCustomers = this.allCustomers.filter(user =>
+      user.username?.toLowerCase().includes(searchTerm)
+    );
+ 
+    this.userNotFound = this.filteredCustomers.length === 0;
+  }
+ 
+  /**
+   * **[NEW]** Deletes a user by their ID
+   * Assumes your UserdetailsService has a `deleteUser(id: number)` method.
+   */
+  onDeleteUser(userId: number | undefined): void {
+    // 1. Guard against undefined userId
+    if (!userId) {
+      console.error('Cannot delete: User ID is undefined.');
+      return;
+    }
+ 
+    // 2. Confirm before deleting (good practice)
+    if (!confirm('Are you sure you want to delete this user?')) {
+      return;
+    }
+ 
+    // 3. Call the service
+    this.userService.deleteUser(userId).subscribe({
+      next: () => {
+        this.allCustomers = this.allCustomers.filter(user => user.userId !== userId);
+        this.filteredCustomers = this.filteredCustomers.filter(user => user.userId !== userId);
+       
+     
+        console.log(`User ${userId} deleted successfully.`);
+      },
+      error: (err) => {
+ 
+        console.error(`Error deleting user ${userId}:`, err);
+        alert('Failed to delete user. Please try again.');
+      }
+    });
+  }
 }

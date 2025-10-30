@@ -15,10 +15,10 @@
         <tr *ngFor="let feedback of allFeedbacks">
           <td>{{ feedback.feedbackId }}</td>
           <td>{{ feedback.user.username }}</td>
-          <!-- <td>{{ feedback.comments }}</td> -->
+          <td>{{ feedback.message }}</td>
           <td>{{ feedback.rating }}</td>
           <td>
-            <button class="btn update" (click)="updateFeedback(feedback.feedbackId, feedback)">Update</button>
+            <!-- <button class="btn update" (click)="updateFeedback(feedback.feedbackId, feedback)">Update</button> -->
             <button class="btn delete" (click)="deleteFeedback(feedback.feedbackId)">Delete</button>
           </td>
         </tr>

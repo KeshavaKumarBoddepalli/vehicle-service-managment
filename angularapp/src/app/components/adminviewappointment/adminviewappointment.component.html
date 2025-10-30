@@ -24,7 +24,7 @@
         <tr *ngFor="let app of appointments; let i = index">
           <td>{{ i + 1 }}</td>
           <td>{{ app.service?.serviceName }}</td>
-          <td>{{ app.service?.cost | currency:'INR':'symbol':'1.0-0' }}</td>
+          <td>{{ app.service?.servicePrice | currency:'INR':'symbol':'1.0-0' }}</td>
           <td>{{ app.service?.typeOfVehicle || 'N/A' }}</td>
           <td>{{ app.appointmentDate | date:'dd/MM/yyyy' }}</td>
           <td>{{ app.location }}</td>
