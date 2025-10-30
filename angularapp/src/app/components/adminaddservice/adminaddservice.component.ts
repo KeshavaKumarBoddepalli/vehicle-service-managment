@@ -13,7 +13,7 @@ export class AdminaddserviceComponent implements OnInit {
   public service: VehicleMaintenance = {
     serviceId: 0,
     serviceName: '',
-    servicePrice: 0,
+    servicePrice: null,
     typeOfVehicle: ''
   };
 
