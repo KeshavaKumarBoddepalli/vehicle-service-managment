@@ -34,28 +34,27 @@ export class AdminaddserviceComponent implements OnInit {
     if (serviceIdParam) {
       const serviceId = +serviceIdParam;
       this.isEditMode = true;
-  
-      
-this.vehicleService.getServiceById(serviceId).subscribe({
-  next: (data: any) => {
-    this.service = {
-      serviceId: data.id, // ✅ manually map 'id' to 'serviceId'
-      serviceName: data.serviceName,
-      servicePrice: data.servicePrice,
-      typeOfVehicle: data.typeOfVehicle
-    };
-  },
-  error: (err) => {
-    console.error('Error fetching service by ID:', err);
-  }
-});
 
+      this.vehicleService.getServiceById(serviceId).subscribe({
+        next: (data: any) => {
+          this.service = {
+            serviceId: data.id, 
+            serviceName: data.serviceName,
+            servicePrice: data.servicePrice,
+            typeOfVehicle: data.typeOfVehicle
+          };
+        },
+        error: (err) => {
+          console.error('Error fetching service by ID:', err);
+        }
+      });
     }
   }
 
   public onSubmit(): void {
     if (this.serviceForm.valid) {
       if (this.isEditMode) {
+        
         this.vehicleService.updateService(this.service.serviceId, this.service).subscribe({
           next: () => {
             alert('Service updated successfully!');
@@ -66,10 +65,10 @@ this.vehicleService.getServiceById(serviceId).subscribe({
           }
         });
       } else {
+        
         this.vehicleService.addService(this.service).subscribe({
           next: () => {
-            this.showSuccessPopup = true;
-            this.router.navigate(['/adminviewservice']);
+            this.showSuccessPopup = true; 
           },
           error: (err) => {
             console.error('Error adding service:', err);
@@ -86,5 +85,6 @@ this.vehicleService.getServiceById(serviceId).subscribe({
       servicePrice: null,
       typeOfVehicle: ''
     });
+    this.router.navigate(['/adminviewservice']); 
   }
 }

@@ -2,6 +2,7 @@
   <h2>{{ isEditMode ? 'Edit Service' : 'Add Service' }}</h2>
 
   <form #serviceForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+   
     <div class="form-group">
       <label for="serviceName">Service Name</label>
       <input
@@ -40,6 +41,7 @@
       </div>
     </div>
 
+    
     <div class="form-group">
       <label for="vehicleType">Type of Vehicle</label>
       <select
@@ -58,17 +60,17 @@
       </div>
     </div>
 
+   
     <button type="submit" class="btn-submit" [disabled]="serviceForm.invalid">
       {{ isEditMode ? 'Update Service' : 'Add Service' }}
     </button>
   </form>
 </div>
 
-
 <div class="popup-overlay" *ngIf="showSuccessPopup">
   <div class="popup">
     <h3>Service Added Successfully</h3>
-    <p>Your service has been added to the system.</p>
+    <p>Your service has been added successfully.</p>
     <button (click)="closePopup()" class="btn-ok">OK</button>
   </div>
 </div>
