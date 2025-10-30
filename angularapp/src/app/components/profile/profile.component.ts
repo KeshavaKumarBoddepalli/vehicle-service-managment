@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,7 +11,7 @@ export class ProfileComponent implements OnInit {
   
   username = '';
   email = '';
-  mobile = '';
+  mobileNumber = '';
   profileImage = 'assets/profilelogo.webp';
 
   isEditing = false;
@@ -18,8 +19,13 @@ export class ProfileComponent implements OnInit {
   usernameError=false;
   emailError = false;
   mobileError = false;
+  
+  userId: number =0;
+ 
 
- constructor(private http:HttpClient ){}
+
+ constructor(private http:HttpClient,private authservice:AuthService){}
+
 
  
   enableEdit(): void {
@@ -40,7 +46,7 @@ export class ProfileComponent implements OnInit {
     // Validate email
     this.emailError = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
     // Validate mobile (10 digits)
-    this.mobileError = !/^\d{10}$/.test(this.mobile);
+    this.mobileError = !/^\d{10}$/.test(this.mobileNumber);
 
     if (this.emailError || this.mobileError || this.usernameError) {
       return; // Stop if validation fails
@@ -48,20 +54,38 @@ export class ProfileComponent implements OnInit {
 
     this.isEditing = false;
     this.showSuccess = true;
+    const updatedUser = {
+      userId: this.userId,
+      username: this.username,
+      email: this.email,
+      mobile: this.mobileNumber
+    };
+ 
+    this.http.put(`https://8080-abcfbddbcfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/user/view/profile`, updatedUser)
+      .subscribe({
+        next: () => {
+          console.log('Profile updated successfully');
+        },
+        error: (err) => {
+          console.error('Error updating profile:', err);
+        }
+      });
+ 
 
   
     setTimeout(() => this.showSuccess = false, 3000);
   }
   ngOnInit(): void {
+    this.userId=this.authservice.getAuthenticatedUserId();
    this.fetchUserProfile();
     
   }
   fetchUserProfile():void{
-    this.http.get<any>('https://8080-abcfbddbcfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api').subscribe({
+    this.http.get<any>(`https://8080-abcfbddbcfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/user/${this.userId}`).subscribe({
       next:(data)=>{
         this.username = data.username;
         this.email = data.email;
-        this.mobile = data.mobile;
+        this.mobileNumber = data.mobileNumber;
       },
       error:(err)=>console.error('Error fetching profile:',err)
     });
