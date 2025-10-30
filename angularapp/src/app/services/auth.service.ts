@@ -17,7 +17,7 @@ export const ROLE = 'role';
 export class AuthService {
 
 
-  public baseUrl = "https://8080-abcfbddbcfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api";
+  public baseUrl = "https://8080-cecdfddacafbdafffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api";
  
   private loggedInUser: any = null
   constructor(private http: HttpClient) {
