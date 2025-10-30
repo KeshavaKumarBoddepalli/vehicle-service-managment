@@ -2,14 +2,15 @@ package com.examly.springapp.controller;
 
 import com.examly.springapp.model.Feedback;
 import com.examly.springapp.service.FeedbackServiceImpl;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/feedback")
@@ -19,7 +20,7 @@ public class FeedbackController {
     private FeedbackServiceImpl feedbackService;
 
     @PostMapping
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER')") // Uncomment this if using role-based access
     public ResponseEntity<Feedback> createFeedback(@RequestBody Feedback feedback) {
         Feedback created = feedbackService.createFeedback(feedback);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
@@ -40,19 +41,21 @@ public class FeedbackController {
         return ResponseEntity.ok(feedbackList);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteFeedback(@PathVariable Long id) {
-        Feedback deleted = feedbackService.deleteFeedback(id);
-        if (deleted == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok("Feedback deleted successfully with ID: " + id);
-    }
+    
+@DeleteMapping("/{id}")
+@PreAuthorize("hasRole('ADMIN')")
+public ResponseEntity<Map<String, String>> deleteFeedback(@PathVariable Long id) {
+    feedbackService.deleteFeedback(id);
+    Map<String, String> response = new HashMap<>();
+    response.put("message", "Feedback deleted successfully with ID: " + id);
+    return ResponseEntity.ok(response);
+}
+
 
     @GetMapping("/user/{userId}")
-@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-public ResponseEntity<List<Feedback>> getFeedbackByUserId(@PathVariable int userId) {
-    List<Feedback> feedbackList = feedbackService.getFeedbackByUserId(userId);
-    return ResponseEntity.ok(feedbackList);
-}
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public ResponseEntity<List<Feedback>> getFeedbackByUserId(@PathVariable int userId) {
+        List<Feedback> feedbackList = feedbackService.getFeedbackByUserId(userId);
+        return ResponseEntity.ok(feedbackList);
+    }
 }

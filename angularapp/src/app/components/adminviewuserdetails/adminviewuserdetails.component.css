@@ -1,0 +1,144 @@
+/* Use a clean font */
+:host {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+ 
+/* Main card container */
+.admin-user-card {
+  max-width: 1200px;
+  margin: 25px auto;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden; /* Ensures border-radius applies to children */
+}
+ 
+/* Card header with title and search */
+.card-header {
+  display: flex;
+  flex-wrap: wrap; /* Allows search to wrap on small screens */
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 25px;
+  border-bottom: 1px solid #e0e0e0;
+}
+ 
+.card-header h2 {
+  margin: 0;
+  color: #333;
+  font-weight: 600;
+}
+ 
+/* Modern search form */
+.search-form {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden; /* To keep button and input attached */
+}
+ 
+.search-form input[type="text"] {
+  padding: 10px 14px;
+  border: none;
+  font-size: 15px;
+  min-width: 250px;
+  outline: none;
+}
+ 
+/* Base button styling */
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px; /* Space between icon and text */
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+ 
+/* Search button styling */
+.btn-search {
+  background-color: #007bff;
+  color: white;
+  border-left: 1px solid #0069d9;
+}
+ 
+.btn-search:hover {
+  background-color: #0056b3;
+}
+ 
+/* Delete button styling */
+.btn-delete {
+  background-color: #f8d7da; /* Light red background */
+  color: #721c24; /* Dark red text */
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+}
+ 
+.btn-delete:hover {
+  background-color: #dc3545; /* Solid red on hover */
+  color: white;
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
+}
+ 
+/* Table styling */
+.table-wrapper {
+  overflow-x: auto; /* Responsive: allows horizontal scroll on small screens */
+  padding: 0;
+}
+ 
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+ 
+th, td {
+  padding: 14px 25px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+}
+ 
+/* Table header */
+th {
+  background-color: #f9f9f9;
+  font-weight: 600;
+  color: #555;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+ 
+/* Table body */
+tbody tr:last-child td {
+  border-bottom: none; /* Remove border from last row */
+}
+ 
+tbody tr:hover {
+  background-color: #f5f5f5;
+}
+ 
+/* Center-align action buttons */
+.action-column {
+  text-align: center;
+}
+ 
+/* "Not Found" message styling */
+.not-found-message {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 17px;
+  color: #6c757d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+ 
+.not-found-message .fas {
+  font-size: 20px;
+  color: #dc3545; /* Red icon for warning */
+}

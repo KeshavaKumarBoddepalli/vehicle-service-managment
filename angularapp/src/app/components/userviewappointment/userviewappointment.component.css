@@ -1,133 +1,94 @@
+/* Container styling */
 .container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-   
-  /* Header with Title */
-  .header-row {
-    border-bottom: 2px solid #e0e0e0;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-  }
-   
-  .section-title {
-    font-size: 2em;
-    color: #333;
-    font-weight: 600;
-    margin: 0;
-    text-align: center; /* Center the title */
-  }
-   
-  /* Filter Dropdown */
-  .filter-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-   
-  .filter-container label {
-    margin-right: 10px;
-    font-size: 1em;
-    color: #555;
-    font-weight: 500;
-  }
-   
-  .form-select {
-    padding: 8px 12px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    font-size: 0.9em;
-    font-weight: 500;
-    min-width: 150px;
-  }
-   
-  /* Table Styling */
-  .table-wrapper {
-    overflow-x: auto; /* Responsive table */
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  }
-   
-  .appointment-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #fff;
-    font-size: 0.95em;
-  }
-   
-  .appointment-table th,
-  .appointment-table td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #e0e0e0;
-    vertical-align: middle;
-  }
-   
-  .appointment-table th {
-    background-color: #004a99; /* Dark blue from image */
-    color: #ffffff;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.85em;
-    letter-spacing: 0.5px;
-  }
-   
-  .appointment-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9; /* Light alternating row color */
-  }
-   
-  .appointment-table tbody tr:hover {
-    background-color: #f1f1f1;
-  }
-   
-  /* Status Text Styling */
-  .status-text {
-    font-weight: bold;
-    font-size: 0.95em;
-    text-transform: capitalize;
-  }
-   
-  .status-approved {
-    color: #28a745; /* Green */
-  }
-   
-  .status-pending {
-    color: #fd7e14; /* Orange */
-  }
-   
-  .status-rejected {
-    color: #dc3545; /* Red */
-  }
-   
-  /* "No Data" Message Styling */
-  .no-appointments-message {
-    text-align: center;
-    padding: 40px;
-    background-color: #fdfdfd;
-    border: 1px dashed #ddd;
-    border-radius: 8px;
-    margin-top: 20px;
-  }
-   
-  .no-appointments-message h3 {
-    color: #888;
-    font-weight: 500;
-    font-size: 1.3em;
-  }
-   
-  /* Responsive adjustments */
-  @media (max-width: 600px) {
-    .filter-container {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .form-select {
-      width: 100%;
-      margin-top: 5px;
-    }
-  }
-   
+  max-width: 900px;
+  margin: 0 auto; /* Centers the container */
+  padding: 2rem;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  text-align: center;
+}
+
+/* Filter section */
+.filter-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.filter-section label {
+  margin-right: 10px;
+  font-weight: 500;
+}
+
+.form-select {
+  width: 200px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Table styling */
+.table {
+  width: 100%;
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Header styling */
+.table thead th {
+  background-color: #4a90e2; /* Blue header */
+  color: #fff;
+  font-weight: 600;
+  padding: 14px;
+  text-align: center;
+}
+
+/* Rounded corners for header */
+.table thead th:first-child {
+  border-top-left-radius: 12px;
+}
+.table thead th:last-child {
+  border-top-right-radius: 12px;
+}
+
+/* Body styling */
+.table tbody td {
+  padding: 12px;
+  text-align: center;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Alternate row colors */
+.table tbody tr:nth-child(even) {
+  background-color: #f2f6fc;
+}
+
+/* Hover effect */
+.table tbody tr:hover {
+  background-color: #e6f0ff;
+  transition: background-color 0.3s ease;
+}
+
+/* No data message */
+.no-data-message {
+  text-align: center;
+  margin-top: 2rem;
+  color: #888;
+  font-size: 1.2rem;
+}

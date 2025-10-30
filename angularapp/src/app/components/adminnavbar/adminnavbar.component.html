@@ -1,25 +1,38 @@
 
 <div class="nav-container">
+  <div class="logo">VehicleService</div>
 
   <ul *ngIf="isUserLoggedIn()">
-    <li>{{ service.getAuthenticatedUser() }} ({{ service.getRole() }})</li>
-    <li><a routerLink="/">Home</a></li>
-
-
-    <ng-container *ngIf="isAdmin()">
-      <li><a routerLink="/adminaddservice">Services</a></li>
-      <li><a routerLink="/adminviewappointment">Appointments</a></li>
-      <li><a routerLink="/adminviewfeedback">Feedbacks</a></li>
-      <li><a routerLink="/adminviewuserdetails">Customer</a></li>
-    </ng-container> 
+   
+    <li class="admin-box"> {{service.getAuthenticatedUser()}} / {{ service.getRole() }}</li>
 
     
-      <li><a (click)="confirmLogout()">Logout</a></li>
-    </ul>
+    <li><a routerLink="/">Home</a></li>
+    
 
-  <div *ngIf="showLogoutPopup">
+    <li class="dropdown" (mouseleave)="closeDropdown()">
+      <a (click)="toggleSerDropdown()" role="button" aria-haspopup="true" aria-expanded="{{ showSerDropdown }}">
+        Service
+      </a>
+      <ul *ngIf="showSerDropdown">
+        <li><a routerLink="/adminaddservice">Add Service</a></li>
+        <li><a routerLink="/adminviewservice">View Service</a></li>
+      </ul>
+    </li>
+
+    <li><a routerLink="/adminviewappointment">Appointments</a></li>
+    <li><a routerLink="/adminviewfeedback">Feedbacks</a></li>
+    <li><a routerLink="/adminviewuserdetails">Customer</a></li>
+
+    
+    <li><button class="logout-btn" (click)="confirmLogout()">Logout</button></li>
+  </ul>
+
+
+  <div *ngIf="showLogoutPopup" class="logout-popup">
     <p>Are you sure you want to logout?</p>
     <button (click)="logout()">Yes</button>
     <button (click)="cancelLogout()">No</button>
   </div>
+
 </div>

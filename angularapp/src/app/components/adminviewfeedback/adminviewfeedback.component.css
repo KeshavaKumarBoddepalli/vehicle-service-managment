@@ -1,4 +1,4 @@
-/* Container styling */
+
 .feedback-container {
     max-width: 1200px;
     margin: 30px auto;
@@ -9,7 +9,7 @@
     font-family: 'Segoe UI', Tahoma, sans-serif;
   }
   
-  /* Heading */
+
   h2 {
     text-align: center;
     color: #2c3e50;
@@ -18,7 +18,7 @@
     font-weight: 600;
   }
   
-  /* Table styling */
+
   .feedback-table {
     width: 100%;
     border-collapse: collapse;
@@ -43,7 +43,7 @@
     transition: background 0.3s ease;
   }
   
-  /* Buttons */
+  
   .btn {
     padding: 8px 14px;
     margin: 0 5px;
@@ -73,7 +73,7 @@
     background-color: #c82333;
   }
   
-  /* No data message */
+ 
   .no-data {
     text-align: center;
     color: #6c757d;
@@ -81,7 +81,7 @@
     margin-top: 20px;
   }
   
-  /* Responsive design */
+  
   @media (max-width: 768px) {
     .feedback-table th,
     .feedback-table td {

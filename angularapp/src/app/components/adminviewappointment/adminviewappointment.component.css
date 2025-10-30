@@ -32,7 +32,7 @@
  
 
 .table-wrapper {
-  overflow-x: auto; /* Ensures table is scrollable on smaller screens */
+  overflow-x: auto; 
 }
  
 .appointment-table {
