@@ -38,29 +38,6 @@
         <small *ngIf="servicePriceVar.errors?.required">Service Price is required.</small>
         <small *ngIf="servicePriceVar.errors?.min">Price must be positive.</small>
       </div>
-<<<<<<< HEAD
-   
-      <div class="form-group">
-        <label for="vehicleType">Type of Vehicle</label>
-        <select
-          id="vehicleType"
-          name="vehicleType"
-          class="form-control"
-          [(ngModel)]="service.typeOfVehicle"
-          #vehicleTypeVar="ngModel"
-          required
-        >
-          <option value="" disabled>Select vehicle type</option>
-          <option *ngFor="let type of vehicleTypes" [value]="type">
-            {{ type }}
-          </option>
-        </select>
-        <div *ngIf="vehicleTypeVar.invalid && (vehicleTypeVar.dirty || vehicleTypeVar.touched)" class="error-message">
-          <small *ngIf="vehicleTypeVar.errors?.required">
-            Please select a vehicle type.
-          </small>
-        </div>
-=======
     </div>
 
     <div class="form-group">
@@ -78,7 +55,6 @@
       </select>
       <div *ngIf="vehicleTypeVar.invalid && (vehicleTypeVar.dirty || vehicleTypeVar.touched)" class="error-message">
         <small *ngIf="vehicleTypeVar.errors?.required">Please select a vehicle type.</small>
->>>>>>> origin/main
       </div>
     </div>
 

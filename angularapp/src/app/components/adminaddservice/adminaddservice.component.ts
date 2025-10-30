@@ -77,9 +77,6 @@ this.vehicleService.getServiceById(serviceId).subscribe({
         });
       }
     }
-<<<<<<< HEAD
-    
-=======
   }
 
   public closePopup(): void {
@@ -91,4 +88,3 @@ this.vehicleService.getServiceById(serviceId).subscribe({
     });
   }
 }
->>>>>>> origin/main

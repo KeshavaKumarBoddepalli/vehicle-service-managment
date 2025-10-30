@@ -52,10 +52,6 @@ export class AdminviewserviceComponent implements OnInit {
   editService(service: VehicleMaintenance): void {
     this.router.navigate(['/admin/editservice', service.serviceId]);
   }
-<<<<<<< HEAD
-}
-=======
   
 
 }
->>>>>>> origin/main
