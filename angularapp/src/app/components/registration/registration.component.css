@@ -1,4 +1,4 @@
-
+/* Fullscreen wrapper */
 .fullscreen-wrapper {
   display: flex;
   flex-direction: column;
@@ -8,54 +8,36 @@
   background-size: cover;
 }
  
-
-<<<<<<< HEAD
 /* Navbar */
 .nav-container {
   background-color: #0c0101dc;
   padding: 10px 30px;
-=======
-header {
-  background-color: black;
-  color: white;
->>>>>>> origin/main
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: #fff;
 }
-<<<<<<< HEAD
-
+ 
 .nav-container h1 a {
   color: #fff;
   text-decoration: none;
   font-size: 24px;
   font-weight: bold;
 }
-
+ 
 .nav-container ul {
   list-style: none;
   display: flex;
   gap: 20px;
 }
-
+ 
 .nav-container ul li a {
   color: #fff;
-=======
- 
-header .header-left {
-  font-weight: bold;
-}
- 
-header .header-right a {
-  color: white;
-  margin-left: 20px;
->>>>>>> origin/main
   text-decoration: none;
   font-size: 16px;
 }
  
-
+/* Main container */
 .main-container {
   flex: 1;
   display: flex;
@@ -63,21 +45,8 @@ header .header-right a {
   align-items: center;
   padding: 20px;
 }
-<<<<<<< HEAD
-
+ 
 /* Registration form section */
-=======
- 
-.image-section {
-  flex: 2;
-  height:auto;
-  background:url('/assets/loginpage.png') no-repeat center center;
-  background-size: contain;
- 
-}
- 
-
->>>>>>> origin/main
 .form-section {
   width: 400px;
   padding: 30px;
@@ -89,38 +58,15 @@ header .header-right a {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   color: #fff;
 }
-<<<<<<< HEAD
-
-.form-section h2 {
-=======
  
-h2.text-center.text-primary {
->>>>>>> origin/main
+.form-section h2 {
   text-align: center;
   margin-bottom: 20px;
   font-size: 24px;
 }
-<<<<<<< HEAD
-
+ 
 /* Inputs and select */
 input, select {
-=======
- 
-label {
-  font-weight: bold;
-  display: block;
-  color:#2d7ed4;
-  margin-bottom: 5px;
- 
-}
-label::after {
-  content: " *"; 
-  color: red;    
-  font-weight: bold;
-}
- 
-input[type="text"], input[type="password"] {
->>>>>>> origin/main
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
@@ -131,18 +77,13 @@ input[type="text"], input[type="password"] {
   font-size: 16px;
   outline: none;
 }
-<<<<<<< HEAD
-
+ 
 select {
   background: rgba(255, 255, 255, 0.1);
 }
-
+ 
 /* Button */
 button {
-=======
- 
-button[type="submit"] {
->>>>>>> origin/main
   width: 100%;
   padding: 12px;
   background-color: #fff;
@@ -154,32 +95,15 @@ button[type="submit"] {
   cursor: pointer;
   transition: 0.3s ease;
 }
-<<<<<<< HEAD
-
+ 
 button:hover {
   background: rgba(255, 255, 255, 0.15);
   color: #fff;
   border: 2px solid #fff;
 }
-
+ 
 /* Error message */
-=======
- 
-button[disabled] {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
- 
->>>>>>> origin/main
 .error-message {
   color: #ff4d4d;
   font-size: 12px;
-<<<<<<< HEAD
-=======
-}
- 
-a {
-  color: #007bff;
-  text-decoration: none;
->>>>>>> origin/main
 }
