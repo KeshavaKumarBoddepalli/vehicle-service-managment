@@ -15,7 +15,7 @@
     padding-bottom: 10px;
   }
    
-  /* Table Styling */
+ 
   .table-wrapper {
     overflow-x: auto;
     border: 1px solid #ddd;
@@ -39,7 +39,7 @@
   }
    
   .table-dark-header th {
-    background-color: #004a99; /* Dark blue from image */
+    background-color: #004a99;
     color: #ffffff;
     font-weight: 600;
     text-transform: uppercase;
@@ -51,14 +51,14 @@
     background-color: #f9f9f9;
   }
    
-  /* Form Inputs inside table */
+ 
   .form-control-sm {
     font-size: 0.9em;
     padding: 0.3rem 0.6rem;
     min-width: 150px;
   }
    
-  /* Button Styling (Enabled/Disabled) */
+ 
   .book-btn {
     font-weight: 500;
     padding: 0.4rem 0.8rem;
@@ -66,19 +66,19 @@
     border: none;
     border-radius: 4px;
     color: #ffffff;
-    background-color: #007bff; /* Blue for enabled state */
+    background-color: #007bff;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
    
   .book-btn:disabled {
-    background-color: #c0c0c0; /* Gray for disabled state */
+    background-color: #c0c0c0;
     color: #6c757d;
     cursor: not-allowed;
-    opacity: 1; /* Full opacity */
+    opacity: 1;
   }
    
-  /* "No Data" Message Styling */
+ 
   .no-data-message {
     text-align: center;
     padding: 40px;
@@ -93,7 +93,7 @@
     font-weight: 500;
   }
    
-  /* Pagination Styling */
+ 
   .pagination-container {
     display: flex;
     justify-content: center;
@@ -135,7 +135,7 @@
     font-weight: bold;
   }
    
-  /* Success Pop-up Alert */
+ 
   .popup-alert {
     position: fixed;
     top: 20px;
@@ -144,3 +144,64 @@
     min-width: 300px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
   }
+ 
+ 
+ 
+.popup-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+ 
+ 
+.popup-dialog {
+  max-width: 420px;
+  width: 90%;
+  padding: 0 8px;
+}
+ 
+ 
+.popup-content {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  animation: popupFadeIn 160ms ease-out;
+}
+ 
+ 
+.popup-body {
+  padding: 20px 24px 8px 24px;
+  font-size: 1rem;
+  color: #212529;
+  text-align: center;
+}
+ 
+ 
+.popup-actions {
+  padding: 0 24px 20px 24px;
+  display: flex;
+  justify-content: center;
+}
+ 
+ 
+.popup-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #6c757d;
+  cursor: pointer;
+}
+ 
+ 
+ 
+ 
