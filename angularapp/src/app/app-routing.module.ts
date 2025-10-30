@@ -42,7 +42,8 @@ const routes: Routes = [
   { path: 'userviewfeedback', component: UserviewfeedbackComponent },
 
   // Error route
-  { path: 'error', component: ErrorComponent }
+  { path: 'error', component: ErrorComponent },
+  { path: 'admin/editservice/:id', component: AdminaddserviceComponent },
 ];
 
 
