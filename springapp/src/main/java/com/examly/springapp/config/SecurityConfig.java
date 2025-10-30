@@ -47,7 +47,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
     .requestMatchers("/api/register", "/api/login").permitAll()
     .requestMatchers("/api/appointment/**").hasAnyRole("USER", "ADMIN")
     .requestMatchers("/api/feedback/**").hasAnyRole("USER", "ADMIN") // ✅ Adjusted to match test endpoint
-    .requestMatchers("/api/user/**").hasRole("USER")
+    .requestMatchers("/api/user/**").hasAnyRole("USER","ADMIN")//adding admin access here
     .requestMatchers("/api/admin/**").hasRole("ADMIN")
     .requestMatchers("/api/services/**").hasAnyRole("USER", "ADMIN") // ✅ Adjusted for GET access
     .anyRequest().authenticated()

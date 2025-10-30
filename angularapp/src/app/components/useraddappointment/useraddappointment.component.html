@@ -27,8 +27,8 @@
         <tr *ngFor="let item of paginatedBookingForms; let i = index" #rowForm="ngForm" ngForm>
           <td>{{ ((currentPage - 1) * itemsPerPage) + i + 1 }}</td>
           <td>{{ item.service.serviceName }}</td>
-          <td>{{ item.service.cost }}</td>
-          <td>{{ item.service.vehicleType || 'N/A' }}</td>
+          <td>{{ item.service.servicePrice }}</td>
+          <td>{{ item.service. typeOfVehicle|| 'N/A' }}</td>
           <td>
             <input type="date"
                    class="form-control form-control-sm"
