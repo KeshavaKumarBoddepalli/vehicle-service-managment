@@ -8,7 +8,7 @@ import { VehicleMaintenance } from '../models/vehicle-maintenance.model';
 })
 export class VehicleService {
 
-  public apiUrl = "https://8080-cddcccedbacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/services";
+  private apiUrl = "https://8080-dcaafddcbffffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/services";
 
   constructor(private http: HttpClient) {}
 

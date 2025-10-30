@@ -24,10 +24,6 @@ public class AppointmentController {
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Appointment> addAppointment(@RequestBody Appointment appointment) {
         try {
-            // Force values to match test expectations
-            appointment.setLocation("New York"); // test expects "New York"
-            appointment.setStatus("Pending");
-
             Appointment savedAppointment = appointmentService.addAppointment(appointment);
             if (savedAppointment == null) {
                 return ResponseEntity.badRequest().body(null);

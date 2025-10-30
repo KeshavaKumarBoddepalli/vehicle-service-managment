@@ -53,12 +53,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepo.save(appointment);
     }
 
-
-    // @Override
-    // public Appointment addAppointment(Appointment appointment) {
-    //     return appointmentRepo.save(appointment);
-    // }
-
     @Override
     public void deleteAppointment(Long appointmentId) {
         appointmentRepo.deleteById(appointmentId);

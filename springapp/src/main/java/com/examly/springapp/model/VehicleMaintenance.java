@@ -33,7 +33,8 @@ public class VehicleMaintenance {
     public long getServiceId() {
         return serviceId;
     }
-
+    
+    
     @JsonProperty("serviceId") // ✅ Used in request
     public void setServiceId(long serviceId) {
         this.serviceId = serviceId;

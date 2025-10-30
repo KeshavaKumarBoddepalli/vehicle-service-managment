@@ -8,7 +8,7 @@ import { Appointment } from '../models/appointment.model';
 })
 export class AppointmentService {
 
-  public apiUrl="https://8080-cddcccedbacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/appointment";
+  private apiUrl="https://8080-dcaafddcbffffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/appointment";
 
   constructor(private http:HttpClient){ }
 
@@ -25,7 +25,7 @@ export class AppointmentService {
   }
 
   updateAppointment(appointmentld:number, appointment:Appointment):Observable<any>{
-    return this.http.post<any>(`${this.apiUrl}/${appointmentld}`,appointment);
+    return this.http.put<any>(`${this.apiUrl}/${appointmentld}`,appointment);
   }
 
   deleteAppointment(appointmentld:number):Observable<any>{
