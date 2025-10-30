@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +21,6 @@ public class VehicleServiceController {
     @Autowired
     private VehicleService vehicleService;
 
-    // ✅ Admin-only: Add a new service
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<VehicleMaintenance> addService(@RequestBody VehicleMaintenance service) {
@@ -30,7 +31,7 @@ public class VehicleServiceController {
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
-    // ✅ Public: Get all services
+   
     @GetMapping
     public ResponseEntity<List<VehicleMaintenance>> getAllServices() {
         List<VehicleMaintenance> services = vehicleService.getAllServices();
@@ -40,7 +41,6 @@ public class VehicleServiceController {
         return ResponseEntity.ok(services);
     }
 
-    // ✅ Public: Get service by name
     @GetMapping("/service")
     public ResponseEntity<List<VehicleMaintenance>> getServiceByName(@RequestParam String serviceName) {
         List<VehicleMaintenance> services = vehicleService.findByServiceName(serviceName);
@@ -50,7 +50,7 @@ public class VehicleServiceController {
         return ResponseEntity.ok(services);
     }
 
-    // ✅ Admin-only: Update a service
+   
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<VehicleMaintenance> updateService(@PathVariable Long id, @RequestBody VehicleMaintenance service) {
@@ -62,18 +62,23 @@ public class VehicleServiceController {
     }
 
     // ✅ Admin-only: Delete a service
-    @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Void> deleteService(@PathVariable Long id) {
-        Optional<VehicleMaintenance> serviceOpt = vehicleService.getServiceById(id);
-        if (serviceOpt.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        vehicleService.deleteService(id);
-        return ResponseEntity.noContent().build();
-    }
+    
+@DeleteMapping("/{id}")
+@PreAuthorize("hasRole('ADMIN')")
+public ResponseEntity<Void> deleteService(@PathVariable Long id) {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    System.out.println("User roles: " + auth.getAuthorities());
 
-    // ✅ Public: Get service by ID
+    Optional<VehicleMaintenance> serviceOpt = vehicleService.getServiceById(id);
+    if (serviceOpt.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+    vehicleService.deleteService(id);
+    return ResponseEntity.noContent().build();
+}
+
+
+   
     @GetMapping("/{id}")
     public ResponseEntity<VehicleMaintenance> getServiceById(@PathVariable Long id) {
         Optional<VehicleMaintenance> found = vehicleService.getServiceById(id);

@@ -1,5 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { VehicleMaintenance } from 'src/app/models/vehicle-maintenance.model';
 import { VehicleService } from 'src/app/services/vehicle.service';
 
@@ -8,65 +9,86 @@ import { VehicleService } from 'src/app/services/vehicle.service';
   templateUrl: './adminaddservice.component.html',
   styleUrls: ['./adminaddservice.component.css']
 })
-  export class AdminaddserviceComponent {
-      // This will be bound to the form
-      // We initialize it with default values
-      public service: any = {
-        serviceName: '',
-        servicePrice: null,
-        vehicleType: '' // Default value for the select
-      };
-     
-      // List of options for the dropdown
-      public vehicleTypes: string[] = ['Two-Wheeler', 'Three-Wheeler', 'Four-Wheeler', 'Other'];
-     
-      public showSuccessPopup = false;
-     
-      // Get a reference to the form in the template
-      @ViewChild('serviceForm') public serviceForm!: NgForm;
-     
-      constructor(private vehicleService: VehicleService) { }
-     
-      /**
-       * Called when the form is submitted.
-       */
-      public onSubmit(): void {
-        // The form is valid, proceed to call the service
-        if (this.serviceForm.valid) {
-          // Create the payload from the form model
-          const newService: VehicleMaintenance = {
-            ...this.service,
-            // Assuming the backend auto-generates the ID, so we don't send one
-          };
-     
-          this.vehicleService.addService(newService).subscribe({
-            next: (response) => {
-              // On success, show the popup
-              this.showSuccessPopup = true;
-              console.log('Service added successfully', response);
-            },
-            error: (err) => {
-              // Handle any errors from the API
-              console.error('Error adding service:', err);
-              // You could show an error popup here as well
-            }
-          });
-        }
-      }
-     
-      /**
-       * Called when the "OK" button on the popup is clicked.
-       */
-      public closePopup(): void {
-        this.showSuccessPopup = false;
-        
-        // Reset the form to its initial state, clearing all fields
-        // and validation messages, allowing the admin to add another service.
-        this.serviceForm.resetForm({
-            serviceName: '',
-            servicePrice: null,
-            vehicleType: ''
+export class AdminaddserviceComponent implements OnInit {
+  public service: VehicleMaintenance = {
+    serviceId: 0,
+    serviceName: '',
+    servicePrice: 0,
+    typeOfVehicle: ''
+  };
+
+  public vehicleTypes: string[] = ['Two-Wheeler', 'Three-Wheeler', 'Four-Wheeler', 'Other'];
+  public showSuccessPopup = false;
+  public isEditMode = false;
+
+  @ViewChild('serviceForm') public serviceForm!: NgForm;
+
+  constructor(
+    private vehicleService: VehicleService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    const serviceIdParam = this.route.snapshot.paramMap.get('id');
+    if (serviceIdParam) {
+      const serviceId = +serviceIdParam;
+      this.isEditMode = true;
+  
+      
+this.vehicleService.getServiceById(serviceId).subscribe({
+  next: (data: any) => {
+    this.service = {
+      serviceId: data.id, // ✅ manually map 'id' to 'serviceId'
+      serviceName: data.serviceName,
+      servicePrice: data.servicePrice,
+      typeOfVehicle: data.typeOfVehicle
+    };
+  },
+  error: (err) => {
+    console.error('Error fetching service by ID:', err);
+  }
+});
+
+    }
+  }
+
+  public onSubmit(): void {
+    if (this.serviceForm.valid) {
+      if (this.isEditMode) {
+        this.vehicleService.updateService(this.service.serviceId, this.service).subscribe({
+          next: () => {
+            alert('Service updated successfully!');
+            this.router.navigate(['/adminviewservice']);
+          },
+          error: (err) => {
+            console.error('Error updating service:', err);
+          }
+        });
+      } else {
+        this.vehicleService.addService(this.service).subscribe({
+          next: () => {
+            this.showSuccessPopup = true;
+            this.router.navigate(['/adminviewservice']);
+          },
+          error: (err) => {
+            console.error('Error adding service:', err);
+          }
         });
       }
     }
+<<<<<<< HEAD
     
+=======
+  }
+
+  public closePopup(): void {
+    this.showSuccessPopup = false;
+    this.serviceForm.resetForm({
+      serviceName: '',
+      servicePrice: null,
+      typeOfVehicle: ''
+    });
+  }
+}
+>>>>>>> origin/main

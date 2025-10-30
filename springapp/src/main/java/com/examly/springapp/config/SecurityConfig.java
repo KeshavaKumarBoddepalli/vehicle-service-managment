@@ -38,26 +38,30 @@ public class SecurityConfig {
     }
 
     @Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    return http
-        .csrf(csrf -> csrf.disable())
-.cors(Customizer.withDefaults())
-.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-.authorizeHttpRequests(auth -> auth
-    .requestMatchers("/api/register", "/api/login").permitAll()
-    .requestMatchers("/api/appointment/**").hasAnyRole("USER", "ADMIN")
-    .requestMatchers("/api/feedback/**").hasAnyRole("USER", "ADMIN") // ✅ Adjusted to match test endpoint
-    .requestMatchers("/api/user/**").hasAnyRole("USER","ADMIN")//adding admin access here
-    .requestMatchers("/api/admin/**").hasRole("ADMIN")
-    .requestMatchers("/api/services/**").hasAnyRole("USER", "ADMIN") // ✅ Adjusted for GET access
-    .anyRequest().authenticated()
-)
-
-        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authenticationProvider(authenticationProvider())
-        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-        .build();
-}
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+            .csrf(csrf -> csrf.disable())
+            .cors(Customizer.withDefaults())
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(
+                    "/api/register",
+                    "/api/login",
+                    "/swagger-ui.html",
+                    "/swagger-ui/**",
+                    "/v3/api-docs/**"
+                ).permitAll()
+                .requestMatchers("/api/appointment/**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers("/api/feedback/**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .requestMatchers("/api/services/**").hasAnyRole("USER", "ADMIN")
+                .anyRequest().authenticated()
+            )
+            .authenticationProvider(authenticationProvider())
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+            .build();
+    }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {

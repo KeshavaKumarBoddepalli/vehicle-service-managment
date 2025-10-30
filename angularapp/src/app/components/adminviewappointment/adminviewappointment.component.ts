@@ -50,7 +50,6 @@ export class AdminviewappointmentComponent implements OnInit {
       (error) => {
         this.errorMessage = 'Failed to update status. Please try again.';
         console.error('Error updating status:', error);
-        // On error, reload all data to revert UI changes
         this.loadAllAppointments();
       }
     );
@@ -64,11 +63,10 @@ export class AdminviewappointmentComponent implements OnInit {
       console.error('Invalid appointment ID');
       return;
     }
- 
+  
     if (confirm('Are you sure you want to delete this appointment?')) {
       this.appointmentService.deleteAppointment(appointmentId).subscribe(
         () => {
-          //filter out the deleted appointment from list
           this.appointments = this.appointments.filter(app => app.appointmentId !== appointmentId);
         },
         (error) => {

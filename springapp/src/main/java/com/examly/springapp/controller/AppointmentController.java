@@ -54,7 +54,8 @@ public class AppointmentController {
     }
 
     @PutMapping("/{appointmentId}")
-    @PreAuthorize("hasRole('ADMIN')")
+    // @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<Appointment> updateAppointment(
             @PathVariable Long appointmentId,
             @RequestBody Map<String, String> requestBody) {

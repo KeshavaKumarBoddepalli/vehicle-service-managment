@@ -31,11 +31,12 @@
           <td>{{ item.service. typeOfVehicle|| 'N/A' }}</td>
           <td>
             <input type="date"
-                   class="form-control form-control-sm"
-                   name="appointmentDate_{{i}}"
-                   [(ngModel)]="item.appointmentDate"
-                   required
-                   #dateInput="ngModel">
+            class="form-control form-control-sm"
+            name="appointmentDate_{{i}}"
+            [(ngModel)]="item.appointmentDate"
+            [min]="today"
+            required
+            #dateInput="ngModel">
           </td>
           <td>
             <input type="text"

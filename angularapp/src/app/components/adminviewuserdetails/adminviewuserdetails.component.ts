@@ -84,12 +84,12 @@ export class AdminviewuserdetailsComponent implements OnInit {
       next: () => {
         this.allCustomers = this.allCustomers.filter(user => user.userId !== userId);
         this.filteredCustomers = this.filteredCustomers.filter(user => user.userId !== userId);
-        
-      
+       
+     
         console.log(`User ${userId} deleted successfully.`);
       },
       error: (err) => {
-
+ 
         console.error(`Error deleting user ${userId}:`, err);
         alert('Failed to delete user. Please try again.');
       }
