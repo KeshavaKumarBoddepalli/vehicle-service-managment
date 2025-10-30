@@ -18,7 +18,8 @@ public class CrosConfig {
                 registry.addMapping("/**")
                         .allowedOrigins(
                             "https://8081-cddcccedbacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io",
-                            "http://127.0.0.1:3000"
+                            "http://127.0.0.1:3000",
+                            "https://8080-cddcccedbacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/swagger-ui.html"
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")

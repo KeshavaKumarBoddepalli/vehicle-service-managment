@@ -32,4 +32,7 @@ export class VehicleService {
   getServiceByName(serviceName: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${serviceName}`);
   }
+  getServiceById(serviceId: number): Observable<VehicleMaintenance> {
+    return this.http.get<VehicleMaintenance>(`${this.apiUrl}/${serviceId}`);
+  }
 }

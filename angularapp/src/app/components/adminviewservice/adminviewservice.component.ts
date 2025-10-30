@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { VehicleMaintenance } from 'src/app/models/vehicle-maintenance.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-adminviewservice',
@@ -11,7 +12,7 @@ export class AdminviewserviceComponent implements OnInit {
   services: VehicleMaintenance[] = [];
   errorMessage: string = '';
 
-  constructor(private vehicleService: VehicleService) {}
+  constructor(private vehicleService: VehicleService,private router:Router) {}
 
   ngOnInit(): void {
     this.loadServices();
@@ -47,8 +48,10 @@ export class AdminviewserviceComponent implements OnInit {
     }
   }
 
+  
   editService(service: VehicleMaintenance): void {
-    // Placeholder for edit logic
-    alert('Edit service: ' + service.serviceName);
+    this.router.navigate(['/admin/editservice', service.serviceId]);
   }
+  
+
 }
