@@ -8,7 +8,18 @@
 
     
     <li><a routerLink="/">Home</a></li>
-    <li><a routerLink="/adminaddservice">Services</a></li>
+    
+
+    <li class="dropdown" (mouseleave)="closeDropdown()">
+      <a (click)="toggleSerDropdown()" role="button" aria-haspopup="true" aria-expanded="{{ showSerDropdown }}">
+        Service
+      </a>
+      <ul *ngIf="showSerDropdown">
+        <li><a routerLink="/adminaddservice">Add Service</a></li>
+        <li><a routerLink="/adminviewservice">View Service</a></li>
+      </ul>
+    </li>
+
     <li><a routerLink="/adminviewappointment">Appointments</a></li>
     <li><a routerLink="/adminviewfeedback">Feedbacks</a></li>
     <li><a routerLink="/adminviewuserdetails">Customer</a></li>
