@@ -34,11 +34,11 @@ public class Appointment {
     
 
 
-    public Appointment(VehicleMaintenance service, LocalDate appointmentDate, String location, User user) {
+    public Appointment(VehicleMaintenance service, LocalDate appointmentDate, String location, User user, String status) {
         this.service = service;
         this.appointmentDate = appointmentDate;
         this.location = location;
-        this.status = "Pending";
+        this.status = status;
         this.user = user;
     }
 

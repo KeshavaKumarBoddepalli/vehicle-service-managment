@@ -79,12 +79,10 @@ export class UseraddappointmentComponent implements OnInit {
           this.updatePaginatedItems();
         } else {
           this.errorMessage = 'No services found.';
-          console.warn('Unexpected response:', services);
         }
       },
       (error) => {
         this.errorMessage = 'Failed to load services. Please try again later.';
-        console.error('Error fetching services:', error);
       }
     );
   }

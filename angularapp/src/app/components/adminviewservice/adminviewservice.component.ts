@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { VehicleMaintenance } from 'src/app/models/vehicle-maintenance.model';
 import { VehicleService } from 'src/app/services/vehicle.service';
+import { VehicleMaintenance } from 'src/app/models/vehicle-maintenance.model';
 
 @Component({
   selector: 'app-adminviewservice',
@@ -8,6 +8,8 @@ import { VehicleService } from 'src/app/services/vehicle.service';
   styleUrls: ['./adminviewservice.component.css']
 })
 export class AdminviewserviceComponent implements OnInit {
+  services: VehicleMaintenance[] = [];
+  errorMessage: string = '';
 
   // --- Data Arrays ---
   public allServices: VehicleMaintenance[] = []; // Stores the master list

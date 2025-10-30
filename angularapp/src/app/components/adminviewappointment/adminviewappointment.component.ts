@@ -43,7 +43,8 @@ export class AdminviewappointmentComponent implements OnInit {
       status: appointment.status,
       service: undefined,
       appointmentDate: '',
-      location: ''
+      location: '',
+      user: undefined
     }).subscribe(
       (updatedFromServer) => {
         const index = this.appointments.findIndex(a => a.appointmentId === updatedFromServer.appointmentId);

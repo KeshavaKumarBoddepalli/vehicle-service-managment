@@ -6,8 +6,6 @@ import com.examly.springapp.model.VehicleMaintenance;
 import com.examly.springapp.repository.AppointmentRepo;
 import com.examly.springapp.repository.UserRepo;
 import com.examly.springapp.repository.VehicleServiceRepo;
-
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,37 +14,33 @@ import java.util.Optional;
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
 
-    
-    private AppointmentRepo appointmentRepo;
-    private UserRepo userRepo;
-    private VehicleServiceRepo vehicleServiceRepo;
-    
+    private final AppointmentRepo appointmentRepo;
+    private final UserRepo userRepo;
+    private final VehicleServiceRepo vehicleServiceRepo;
 
     public AppointmentServiceImpl(AppointmentRepo appointmentRepo, UserRepo userRepo,
-            VehicleServiceRepo vehicleServiceRepo) {
+                                   VehicleServiceRepo vehicleServiceRepo) {
         this.appointmentRepo = appointmentRepo;
         this.userRepo = userRepo;
         this.vehicleServiceRepo = vehicleServiceRepo;
     }
 
-
     @Override
     public Appointment addAppointment(Appointment appointment) {
-        if (appointment.getUser() == null || appointment.getService() == null) {
-            throw new IllegalArgumentException("User or Service object is missing in request");
+        if (appointment.getUser() == null || appointment.getService() == null ||
+            appointment.getLocation() == null || appointment.getStatus() == null) {
+            throw new IllegalArgumentException("Missing required fields in request");
         }
 
-        Integer userId = appointment.getUser().getUserId(); // use Integer
+        Integer userId = appointment.getUser().getUserId();
         Long serviceId = appointment.getService().getServiceId();
 
-        // Load managed entities from DB
         User user = userRepo.findById(userId).orElseThrow(() ->
             new IllegalArgumentException("User not found in DB"));
 
         VehicleMaintenance service = vehicleServiceRepo.findById(serviceId).orElseThrow(() ->
             new IllegalArgumentException("Service not found in DB"));
 
-        // Set managed entities
         appointment.setUser(user);
         appointment.setService(service);
 
