@@ -1,10 +1,13 @@
 package com.examly.springapp.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -134,12 +137,16 @@ public ResponseEntity<?> login(@RequestBody UserDto userDto) {
     }
 
 @DeleteMapping("/user/{id}")
-public ResponseEntity<String> deleteUserById(@PathVariable int id) {
+public ResponseEntity<Map<String, String>> deleteUserById(@PathVariable int id) {
     boolean deleted = userService.deleteUser(id);
     if (deleted) {
-        return ResponseEntity.ok("User deleted successfully.");
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "User deleted successfully.");
+        return ResponseEntity.ok(response);
     } else {
-        return ResponseEntity.status(404).body("User not found.");
+        Map<String, String> response = new HashMap<>();
+        response.put("error", "User not found.");
+        return ResponseEntity.status(404).body(response);
     }
 }
 

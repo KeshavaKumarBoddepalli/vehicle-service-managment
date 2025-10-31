@@ -54,14 +54,14 @@ public class AppointmentController {
     }
 
     @PutMapping("/{appointmentId}")
-    // @PreAuthorize("hasRole('ADMIN')")
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<Appointment> updateAppointment(
             @PathVariable Long appointmentId,
-            @RequestBody Map<String, String> requestBody) {
+            @RequestBody Appointment appointment) {
 
-        String status = requestBody.get("status");
-        Appointment updatedAppointment = appointmentService.updateAppointmentStatus(appointmentId, status);
+                String status = appointment.getStatus(); 
+                Appointment updatedAppointment = appointmentService.updateAppointmentStatus(appointmentId, status);
 
         if (updatedAppointment == null) {
             Appointment notFound = new Appointment();
@@ -72,6 +72,7 @@ public class AppointmentController {
 
         return ResponseEntity.ok(updatedAppointment);
     }
+ 
 
     @DeleteMapping("/{appointmentId}")
     @PreAuthorize("hasRole('ADMIN')")

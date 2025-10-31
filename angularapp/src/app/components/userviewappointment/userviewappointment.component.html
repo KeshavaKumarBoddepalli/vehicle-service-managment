@@ -1,10 +1,7 @@
 <div class="container my-4">
   <h2 class="section-title">My Appointments</h2>
 
-  <div *ngIf="errorMessage" class="alert alert-danger">
-    {{ errorMessage }}
-  </div>
-
+  <!-- Filter Section -->
   <div class="filter-section mb-3">
     <label for="statusFilter" class="form-label">Filter by Status:</label>
     <select id="statusFilter" [(ngModel)]="selectedStatus" (change)="onFilterChange()" class="form-select">
@@ -12,11 +9,17 @@
     </select>
   </div>
 
-  <div *ngIf="filteredAppointments.length > 0; else noAppointments">
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="text-center my-4">
+    <p>Loading appointments...</p>
+  </div>
+
+  <!-- Appointment Table -->
+  <div *ngIf="!isLoading && filteredAppointments.length > 0; else noAppointments">
     <table class="table table-bordered table-striped">
       <thead class="table-dark">
         <tr>
-          <th>#</th>
+          <th>Sr No.</th>
           <th>Service Name</th>
           <th>Price</th>
           <th>Vehicle Type</th>
@@ -26,22 +29,65 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let app of filteredAppointments; let i = index">
-          <td>{{ i + 1 }}</td>
+        <tr *ngFor="let app of paginatedAppointments; let i = index">
+          <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
           <td>{{ app.service.serviceName }}</td>
           <td>{{ app.service.servicePrice }}</td>
           <td>{{ app.service.typeOfVehicle || 'N/A' }}</td>
           <td>{{ app.appointmentDate }}</td>
           <td>{{ app.location }}</td>
-          <td>{{ app.status }}</td>
+          <td>
+            <span
+              class="status-badge"
+              [ngClass]="{
+                'status-pending': app.status === 'Pending',
+                'status-approved': app.status === 'Approved',
+                'status-rejected': app.status === 'Rejected'
+              }"
+            >
+              {{ app.status }}
+            </span>
+          </td>
         </tr>
       </tbody>
     </table>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-controls mt-3">
+      <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">« Prev</button>
+      <button
+        *ngFor="let page of totalPagesArray"
+        (click)="changePage(page)"
+        [class.active]="page === currentPage"
+      >
+        {{ page }}
+      </button>
+      <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Next »</button>
+    </div>
   </div>
 
+  <!-- No Appointments Template -->
   <ng-template #noAppointments>
-    <div class="no-data-message">
+    <div class="no-data-message text-center mt-4">
       <h4>No appointments found.</h4>
     </div>
   </ng-template>
+</div>
+
+<!-- Success Popup -->
+<div class="popup-overlay" *ngIf="showSuccessPopup">
+  <div class="popup-content success-dialog">
+    <h3>Success!</h3>
+    <p>{{ successMessage }}</p>
+    <button class="btn-ok" (click)="closeSuccessPopup()">Close</button>
+  </div>
+</div>
+
+<!-- Error Popup -->
+<div class="popup-overlay" *ngIf="showErrorPopup">
+  <div class="popup-content confirm-dialog">
+    <h3>Error</h3>
+    <p>{{ errorMessage }}</p>
+    <button class="btn-cancel" (click)="closeErrorPopup()">Close</button>
+  </div>
 </div>

@@ -1,84 +1,92 @@
+/* Container */
 .container {
   max-width: 1200px;
   margin: 20px auto;
   padding: 20px;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
- 
+
+/* Section Title */
 .section-title {
   text-align: center;
-  font-size: 2em;
-  color: #333;
+  font-size: 2rem;
   font-weight: 600;
+  color: #333;
   margin-bottom: 20px;
   border-bottom: 2px solid #e0e0e0;
   padding-bottom: 10px;
 }
- 
-/* Table Styling */
+
+/* Table Wrapper */
 .table-wrapper {
   overflow-x: auto;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
 }
- 
+
+/* Table Styling */
 .table {
   width: 100%;
   border-collapse: collapse;
-  background-color: #fff;
-  font-size: 0.9em;
+  font-size: 0.95rem;
 }
- 
+
 .table th,
 .table td {
-  padding: 10px 12px;
+  padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid #e0e0e0;
   vertical-align: middle;
 }
- 
+
 .table-dark-header th {
-  background-color: #004a99; /* Dark blue from image */
-  color: #ffffff;
+  background-color: #004a99;
+  color: #fff;
   font-weight: 600;
   text-transform: uppercase;
-  font-size: 0.85em;
+  font-size: 0.85rem;
   letter-spacing: 0.5px;
 }
- 
+
 .table tbody tr:nth-child(even) {
   background-color: #f9f9f9;
 }
- 
-/* Form Inputs inside table */
+
+/* Form Inputs */
 .form-control-sm {
-  font-size: 0.9em;
-  padding: 0.3rem 0.6rem;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.6rem;
   min-width: 150px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
 }
- 
-/* Button Styling (Enabled/Disabled) */
+
+/* Book Button */
 .book-btn {
   font-weight: 500;
   padding: 0.4rem 0.8rem;
-  font-size: 0.85em;
+  font-size: 0.85rem;
   border: none;
   border-radius: 4px;
-  color: #ffffff;
-  background-color: #007bff; /* Blue for enabled state */
+  color: #fff;
+  background-color: #007bff;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
- 
+
+.book-btn:hover {
+  background-color: #0056b3;
+}
+
 .book-btn:disabled {
-  background-color: #c0c0c0; /* Gray for disabled state */
+  background-color: #c0c0c0;
   color: #6c757d;
   cursor: not-allowed;
-  opacity: 1; /* Full opacity */
 }
- 
-/* "No Data" Message Styling */
+
+/* No Data Message */
 .no-data-message {
   text-align: center;
   padding: 40px;
@@ -87,60 +95,90 @@
   border-radius: 8px;
   margin-top: 20px;
 }
- 
+
 .no-data-message h3 {
   color: #888;
   font-weight: 500;
 }
- 
-/* Pagination Styling */
-.pagination-container {
+
+/* Pagination Controls */
+.pagination-controls {
+  margin-top: 1.5rem;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  gap: 5px;
+  flex-wrap: wrap;
 }
- 
-.pagination {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  overflow: hidden;
-}
- 
-.page-item {
-  border-right: 1px solid #ddd;
-}
-.page-item:last-child {
-  border-right: none;
-}
- 
-.page-link {
-  display: block;
-  padding: 8px 14px;
-  color: #007bff;
-  text-decoration: none;
-  cursor: pointer;
+
+.pagination-controls button {
   background-color: #fff;
+  border: 1px solid #ddd;
+  color: #007bff;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.9rem;
 }
- 
-.page-link:hover {
-  background-color: #f4f4f4;
+
+.pagination-controls button:hover:not(:disabled) {
+  background-color: #f0f0f0;
 }
- 
-.page-link.active {
+
+.pagination-controls button.active {
   background-color: #007bff;
-  color: #fff;
-  font-weight: bold;
+  color: white;
+  border-color: #007bff;
 }
- 
-/* Success Pop-up Alert */
-.popup-alert {
+
+.pagination-controls button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Success Popup */
+.popup-overlay {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 1050;
-  min-width: 300px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.success-dialog h3 {
+  margin-bottom: 1rem;
+  color: #28a745;
+}
+
+.popup-content p {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+.btn-ok {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-ok:hover {
+  background-color: #218838;
 }
