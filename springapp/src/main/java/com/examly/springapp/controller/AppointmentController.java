@@ -60,8 +60,8 @@ public class AppointmentController {
             @PathVariable Long appointmentId,
             @RequestBody Appointment appointment) {
 
-                String status = appointment.getStatus(); 
-                Appointment updatedAppointment = appointmentService.updateAppointmentStatus(appointmentId, status);
+        String status = appointment.getStatus();
+        Appointment updatedAppointment = appointmentService.updateAppointmentStatus(appointmentId, status);
 
         if (updatedAppointment == null) {
             Appointment notFound = new Appointment();

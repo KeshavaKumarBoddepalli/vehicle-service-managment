@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 // ... (all your other imports)
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod; // <-- MAKE SURE THIS IS IMPORTED
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -44,11 +44,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
             .csrf(csrf -> csrf.disable())
-            
-            // --- CHANGE 1: THIS LINE IS REMOVED ---
-            // .cors(Customizer.withDefaults()) 
-            // By removing .cors(), we allow CrosConfig.java to handle CORS.
- 
+            // .cors(Customizer.withDefaults())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
             
@@ -64,6 +60,7 @@ public class SecurityConfig {
                     "/swagger-ui/**",
                     "/v3/api-docs/**"
                 ).permitAll()
+                .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                 .requestMatchers("/api/appointment/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/api/feedback/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")

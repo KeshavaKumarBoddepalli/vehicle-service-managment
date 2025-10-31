@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1f1f1f; /* Dark background */
+  background-color: #1f1f1f;
   padding: 12px 24px;
   color: #fff;
   font-family: 'Segoe UI', Arial, sans-serif;
@@ -89,14 +89,15 @@
   color: #f39c12; 
 }
 
+  
 .profile-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ff6a00, #ff007f);
-  display: inline-block;
+  width: 30px; 
+  height: 30px;
+  border-radius: 60%;
+  background: url('/assets/profilelogo.webp') no-repeat center;
+  background-size: cover;
+  cursor: pointer;
 }
-
 
 .logout-btn {
   background-color: #e74c3c;

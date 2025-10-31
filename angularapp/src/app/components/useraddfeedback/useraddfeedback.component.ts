@@ -28,6 +28,7 @@ export class UseraddfeedbackComponent implements OnInit {
       next: ()=>{
         alert('Feedback is submitted successfully!');
         this.router.navigate(['/userviewfeedback'])
+        this.router.navigate(['/userviewfeedback'])
         this.newFeedback.message='';
         this.newFeedback.rating=0;
       },
@@ -36,7 +37,6 @@ export class UseraddfeedbackComponent implements OnInit {
       }
     })
   }
-
  
   validateRating(event: any) {
     const value = event.target.valueAsNumber;
@@ -50,3 +50,4 @@ export class UseraddfeedbackComponent implements OnInit {
   }
  
 }
+ 
