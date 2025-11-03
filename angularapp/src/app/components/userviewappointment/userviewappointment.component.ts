@@ -69,8 +69,9 @@ export class UserviewappointmentComponent implements OnInit {
     this.appointmentService.getAppointmentsByUser(userId).subscribe({
       next: (data) => {
         this.allMyAppointments = data.sort((a, b) =>
-          new Date(b.appointmentDate).getTime() - new Date(a.appointmentDate).getTime()
+          (b.appointmentId ?? 0) - (a.appointmentId ?? 0)
         );
+ 
         this.onFilterChange();
         this.isLoading = false;
       },
@@ -81,6 +82,7 @@ export class UserviewappointmentComponent implements OnInit {
       }
     });
   }
+ 
  
   onFilterChange(): void {
     if (this.selectedStatus === 'All') {
