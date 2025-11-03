@@ -7,9 +7,15 @@ import { Appointment } from '../models/appointment.model';
   providedIn: 'root'
 })
 export class AppointmentService {
+<<<<<<< HEAD
  
   private apiUrl="https://8080-facafcdbdfacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/appointment";
  
+=======
+
+  private apiUrl = "https://8080-cddcccedbacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/appointment";
+
+>>>>>>> origin/main
   constructor(private http: HttpClient) {}
  
   getAppointments(): Observable<any> {

@@ -7,7 +7,11 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UserdetailsService {
+<<<<<<< HEAD
   apiUrl="https://8080-facafcdbdfacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/user";
+=======
+  apiUrl="https://8080-cddcccedbacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/user";
+>>>>>>> origin/main
 
   constructor(private http:HttpClient) { }
 

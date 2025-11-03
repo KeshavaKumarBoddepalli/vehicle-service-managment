@@ -9,7 +9,7 @@
    
  
     <li class="dropdown" (mouseleave)="closeDropdown()">
-      <a (mouseenter)="cancelLogout(); toggleSerDropdown()" role="button" aria-haspopup="true" aria-expanded="{{ showSerDropdown }}" class="service">
+      <a (mouseenter)="cancelLogout(); toggleSerDropdown()" role="button" aria-haspopup="true" aria-expanded="{{ showSerDropdown }}" class="service" (keydown)="handleKeyPress($event)"   >
         Service
       </a>
       <ul *ngIf="showSerDropdown">
@@ -23,7 +23,7 @@
     <li><a routerLink="/adminviewuserdetails" (mouseenter)="cancelLogout()">Customer</a></li>
  
     <li>
-      <a routerLink="/profile" class="profile-icon" (mouseenter)="cancelLogout()"></a>
+      <a routerLink="/profile" class="profile-icon" (mouseenter)="cancelLogout()" aria-label="Profile"></a>
     </li>
  
     <li><button class="logout-btn" (click)="confirmLogout()">Logout</button></li>

@@ -112,7 +112,7 @@
   vertical-align: middle;
   white-space: nowrap; /* Prevents text wrapping in cells */
 }
-
+ 
 .appointment-table th {
   background-color: #343a40;
   color: #fff;
@@ -121,7 +121,7 @@
   font-size: 13px;
   padding: 14px 16px;
 }
-
+ 
 .appointment-table td {
   background-color: #fff;
   padding: 14px 16px;
@@ -129,7 +129,7 @@
   font-size: 14px;
   color: #333;
 }
-
+ 
 .appointment-table tbody tr:nth-child(even) td {
   background-color: #f1f5f9;
 }
@@ -178,20 +178,18 @@
   cursor: not-allowed;
   background-image: none; /* Remove arrow when disabled */
 }
-SVG namespace
- 
 /* --- Action Buttons --- */
 .action-cell {
   display: flex;
   gap: 8px;
   align-items: center;
 }
-
+ 
 .delete-button {
   background-color: #d3142d;
   box-shadow: 0 2px rgb(139, 43, 57)a(232, 62, 140, 0.2);
 }
-
+ 
 .action-button {
   padding: 8px 12px;
   border: none;
@@ -203,7 +201,7 @@ SVG namespace
   color: white;
   white-space: nowrap; /* Prevents button text from wrapping */
 }
-
+ 
 .action-button:hover {
   opacity: 0.9;
   transform: translateY(-1px);
@@ -272,7 +270,7 @@ SVG namespace
   background-color: #fff;
   border: 1px dashed #ddd;
   border-radius: 8px;
-  min-height: 150px; 
+  min-height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -368,39 +366,41 @@ SVG namespace
   transform: translateX(-50%);
   background-color: #28a745;
   color: white;
-  padding: 16px 28px;
+  padding: 16px 24px;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   z-index: 2000;
-  display: flex;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
   align-items: center;
-  gap: 12px;
-  animation: fadeInOut 3s ease-in-out forwards;
+  justify-content: space-between;
+  min-width: 230px;
 }
-
-@keyframes fadeInOut {
-  0% { opacity: 0; bottom: 0px; }
-  10% { opacity: 1; bottom: 30px; }
-  90% { opacity: 1; bottom: 30px; }
-  100% { opacity: 0; bottom: 0px; }
+ 
+.success-popup.show {
+  display: flex;
+  opacity: 1;
 }
-
-.status-success-popup .close-btn {
+ 
+.success-popup .close-popup-btn {
   background: none;
   border: none;
   color: white;
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
-  opacity: 0.8;
+  margin-left: 5px;
+  line-height: 1;
 }
+ 
 .status-success-popup .close-btn:hover {
   opacity: 1;
 }
  
-
+ 
 /* --- *** ADD THIS NEW STYLE for the Cancelled Badge *** --- */
 /* (Assuming you have a <span> for status on this page) */
  

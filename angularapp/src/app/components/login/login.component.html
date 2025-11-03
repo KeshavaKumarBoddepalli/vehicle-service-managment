@@ -28,7 +28,7 @@
                  required>
           
           <!-- Password Toggle Button -->
-          <span class="password-toggle-icon" (click)="togglePasswordVisibility()">
+          <span class="password-toggle-icon" (click)="togglePasswordVisibility()" (keydown)="handleKeyPress($event)">
             <svg *ngIf="passwordFieldType === 'password'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 10.224 6.365 7.5 12 7.5c5.635 0 8.573 2.724 9.964 4.183.37.362.37.951 0 1.313C20.573 14.776 17.635 17.5 12 17.5c-5.635 0-8.573-2.724-9.964-4.183Z" />
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />

@@ -62,4 +62,13 @@ export class UsernavbarComponent implements OnInit {
     this.showAppointmentsDropdown = false;
     this.showFeedbackDropdown = false;
   }
+
+  handleKeyPress(event: KeyboardEvent): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      this.toggleDropdown();
+      event.preventDefault(); // optional: prevents scrolling on spacebar
+    }
+  }
+  toggleDropdown() {
+  }
 }
