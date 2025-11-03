@@ -5,7 +5,7 @@
     {{ errorMessage }}
   </div>
  
-  <!-- Main Content Table -->
+  
   <div *ngIf="appointments.length > 0; else noAppointments" class="table-wrapper">
     <table class="appointment-table">
       <thead>
@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Use paginatedAppointments here instead of appointments -->
+       
         <tr *ngFor="let app of paginatedAppointments; let i = index">
           <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
           <td>{{ app.service?.serviceName }}</td>
@@ -32,7 +32,7 @@
           <td>{{ app.location }}</td>
           <td>{{ app.user?.username }}</td>
          
-          <!-- Status Dropdown: No (change) event needed anymore -->
+          
           <td>
             <select [(ngModel)]="app.status"
                     [ngClass]="{
@@ -45,13 +45,13 @@
             </select>
           </td>
  
-          <!-- Action Buttons -->
+        
           <td class="action-cell">
-            <!-- Update button calls onStatusChange with the current `app` object -->
+           
             <button (click)="onStatusChange(app)" class="action-button update-button">
               Update
             </button>
-            <!-- Delete button now calls requestDeleteAppointment -->
+          
             <button (click)="requestDeleteAppointment(app.appointmentId)" class="action-button delete-button">
               Delete
             </button>
@@ -61,7 +61,7 @@
     </table>
   </div>
  
-  <!-- Pagination Controls -->
+  
   <div *ngIf="totalPages > 1" class="pagination-controls">
     <button (click)="prevPage()" [disabled]="currentPage === 1" class="pagination-button">
       &laquo; Prev
@@ -74,7 +74,7 @@
     </button>
   </div>
  
-  <!-- No Appointments Template -->
+
   <ng-template #noAppointments>
     <div *ngIf="!errorMessage" class="no-appointments-message">
       <h3>Oops! No Appointment found.</h3>
@@ -83,18 +83,12 @@
  
 </div>
  
-<!--
-  MODALS & POPUPS
-  These live outside the main container.
--->
- 
-<!-- Success Popup (Toast) -->
-<div class="success-popup" [class.show]="showSuccessPopup">
+
+<!-- <div class="success-popup" [class.show]="showSuccessPopup">
   {{ successMessage }}
   <button (click)="closeSuccessPopup()" class="close-popup-btn">&times;</button>
-</div>
- 
-<!-- Delete Confirmation Modal -->
+</div> -->
+
 <div *ngIf="showDeleteModal" class="modal-overlay">
   <div class="modal-content">
     <h3 class="modal-title">Confirm Deletion</h3>
@@ -108,4 +102,9 @@
       </button>
     </div>
   </div>
+</div>
+
+<div class="status-success-popup" *ngIf="showSuccessPopup">
+  <span>Status updated successfully</span>
+  <button class="close-btn" (click)="closePopup()">×</button>
 </div>

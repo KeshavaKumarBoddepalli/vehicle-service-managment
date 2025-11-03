@@ -1,7 +1,7 @@
-<div class="profile-container">
+ <div class="profile-container">
   <h2>{{getRole()}} Profile <span class="edit-icon" (click)="enableEdit()">&#9998;</span></h2>
 
-  <!-- View Mode -->
+  
   <div *ngIf="!isEditing">
     <img [src]="profileImage" alt="Profile Image" class="profile-img" />
     <p><strong>Username:</strong> {{ username }}</p>
@@ -9,7 +9,7 @@
     <p><strong>Mobile Number:</strong> {{ mobileNumber }}</p>
   </div>
 
-  <!-- Edit Mode -->
+  
   <div *ngIf="isEditing">
     <label>Username:</label>
     <input type="text" [(ngModel)]="username" disabled />

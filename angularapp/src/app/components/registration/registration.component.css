@@ -1,3 +1,4 @@
+
 .fullscreen-wrapper {
   display: flex;
   flex-direction: column;
@@ -35,7 +36,7 @@
   font-size: 16px;
 }
  
- 
+
 .main-container {
   flex: 1;
   display: flex;
@@ -44,7 +45,7 @@
   padding: 20px;
 }
  
- 
+
 .form-section {
   width: 400px;
   padding: 30px;
@@ -63,7 +64,7 @@
   font-size: 24px;
 }
  
- 
+
 input, select {
   width: 100%;
   padding: 10px;
@@ -80,7 +81,7 @@ select {
   background: rgba(11, 11, 11, 0.1);
 }
  
- 
+
 button {
   width: 100%;
   padding: 12px;
@@ -99,7 +100,7 @@ button {
   color: rgb(242, 242, 243);
   border: 2px solid #fff;
 } */
- 
+
 button[type="submit"]:hover {
   background: rgba(8, 8, 8, 0.15);
   color: #645f5f;
@@ -111,7 +112,7 @@ button[disabled] {
   cursor: not-allowed;
 }
  
- 
+
 .error-message {
   color: #ff4d4d;
   font-size: 12px;

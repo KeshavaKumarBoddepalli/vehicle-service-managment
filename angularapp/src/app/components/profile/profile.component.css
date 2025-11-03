@@ -9,19 +9,19 @@
   }
   
 .profile-container input {
-  width: 100%; /* Make all input boxes same width */
+  width: 100%; 
   padding: 10px;
   margin-bottom: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box; /* Prevent overflow */
+  box-sizing: border-box; 
 }
 
 .profile-container label {
-  display: block;       /* ✅ Forces label to occupy full width */
+  display: block;       
   margin-bottom: 6px;
   font-weight: bold;
-  text-align: left;     /* ✅ Align label text to left */
+  text-align: left;    
 }
 
   

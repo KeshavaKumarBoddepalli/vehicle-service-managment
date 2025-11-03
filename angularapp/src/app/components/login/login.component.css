@@ -16,7 +16,7 @@
   background-size: cover;
 }
  
- 
+
 .main-container {
   display: flex;
   justify-content: center;
@@ -24,7 +24,7 @@
   width: 100%;
 }
  
- 
+
 form {
   width: 400px;
   padding: 30px;
@@ -45,7 +45,7 @@ h2.text-center.text-primary {
   font-size: 2rem;
 }
  
- 
+
 label {
   font-weight: 600;
   color: #0f0101;
@@ -71,7 +71,7 @@ input[type="password"] {
   margin-top: 5px;
 }
  
- 
+
 button[type="submit"] {
   width: 100%;
   padding: 12px;
@@ -95,7 +95,7 @@ button[disabled] {
   background-color: #ccc;
   cursor: not-allowed;
 }
- 
+
 a {
   color: #fff;
   text-decoration: none;

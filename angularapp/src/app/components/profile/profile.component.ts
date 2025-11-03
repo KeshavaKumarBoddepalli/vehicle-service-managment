@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
   userRole = '';
   password = '';
  
-  public apiUrl = "https://8080-facafcdbdfacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/user";
+  public apiUrl = "https://8080-cecdfddacafbdafffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/user";
  
   constructor(private http: HttpClient, public authservice: AuthService) {}
  
@@ -98,3 +98,5 @@ export class ProfileComponent implements OnInit {
     });
   }
 }
+
+
