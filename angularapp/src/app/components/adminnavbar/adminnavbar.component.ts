@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -10,9 +14,15 @@ import { AuthService } from 'src/app/services/auth.service';
 export class AdminnavbarComponent implements OnInit {
   showLogoutPopup = false;
   showSerDropdown: boolean;
+<<<<<<< HEAD
  
   constructor(public service: AuthService, private router: Router) {}
  
+=======
+
+  constructor(public service: AuthService, private router: Router) {}
+
+>>>>>>> origin/main
   ngOnInit(): void {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
@@ -20,7 +30,11 @@ export class AdminnavbarComponent implements OnInit {
       }
     });
   }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> origin/main
   isUserLoggedIn(): boolean {
     return this.service.isLoggedIn();
   }
@@ -42,12 +56,20 @@ export class AdminnavbarComponent implements OnInit {
     this.showLogoutPopup = false;
     this.router.navigate(['/']);
   }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> origin/main
   toggleSerDropdown(): void {
     this.cancelLogout;
     this.showSerDropdown = !this.showSerDropdown;
   }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> origin/main
   closeDropdown(): void {
     this.showSerDropdown = false;
   }

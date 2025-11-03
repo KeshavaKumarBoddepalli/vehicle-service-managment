@@ -28,7 +28,6 @@ export class UseraddfeedbackComponent implements OnInit {
       next: ()=>{
         alert('Feedback is submitted successfully!');
         this.router.navigate(['/userviewfeedback'])
-        this.router.navigate(['/userviewfeedback'])
         this.newFeedback.message='';
         this.newFeedback.rating=0;
       },

@@ -112,21 +112,26 @@
   vertical-align: middle;
   white-space: nowrap; /* Prevents text wrapping in cells */
 }
- 
+
 .appointment-table th {
-  background-color: #f4f4f4;
-  color: #555;
+  background-color: #343a40;
+  color: #fff;
   font-weight: 600;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 13px;
+  padding: 14px 16px;
 }
- 
-.appointment-table tbody tr:nth-child(even) {
-  background-color: #fdfdfd;
+
+.appointment-table td {
+  background-color: #fff;
+  padding: 14px 16px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  color: #333;
 }
- 
-.appointment-table tbody tr:hover {
-  background-color: #f0f8ff;
+
+.appointment-table tbody tr:nth-child(even) td {
+  background-color: #f1f5f9;
 }
  
 /* ... all of your existing admin styles ... */
@@ -181,7 +186,12 @@ SVG namespace
   gap: 8px;
   align-items: center;
 }
- 
+
+.delete-button {
+  background-color: #d3142d;
+  box-shadow: 0 2px rgb(139, 43, 57)a(232, 62, 140, 0.2);
+}
+
 .action-button {
   padding: 8px 12px;
   border: none;
@@ -193,9 +203,9 @@ SVG namespace
   color: white;
   white-space: nowrap; /* Prevents button text from wrapping */
 }
- 
+
 .action-button:hover {
-  opacity: 0.85;
+  opacity: 0.9;
   transform: translateY(-1px);
 }
  
@@ -353,39 +363,40 @@ SVG namespace
 /* --- Success Popup (Toast) --- */
 .success-popup {
   position: fixed;
-  bottom: -100px; /* Start off-screen */
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #28a745;
   color: white;
-  padding: 16px 30px;
+  padding: 16px 28px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   font-size: 16px;
   font-weight: 600;
   z-index: 2000;
-  transition: bottom 0.5s ease-in-out;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
+  animation: fadeInOut 3s ease-in-out forwards;
 }
- 
-.success-popup.show {
-  bottom: 30px; /* Slide in */
+
+@keyframes fadeInOut {
+  0% { opacity: 0; bottom: 0px; }
+  10% { opacity: 1; bottom: 30px; }
+  90% { opacity: 1; bottom: 30px; }
+  100% { opacity: 0; bottom: 0px; }
 }
- 
-.close-popup-btn {
+
+.status-success-popup .close-btn {
   background: none;
   border: none;
   color: white;
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: bold;
   cursor: pointer;
-  padding: 0 5px;
-  line-height: 1;
-  opacity: 0.7;
+  opacity: 0.8;
 }
-.close-popup-btn:hover {
+.status-success-popup .close-btn:hover {
   opacity: 1;
 }
  

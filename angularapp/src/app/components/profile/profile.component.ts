@@ -1,19 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-
+ 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
+ 
   username = '';
   email = '';
   mobileNumber = '';
   profileImage = 'assets/profilelogo.webp';
-
+ 
   isEditing = false;
   showSuccess = false;
   usernameError = false;
@@ -36,29 +36,27 @@ export class ProfileComponent implements OnInit {
     };
     return roleMap[role] || 'Unknown';
   }
-
   enableEdit(): void {
     this.isEditing = true;
   }
-
+ 
   cancelEdit(): void {
     this.isEditing = false;
     this.usernameError = false;
     this.emailError = false;
     this.mobileError = false;
   }
-
+ 
   updateProfile(): void {
     this.emailError = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
     this.mobileError = !/^\d{10}$/.test(this.mobileNumber);
-
+ 
     if (this.usernameError || this.emailError || this.mobileError) {
       return;
     }
-
+ 
     this.isEditing = false;
     this.showSuccess = true;
-
     const updatedUser = {
       userId: this.userId,
       username: this.username,
@@ -67,7 +65,6 @@ export class ProfileComponent implements OnInit {
       password: this.password,
       userRole: this.userRole
     };
-
     this.http.put(`${this.apiUrl}/view/profile`, updatedUser).subscribe({
       next: () => {
         console.log('Profile updated successfully');
@@ -84,7 +81,6 @@ export class ProfileComponent implements OnInit {
     this.userId = this.authservice.getAuthenticatedUserId();
     this.fetchUserProfile();
   }
-
   fetchUserProfile(): void {
     this.http.get<any>(`${this.apiUrl}/${this.userId}`).subscribe({
       next: (data) => {

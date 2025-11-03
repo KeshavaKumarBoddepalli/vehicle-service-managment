@@ -1,78 +1,47 @@
-  .profile-container {
-    width: 400px;
-    margin: 30px auto;
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    text-align: center;
-  }
-  
+.profile-container {
+  width: 400px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
 .profile-container input {
-  width: 100%; /* Make all input boxes same width */
+  width: 100%; 
   padding: 10px;
   margin-bottom: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box; /* Prevent overflow */
+  box-sizing: border-box; 
 }
 
 .profile-container label {
-  display: block;       /* ✅ Forces label to occupy full width */
+  display: block;       
   margin-bottom: 6px;
   font-weight: bold;
-  text-align: left;     /* ✅ Align label text to left */
+  text-align: left;    
 }
 
-  
-  .profile-img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-bottom: 15px;
-  }
-  
-  .edit-icon {
-    color: #007bff;
-    cursor: pointer;
-    font-size: 18px;
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
-  .error {
-    display:block;
-    margin-top:4px;
-    margin-bottom:8px;
-    color: red;
-    font-size: 12px;
-  }
-  
-  .success {
-    color: green;
-    font-weight: bold;
-  }
-  
-  input {
-    width: 100%;
-    padding: 8px;
-    margin: 8px 0;
-  }
-  
-  button {
-    margin: 10px 5px;
-    padding: 8px 12px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  button:first-child {
-    background: #007bff;
-    color: #fff;
-  }
-  
-  button:last-child {
-    background: #ccc;
-  }
+input {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+}
+
+button {
+  margin: 10px 5px;
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+}
+
+button:first-child {
+  background: #007bff;
+  color: #fff;
+}
+
+button:last-child {
+  background: #ccc;
+}
