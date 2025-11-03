@@ -104,5 +104,9 @@ export class RegistrationComponent implements OnInit {
   toggleConfirmPasswordVisibility(): void {
     this.confirmPasswordFieldType = this.confirmPasswordFieldType === 'password' ? 'text' : 'password';
   }
+
+  handleKeyPress(event: KeyboardEvent): void {
+    
+  }
   
 }

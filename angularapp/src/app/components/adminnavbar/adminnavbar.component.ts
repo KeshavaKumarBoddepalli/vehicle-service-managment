@@ -51,4 +51,11 @@ export class AdminnavbarComponent implements OnInit {
   closeDropdown(): void {
     this.showSerDropdown = false;
   }
+
+  handleKeyPress(event: KeyboardEvent): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      this.toggleSerDropdown();
+      event.preventDefault(); // optional: prevents scrolling on spacebar
+    }
+  }
 }
