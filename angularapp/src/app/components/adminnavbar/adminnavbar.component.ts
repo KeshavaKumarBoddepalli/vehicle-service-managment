@@ -44,7 +44,7 @@ export class AdminnavbarComponent implements OnInit {
   }
  
   toggleSerDropdown(): void {
-    this.cancelLogout;
+    this.cancelLogout();
     this.showSerDropdown = !this.showSerDropdown;
   }
  
