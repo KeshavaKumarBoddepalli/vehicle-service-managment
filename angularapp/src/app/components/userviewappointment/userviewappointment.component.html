@@ -111,8 +111,8 @@
         <form #editForm="ngForm" (ngSubmit)="onUpdateAppointment(editForm)">
           <!-- Service Info (Read-only) -->
           <div class="form-group">
-            <label>Service:</label>
-            <input type="text" class="form-control" [value]="currentEditingAppointment?.service?.serviceName" readonly>
+            <label for="service">Service:</label>
+            <input id="service" type="text" class="form-control" [value]="currentEditingAppointment?.service?.serviceName" readonly>
           </div>
           
           <!-- Appointment Date -->

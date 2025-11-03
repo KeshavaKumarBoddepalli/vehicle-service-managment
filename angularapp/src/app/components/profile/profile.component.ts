@@ -93,4 +93,8 @@ export class ProfileComponent implements OnInit {
       error: (err) => console.error('Error fetching profile:', err)
     });
   }
+
+  handleKeyPress(event: KeyboardEvent): void {
+    
+  }
 }
