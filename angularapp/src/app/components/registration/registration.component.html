@@ -19,6 +19,7 @@
         <div *ngIf="registerForm.controls.email?.touched && registerForm.controls.email?.invalid" class="error-message">
           <div *ngIf="registerForm.controls.email.errors?.required">Email is required.</div>
           <div *ngIf="registerForm.controls.email.errors?.email">Enter a valid email address.</div>
+          <div *ngIf="registerForm.controls.email.errors?.pattern">Invalid Email Format</div>
         </div>
  
         <!-- Password -->
