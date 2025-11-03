@@ -9,7 +9,7 @@
    
  
     <li class="dropdown" (mouseleave)="closeDropdown()">
-      <a (mouseenter)="cancelLogout(); toggleSerDropdown()" role="button" aria-haspopup="true" aria-expanded="{{ showSerDropdown }}" class="service">
+      <a (mouseenter)="cancelLogout(); toggleSerDropdown()" role="button" aria-haspopup="true" aria-expanded="{{ showSerDropdown }}" class="service" (keydown)="handleKeyPress($event)"   >
         Service
       </a>
       <ul *ngIf="showSerDropdown">
