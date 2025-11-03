@@ -1,8 +1,8 @@
 <div class="feedback-form-container">
   <h2>Submit Your Feedback</h2>
-
+ 
   <form (ngSubmit)="submitFeedback()" #feedbackForm="ngForm" class="feedback-form">
-    <!-- Message -->
+ 
     <div class="form-group">
       <label for="message">Message:</label>
       <textarea
@@ -11,10 +11,15 @@
         [(ngModel)]="newFeedback.message"
         required
         placeholder="Write your feedback here..."
+        pattern="^[a-zA-Z ]+$"
+        #message="ngModel"
       ></textarea>
+      <div *ngIf="message.invalid && message.touched" class="error">
+        <span *ngIf="message.errors?.required">Message is required.</span>
+        <span *ngIf="message.errors?.pattern">Only letters and spaces are allowed.</span>
+      </div>
     </div>
-
-    <!-- Rating -->
+ 
     <div class="form-group">
       <label for="rating">Rating:</label>
       <input
@@ -27,10 +32,14 @@
         required
         placeholder="Enter rating (1-5)"
         (input)="validateRating($event)"
+        #rating="ngModel"
       />
+      <div *ngIf="rating.invalid && rating.touched" class="error">
+        <span *ngIf="rating.errors?.required">Rating is required.</span>
+        <span *ngIf="rating.errors?.min || rating.errors?.max">Rating must be between 1 and 5.</span>
+      </div>
     </div>
-
-    <!-- Submit Button -->
+ 
     <button type="submit" class="btn-submit" [disabled]="feedbackForm.invalid">
       Submit Feedback
     </button>
