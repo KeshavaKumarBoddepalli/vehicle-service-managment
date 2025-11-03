@@ -1,20 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/user.model';
+// Import HttpErrorResponse to catch backend errors
+import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
-
-
+// The User model isn't used in this component, so I've commented it out
+// import { User } from 'src/app/models/user.model';
+ 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export  class RegistrationComponent implements OnInit {
+export class RegistrationComponent implements OnInit {
   registerForm: FormGroup;
-  users: User[] = [];
- 
+  
+  // These new properties will hold our success/error messages
+  public errorMessage: string | null = null;
+  public successMessage: string | null = null;
+  passwordFieldType: string = 'password';
+  confirmPasswordFieldType: string = 'password';
   constructor(private fb: FormBuilder, private service: AuthService, private router: Router) {
+
     this.registerForm = this.fb.group({
       username: ['', [
         Validators.required,
@@ -39,34 +46,62 @@ export  class RegistrationComponent implements OnInit {
         validators: this.passwordMatchValidator
       });
   }
- 
   ngOnInit(): void { }
- 
   passwordMatchValidator(form: AbstractControl) {
     const password = form.get('password')?.value;
     const confirmPassword = form.get('confirmPassword')?.value;
     return password === confirmPassword ? null : { mismatch: true };
   }
- 
   onSubmit() {
+    // Clear any previous messages on a new submit
+    this.errorMessage = null;
+    this.successMessage = null;
+ 
     if (this.registerForm.valid) {
      this.service.register(this.registerForm.value).subscribe(
+         
+        // --- UPDATED SUCCESS HANDLER ---
          (result) => {
+           this.successMessage = "Registration successful! Redirecting to login...";
            this.registerForm.reset();
-           alert("Registration successful");
-           this.router.navigate(['/login']);
+           
+           // Navigate to login after a 2-second delay so user can read the message
+           setTimeout(() => {
+             this.router.navigate(['/login']);
+           }, 2000);
          },
-         (error) => {
-           this.registerForm.reset();
-           alert("Registration not done, We're sorry, but an error occurred. Please try again later.");
-           this.router.navigate(['/error'], {
-             queryParams: { errorMsg: 'Registration not done due to existing emailId' }
-           });
+ 
+         // --- UPDATED ERROR HANDLER ---
+         (error: HttpErrorResponse) => {
+           // We DON'T reset the form, so the user can fix their mistake.
+           
+           // We DON'T navigate away. We show the error on this page.
+           
+           // Check if the backend sent a specific error message
+           if (error.error && typeof error.error.message === 'string') {
+             // This handles a JSON response like { "message": "Username already exists" }
+             this.errorMessage = error.error.message;
+           } else if (error.error && typeof error.error === 'string') {
+             // This handles a plain text response from the backend
+             this.errorMessage = error.error;
+           } else {
+             // This is a fallback for network errors or other generic issues
+             this.errorMessage = "Registration not done. An unknown error occurred. Please try again later.";
+           }
          }
        );
- 
     } else {
+      // Form is invalid, so we mark all fields as touched to show errors
       this.registerForm.markAllAsTouched();
     }
   }
+
+  togglePasswordVisibility(): void {
+    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+  }
+ 
+  toggleConfirmPasswordVisibility(): void {
+    this.confirmPasswordFieldType = this.confirmPasswordFieldType === 'password' ? 'text' : 'password';
+  }
+  
 }

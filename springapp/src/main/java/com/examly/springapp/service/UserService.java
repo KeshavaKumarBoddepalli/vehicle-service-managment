@@ -14,6 +14,11 @@ public interface UserService {
     User getByUserId(int userId);
     boolean deleteUser(int userId);
     User updateUser(User user);
-    User getUserByName(String name);
+    User findByUsername(String username);
+
+    boolean existsByUsername(String username);
+    boolean existsByEmail(String email);
+    boolean existsByMobileNumber(String mobileNumber);
+    
     
 }

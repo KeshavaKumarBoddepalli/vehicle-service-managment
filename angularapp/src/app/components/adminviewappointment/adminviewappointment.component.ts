@@ -8,18 +8,44 @@ import { AppointmentService } from 'src/app/services/appointment.service';
   styleUrls: ['./adminviewappointment.component.css']
 })
 export class AdminviewappointmentComponent implements OnInit {
-  // --- Existing Properties ---
-  appointments: Appointment[] = []; // This will hold the MASTER list of all appointments
+ 
+  appointments: Appointment[] = []; // Master list
+  filteredAndSortedAppointments: Appointment[] = []; // List for display logic
+  paginatedAppointments: Appointment[] = []; // List for current page
+ 
+  // --- *** NEW: Added isLoading flag *** ---
+  isLoading: boolean = true;
+  
   errorMessage: string = '';
+  private errorPopupTimer: any;
+  
   statuses: string[] = ['Pending', 'Approved', 'Rejected'];
  
-  // --- Properties for Pagination ---
-  paginatedAppointments: Appointment[] = []; // This will hold the appointments for the current page
+  // --- Properties for Filtering ---
+  filterStatus: string = 'All';
+  statusFilterOptions: string[] = ['All', 'Pending', 'Approved', 'Rejected', 'Cancelled'];
+ 
+  // --- Pagination ---
   currentPage: number = 1;
-  itemsPerPage: number = 10; // Hardcoded default, since dropdown is removed
+  itemsPerPage: number = 10;
   totalPages: number = 0;
  
-  // --- New Properties for Modals/Popups ---
+  // --- Search & Sort ---
+  searchTerm: string = '';
+  sortField: string = ''; 
+  sortOrder: 'asc' | 'desc' = 'asc'; 
+  sortOptions: { value: string, label: string }[] = [
+    { value: '', label: 'Default Order' }, 
+    { value: 'appointmentId', label: 'Booking ID' }, 
+    { value: 'appointmentDate', label: 'Date' },
+    { value: 'service.serviceName', label: 'Service Name' },
+    { value: 'service.servicePrice', label: 'Price' },
+    { value: 'location', label: 'Location' },
+    { value: 'user.username', label: 'Username' },
+    { value: 'status', label: 'Status' }
+  ];
+ 
+  // --- Modals & Popups ---
   showDeleteModal: boolean = false;
   showSuccessPopup: boolean = false;
   successMessage: string = '';
@@ -33,37 +59,97 @@ export class AdminviewappointmentComponent implements OnInit {
   }
  
   loadAllAppointments(): void {
+    this.errorMessage = ''; 
+    this.isLoading = true; // <-- 1. Set loading to true
     this.appointmentService.getAppointments().subscribe(
       (data) => {
-        this.appointments = data; // Load all appointments into the master list
-        this.totalPages = Math.ceil(this.appointments.length / this.itemsPerPage);
-        this.updatePaginatedAppointments(); // Update the view for the first page
+        this.appointments = data; 
+        this.applyFiltersAndSort(); 
+        this.isLoading = false; // <-- 2. Set loading to false on success
       },
       (error) => {
-        this.errorMessage = 'Failed to load appointments. Please try again later.';
+        this.triggerErrorPopup('Failed to load appointments. Please try again later.');
         console.error('Error fetching appointments:', error);
+        this.isLoading = false; // <-- 3. Set loading to false on error
       }
     );
   }
  
-  // --- New Pagination Methods ---
+  applyFiltersAndSort(): void {
+    this.errorMessage = ''; 
+    let tempAppointments = [...this.appointments];
+ 
+    // 1. Apply Status Filter
+    if (this.filterStatus !== 'All') {
+      tempAppointments = tempAppointments.filter(app => app.status === this.filterStatus);
+    }
+ 
+    // 2. Apply Search Filter
+    if (this.searchTerm.trim() !== '') {
+      const lowerTerm = this.searchTerm.toLowerCase();
+      tempAppointments = tempAppointments.filter(app =>
+        (app.service?.serviceName && app.service.serviceName.toLowerCase().includes(lowerTerm)) ||
+        (app.location && app.location.toLowerCase().includes(lowerTerm)) ||
+        (app.user?.username && app.user.username.toLowerCase().includes(lowerTerm)) ||
+        (app.status && app.status.toLowerCase().includes(lowerTerm))
+      );
+    }
+ 
+    // 3. Apply Sort
+    if (this.sortField) {
+      tempAppointments.sort((a, b) => {
+        const valA = this.getNestedPropertyValue(a, this.sortField);
+        const valB = this.getNestedPropertyValue(b, this.sortField);
+ 
+        let comparison = 0;
+ 
+        if (valA === null || valA === undefined) return 1;
+        if (valB === null || valB === undefined) return -1;
+ 
+        if (this.sortField === 'appointmentDate') {
+          comparison = new Date(valA).getTime() - new Date(valB).getTime();
+        } else if (typeof valA === 'number' && typeof valB === 'number') {
+          comparison = valA - valB;
+        } else if (typeof valA === 'string' && typeof valB === 'string') {
+          comparison = valA.toLowerCase().localeCompare(valB.toLowerCase());
+        } else {
+          comparison = String(valA).localeCompare(String(valB));
+        }
+ 
+        return this.sortOrder === 'asc' ? comparison : -comparison;
+      });
+    }
+ 
+    this.filteredAndSortedAppointments = tempAppointments;
+    this.currentPage = 1;
+    this.updatePaginatedAppointments(); 
+  }
+ 
+  private getNestedPropertyValue(obj: any, path: string): any {
+    if (!obj || !path) return null;
+    return path.split('.').reduce((acc, part) => (acc && acc[part] !== undefined) ? acc[part] : null, obj);
+  }
+ 
  
   updatePaginatedAppointments(): void {
-    if (this.appointments.length === 0) {
+    const totalItems = this.filteredAndSortedAppointments.length;
+ 
+    if (totalItems === 0) {
       this.paginatedAppointments = [];
-      this.totalPages = 0; // Ensure total pages is 0 if no appointments
-      this.currentPage = 1; // Reset to page 1
+      this.totalPages = 0;
       return;
     }
  
-    // Recalculate total pages in case it changed (e.g., deletion)
-    this.totalPages = Math.ceil(this.appointments.length / this.itemsPerPage);
+    this.totalPages = Math.ceil(totalItems / this.itemsPerPage);
+ 
+    if (this.currentPage > this.totalPages) {
+      this.currentPage = this.totalPages;
+    }
  
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
-    this.paginatedAppointments = this.appointments.slice(startIndex, endIndex);
+    this.paginatedAppointments = this.filteredAndSortedAppointments.slice(startIndex, endIndex);
  
-    // Handle edge case where user might be on a page that no longer exists (e.g., after deletion)
     if (this.paginatedAppointments.length === 0 && this.currentPage > 1) {
       this.currentPage--;
       this.updatePaginatedAppointments();
@@ -91,21 +177,20 @@ export class AdminviewappointmentComponent implements OnInit {
     }
   }
  
-  // --- New Methods for Modals and Popups ---
  
-  /**
-   * Shows a success message popup for 3 seconds.
-   */
   private triggerSuccessPopup(message: string): void {
+    this.errorMessage = ''; 
+    if (this.errorPopupTimer) {
+      clearTimeout(this.errorPopupTimer);
+    }
+ 
     this.successMessage = message;
     this.showSuccessPopup = true;
  
-    // Clear any existing timer to avoid conflicts
     if (this.successPopupTimer) {
       clearTimeout(this.successPopupTimer);
     }
  
-    // Hide the popup after 3 seconds
     this.successPopupTimer = setTimeout(() => {
       this.closeSuccessPopup();
     }, 3000);
@@ -120,30 +205,39 @@ export class AdminviewappointmentComponent implements OnInit {
     }
   }
  
-  /**
-   * Called by the "Delete" button. Sets up the delete confirmation modal.
-   */
+  private triggerErrorPopup(message: string): void {
+    this.showSuccessPopup = false; 
+    if (this.successPopupTimer) {
+      clearTimeout(this.successPopupTimer);
+    }
+ 
+    this.errorMessage = message;
+ 
+    if (this.errorPopupTimer) {
+      clearTimeout(this.errorPopupTimer);
+    }
+ 
+    this.errorPopupTimer = setTimeout(() => {
+      this.errorMessage = ''; 
+      this.errorPopupTimer = null;
+    }, 4000);
+  }
+ 
+ 
   requestDeleteAppointment(appointmentId: number | undefined): void {
     if (appointmentId === undefined) {
-      console.error('Invalid appointment ID');
       return;
     }
     this.appointmentToDeleteId = appointmentId;
     this.showDeleteModal = true;
   }
  
-  /**
-   * Called by the "Cancel" button on the delete modal.
-   */
+ 
   cancelDelete(): void {
     this.showDeleteModal = false;
     this.appointmentToDeleteId = undefined;
   }
  
-  /**
-   * Called by the "Confirm Delete" button on the delete modal.
-   * Performs the actual deletion.
-   */
   confirmDelete(): void {
     if (this.appointmentToDeleteId === undefined) {
       return;
@@ -151,55 +245,64 @@ export class AdminviewappointmentComponent implements OnInit {
  
     this.appointmentService.deleteAppointment(this.appointmentToDeleteId).subscribe(
       () => {
-        // Update the MASTER list
         this.appointments = this.appointments.filter(app => app.appointmentId !== this.appointmentToDeleteId);
-        // Refresh the pagination (which also recalculates total pages)
-        this.updatePaginatedAppointments();
-        // Show success message
+        this.applyFiltersAndSort();
         this.triggerSuccessPopup('Appointment deleted successfully!');
       },
       (error) => {
-        this.errorMessage = 'Failed to delete appointment.';
+        this.triggerErrorPopup('Failed to delete appointment.');
         console.error('Error deleting appointment:', error);
       },
       () => {
-        // This 'complete' block always runs, good place to clean up
         this.showDeleteModal = false;
         this.appointmentToDeleteId = undefined;
       }
     );
   }
  
-  // --- Updated Methods ---
  
-  /**
-   * This function is now called by the new "Update" button.
-   */
   onStatusChange(appointment: Appointment): void {
     if (!appointment.appointmentId) {
       console.error('Appointment ID is missing');
       return;
     }
-    this.appointmentService.updateAppointment(appointment.appointmentId, appointment).subscribe(
+ 
+    const originalAppointment = this.appointments.find(a => a.appointmentId === appointment.appointmentId);
+    
+    if (originalAppointment && originalAppointment.status == 'Cancelled') {
+      
+      this.triggerErrorPopup(`Error: 'Cancelled' appointments cannot be changed.`);
+ 
+      appointment.status = originalAppointment.status; 
+      
+      const paginatedIndex = this.paginatedAppointments.findIndex(a => a.appointmentId === appointment.appointmentId);
+      if (paginatedIndex !== -1) {
+          this.paginatedAppointments[paginatedIndex].status = originalAppointment.status;
+      }
+      
+      return; 
+    }
+ 
+    // Call the dedicated status update method
+    this.appointmentService.updateAppointmentStatus(appointment.appointmentId, appointment.status).subscribe(
       (updatedFromServer) => {
-        // Find and update the appointment in the MASTER list
         const index = this.appointments.findIndex(a => a.appointmentId === updatedFromServer.appointmentId);
         if (index !== -1) {
-          this.appointments[index] = updatedFromServer;
+          this.appointments[index] = updatedFromServer; 
         }
-        // Refresh the current page's view
-        this.updatePaginatedAppointments();
-        console.log('Status updated successfully');
-        // Show success message
+        this.applyFiltersAndSort();
         this.triggerSuccessPopup('Status updated successfully!');
       },
       (error) => {
-        this.errorMessage = 'Failed to update status. Please try again.';
+        this.triggerErrorPopup('Failed to update status. Please try again.');
         console.error('Error updating status:', error);
-        // Reload all data from server in case of failure to ensure consistency
         this.loadAllAppointments();
       }
     );
   }
  
+  onFilterChange(): void {
+    this.applyFiltersAndSort();
+  }
 }
+ 

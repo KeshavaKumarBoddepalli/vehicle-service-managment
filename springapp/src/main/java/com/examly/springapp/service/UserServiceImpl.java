@@ -53,8 +53,8 @@ public class UserServiceImpl implements UserService , UserDetailsService {
     }
 
     @Override
-    public User getUserByName(String name) {
-        return urepo.findByUsername(name);
+    public User findByUsername(String username) {
+        return urepo.findByUsername(username);
     }
 
     
@@ -77,8 +77,20 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
         }
         return urepo.save(user);
     }
-    // @Override
-    public User findByUsername(String username) {
-      return urepo.findByUsername(username);
+   
+
+    @Override
+    public boolean existsByUsername(String username) {
+        return urepo.existsByUsername(username);
+    }
+ 
+    @Override
+    public boolean existsByEmail(String email) {
+        return urepo.existsByEmail(email);
+    }
+ 
+    @Override
+    public boolean existsByMobileNumber(String mobileNumber) {
+        return urepo.existsByMobileNumber(mobileNumber);
     }
 }

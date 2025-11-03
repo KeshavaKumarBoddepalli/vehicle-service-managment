@@ -8,24 +8,24 @@ import { AuthService } from './services/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent{
   userRole: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {}
 
-  ngOnInit(): void {
-    this.userRole = this.authService.getRole(); 
-  }
+  // ngOnInit(): void {
+  //   this.userRole = this.authService.getRole(); 
+  // }
 
-  isUserLoggedIn(): boolean {
-    return this.authService.isLoggedIn();
-  }
+  // isUserLoggedIn(): boolean {
+  //   return this.authService.isLoggedIn();
+  // }
 
-  isAdmin(): boolean {
-    return this.userRole === 'ADMIN';
-  }
+  // isAdmin(): boolean {
+  //   return this.userRole === 'ADMIN';
+  // }
 
-  isUser(): boolean {
-    return this.userRole === 'USER';
-  }
+  // isUser(): boolean {
+  //   return this.userRole === 'USER';
+  // }
 }

@@ -1,9 +1,37 @@
+<!--
+  This template now controls which navbar is visible.
+  It uses the 'async' pipe to subscribe to the observables
+  from your newly reactive AuthService.
+-->
  
-<app-navbar *ngIf="!isUserLoggedIn()"></app-navbar>
+<!--
+  We use *ngIf with the 'async' pipe to listen
+  to the 'isLoggedIn$' observable.
+-->
+<ng-container *ngIf="(authService.isLoggedIn$ | async) as isLoggedIn">
  
- 
-<app-adminnavbar *ngIf="isUserLoggedIn() && isAdmin()"></app-adminnavbar>
- 
-<app-usernavbar *ngIf="isUserLoggedIn() && isUser()"></app-usernavbar>
- 
-<router-outlet></router-outlet>
+    <!-- USER IS LOGGED IN -->
+    <ng-container *ngIf="(authService.userRole$ | async) as role">
+      
+      <!-- Show Admin Navbar if role is ADMIN -->
+      <app-adminnavbar *ngIf="role === 'ADMIN'"></app-adminnavbar>
+      
+      <!-- Show User Navbar if role is USER -->
+      <app-usernavbar *ngIf="role === 'USER'"></app-usernavbar>
+    
+    </ng-container>
+   
+  </ng-container>
+   
+  <!--
+    USER IS LOGGED OUT
+    We use '!' to show this if isLoggedIn is false
+  -->
+  <app-navbar *ngIf="!(authService.isLoggedIn$ | async)"></app-navbar>
+   
+   
+  <!--
+    Your main application content will be rendered here.
+    This should come AFTER the navbars.
+  -->
+  <router-outlet></router-outlet>

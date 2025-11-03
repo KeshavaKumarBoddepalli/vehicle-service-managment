@@ -1,5 +1,5 @@
   <div class="profile-container">
-    <h2>User Profile <span class="edit-icon" (click)="enableEdit()">&#9998;</span></h2>
+    <h2>{{getRole()}} Profile <span class="edit-icon" (click)="enableEdit()">&#9998;</span></h2>
   
     <!-- View Mode -->
     <div *ngIf="!isEditing">
@@ -12,8 +12,7 @@
     <!-- Edit Mode -->
     <div *ngIf="isEditing">
       <label>Username:</label>
-      <input type="text" [(ngModel)]="username"/>
-      <small *ngIf="usernameError" class="error">Enter a valid username</small>
+      <input type="text" [(ngModel)]="username" disabled />
   
       <label>Email:</label>
       <input type="text" [(ngModel)]="email" />

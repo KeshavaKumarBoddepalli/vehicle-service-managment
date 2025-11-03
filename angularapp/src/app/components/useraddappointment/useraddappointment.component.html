@@ -1,9 +1,10 @@
 <!-- Success Popup -->
-<div *ngIf="successMessage" class="popup-overlay">
+<div *ngIf="showSuccessPopup" class="popup-overlay">
   <div class="popup-content success-dialog">
     <h3>Success!</h3>
     <p>{{ successMessage }}</p>
-    <button class="btn-ok" (click)="successMessage = ''">Close</button>
+    <!-- Call TS method so you also navigate after closing -->
+    <button class="btn-ok" (click)="closePopup()">Close</button>
   </div>
 </div>
 
@@ -12,7 +13,7 @@
   <h2 class="section-title">Available Services</h2>
 
   <!-- Error Message -->
-  <div *ngIf="errorMessage && !successMessage" class="alert alert-danger">
+  <div *ngIf="errorMessage && !showSuccessPopup" class="alert alert-danger">
     {{ errorMessage }}
   </div>
 
@@ -30,42 +31,72 @@
           <th>Actions</th>
         </tr>
       </thead>
+
       <tbody>
+        <!-- Put ngForm on the row so each row is its own form -->
         <tr *ngFor="let item of paginatedBookingForms; let i = index" #rowForm="ngForm" ngForm>
           <td>{{ ((currentPage - 1) * itemsPerPage) + i + 1 }}</td>
           <td>{{ item.service.serviceName }}</td>
-          <td>₹{{ item.service.servicePrice}}</td>
+          <td>₹{{ item.service.servicePrice }}</td>
           <td>{{ item.service.typeOfVehicle || 'N/A' }}</td>
 
+          <!-- Appointment Date -->
           <td>
             <input
               type="date"
               class="form-control form-control-sm"
-              name="appointmentDate_{{i}}"
+              id="appointmentDate_{{ i }}"
+              name="appointmentDate_{{ i }}"
               [(ngModel)]="item.appointmentDate"
+              [min]="today"
               required
               #dateInput="ngModel"
             />
+
+            <!-- Validation messages -->
+            <div class="text-danger mt-1" *ngIf="dateInput.touched || rowForm.dirty">
+              <small *ngIf="dateInput.errors?.required">Date is required.</small>
+              <!-- Angular template-driven doesn't surface 'min' error, so compare strings -->
+              <small *ngIf="item.appointmentDate && item.appointmentDate < today">
+                Past dates are not allowed.
+              </small>
+            </div>
           </td>
 
+          <!-- Location -->
           <td>
             <input
               type="text"
               class="form-control form-control-sm"
               placeholder="Enter location"
-              name="location_{{i}}"
+              id="location_{{ i }}"
+              name="location_{{ i }}"
               [(ngModel)]="item.location"
               required
               minlength="3"
+              maxlength="50"
+              pattern="^(?!\\s*$)[A-Za-z ]+$"
+              (blur)="item.location = item.location?.trim()"
               #locationInput="ngModel"
+              inputmode="text"
+              autocomplete="address-level2"
+              title="Only letters and spaces are allowed"
             />
+
+            <!-- Validation messages -->
+            <div class="text-danger mt-1" *ngIf="locationInput.touched || rowForm.dirty">
+              <small *ngIf="locationInput.errors?.required">Location is required.</small>
+              <small *ngIf="locationInput.errors?.minlength">Minimum 3 characters.</small>
+              <small *ngIf="locationInput.errors?.pattern">Only letters and spaces are allowed.</small>
+            </div>
           </td>
 
+          <!-- Actions -->
           <td>
             <button
               type="button"
               (click)="onSubmit(item, rowForm)"
-              [disabled]="rowForm.invalid"
+              [disabled]="rowForm.invalid || (item.appointmentDate && item.appointmentDate < today)"
               class="btn book-btn"
             >
               Add Appointment
