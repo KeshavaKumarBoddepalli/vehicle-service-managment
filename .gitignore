@@ -1,2 +1,4 @@
 /angularapp/node_modules
 /springapp/target 
+/springapp/src/main/resources/application.properties
+/angularapp/src/test.ts
