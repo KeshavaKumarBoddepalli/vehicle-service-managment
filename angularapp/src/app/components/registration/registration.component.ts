@@ -3,8 +3,8 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
-
-
+ 
+ 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -23,6 +23,7 @@ export  class RegistrationComponent implements OnInit {
         Validators.pattern('^[A-Za-z][A-Za-z0-9_]*$')
       ]],
       email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$')]],
+     
       password: ['', [
         Validators.required,
         Validators.minLength(8),
@@ -70,3 +71,4 @@ export  class RegistrationComponent implements OnInit {
     }
   }
 }
+ 

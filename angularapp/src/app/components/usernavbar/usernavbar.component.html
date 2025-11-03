@@ -1,51 +1,52 @@
-<div class="nav-container" (mouseleave)="closeAllDropdowns()">
+<div class="nav-container"  (mouseleave)="closeAllDropdowns()">
+  <div class="logo">VehicleService</div>
     <ul *ngIf="isUserLoggedIn()">
-      <li>
+      <li class="user-box">
         {{ service.getAuthenticatedUser() }} ({{ service.getRole() }})
       </li>
       <li>
-        <a routerLink="/">Home</a>
+        <a routerLink="/" (mouseenter)="cancelLogout()">Home</a>
       </li>
-  
+ 
       <ng-container *ngIf="isCustomer()">
-        
-        <li class="dropdown">
-          <a (click)="toggleAppointmentsDropdown()" role="button" aria-haspopup="true" aria-expanded="{{ showAppointmentsDropdown }}">
+       
+        <li class="dropdown" (mouseleave)="closeAllDropdowns()">
+          <a (mouseenter)="cancelLogout(); toggleAppointmentsDropdown()" role="button" aria-haspopup="true" aria-expanded="{{ showAppointmentsDropdown }}" class="app">
             Appointments
           </a>
           <ul *ngIf="showAppointmentsDropdown">
-            <li><a routerLink="/useraddappointment">Book Appointment</a></li>
-            <li><a routerLink="/userviewappointment">View Appointments</a></li>
+            <li><a routerLink="/useraddappointment" (click)="cancelLogout()">Book Appointment</a></li>
+            <li><a routerLink="/userviewappointment"   (click)="cancelLogout()">View Appointments</a></li>
           </ul>
         </li>
-  
-        
-        <li class="dropdown">
-          <a (click)="toggleFeedbackDropdown()" role="button" aria-haspopup="true" aria-expanded="{{ showFeedbackDropdown }}">
+ 
+       
+        <li class="dropdown"  (mouseleave)="closeAllDropdowns()">
+          <a (mouseenter)="cancelLogout(); toggleFeedbackDropdown()" role="button" aria-haspopup="true" aria-expanded="{{ showFeedbackDropdown }}" class="feedback">
             Feedback
           </a>
           <ul *ngIf="showFeedbackDropdown">
-            <li><a routerLink="/useraddfeedback">Add Feedback</a></li>
-            <li><a routerLink="/userviewfeedback">View Feedback</a></li>
+            <li><a routerLink="/useraddfeedback" (click)="cancelLogout()">Add Feedback</a></li>
+            <li><a routerLink="/userviewfeedback"  (click)="cancelLogout()">View Feedback</a></li>
           </ul>
         </li>
-  
-        
+ 
+       
         <li>
-          <a routerLink="/profile" class="profile-icon"></a>
+          <a routerLink="/profile" (mouseenter)="cancelLogout()" class="profile-icon"></a>
         </li>
-
-
+ 
+ 
       </ng-container>
-  
+ 
       <li>
         <button class="logout-btn" (click)="confirmLogout()">Logout</button>
       </li>
     </ul>
-  
-    <div *ngIf="showLogoutPopup" class="logout-popup">
+ 
+    <div *ngIf="showLogoutPopup" class="logout-popup" (mouseleave)="cancelLogout()">
       <p>Are you sure you want to logout?</p>
       <button (click)="logout()">Yes</button>
       <button (click)="cancelLogout()">No</button>
     </div>
-  </div>
+</div>
