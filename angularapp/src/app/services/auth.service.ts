@@ -16,7 +16,7 @@ export const ROLE = 'role';
 })
 export class AuthService {
  
-  public baseUrl = "https://8080-cecdfddacafbdafffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api";
+  public baseUrl = "https://8080-cddcccedbacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api";
  
   // --- START OF REACTIVE CHANGES ---
  
