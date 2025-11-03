@@ -1,94 +1,431 @@
-/* Container styling */
-.container {
-  max-width: 900px;
-  margin: 0 auto; /* Centers the container */
-  padding: 2rem;
-  background-color: #f8f9fa;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+/* --- Root Variables for a Professional Theme --- */
+:host {
+  --primary-color: #007bff;
+  --primary-hover: #0069d9;
+  --danger-color: #dc3545;
+  --danger-hover: #c82333;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --secondary-color: #6c757d;
+  --text-dark: #212529;
+  --text-light: #ffffff;
+  --text-muted: #6c757d;
+  --border-color: #dee2e6;
+  --background-light: #f8f9fa;
+  --background-white: #ffffff;
+  --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --shadow-md: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  --border-radius: 0.375rem; /* 6px */
 }
-
-/* Title styling */
-.section-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: #2c3e50;
-  text-align: center;
+ 
+/* --- Global & Typography --- */
+* {
+  box-sizing: border-box;
 }
-
-/* Filter section */
-.filter-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1.5rem;
+ 
+.container-fluid {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  color: var(--text-dark);
+  background-color: var(--background-white);
+  padding: 1.5rem;
 }
-
-.filter-section label {
-  margin-right: 10px;
+ 
+h2.text-center {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+ 
+/* --- Filter Section --- */
+.form-group {
+  margin-bottom: 1rem;
+}
+ 
+.form-group label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
   font-weight: 500;
 }
-
-.form-select {
-  width: 200px;
-  padding: 0.5rem;
+ 
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
   font-size: 1rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  line-height: 1.5;
+  color: var(--text-dark);
+  background-color: var(--background-white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-
-/* Table styling */
+ 
+.form-control:focus {
+  outline: 0;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+ 
+/* --- Table Styling --- */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+}
+ 
 .table {
   width: 100%;
-  margin: 0 auto;
-  border-collapse: separate;
-  border-spacing: 0;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-collapse: collapse;
+  margin-bottom: 0; /* Removed margin as wrapper has it */
 }
-
-/* Header styling */
-.table thead th {
-  background-color: #4a90e2; /* Blue header */
-  color: #fff;
+ 
+.table th,
+.table td {
+  padding: 1rem;
+  vertical-align: middle;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+ 
+.table th {
+  background-color: var(--background-light);
   font-weight: 600;
-  padding: 14px;
-  text-align: center;
+  color: var(--text-dark);
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.5px;
 }
-
-/* Rounded corners for header */
-.table thead th:first-child {
-  border-top-left-radius: 12px;
+ 
+.table tbody tr:nth-of-type(even) {
+  background-color: var(--background-light);
 }
-.table thead th:last-child {
-  border-top-right-radius: 12px;
-}
-
-/* Body styling */
-.table tbody td {
-  padding: 12px;
-  text-align: center;
-  background-color: #ffffff;
-  border-bottom: 1px solid #ddd;
-}
-
-/* Alternate row colors */
-.table tbody tr:nth-child(even) {
-  background-color: #f2f6fc;
-}
-
-/* Hover effect */
+ 
 .table tbody tr:hover {
-  background-color: #e6f0ff;
-  transition: background-color 0.3s ease;
+  background-color: #e9ecef;
 }
-
-/* No data message */
-.no-data-message {
+ 
+/* --- Status Badges --- */
+.badge {
+  display: inline-block;
+  padding: 0.4em 0.75em;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
   text-align: center;
-  margin-top: 2rem;
-  color: #888;
-  font-size: 1.2rem;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 1rem; /* Pill shape */
+  text-transform: capitalize;
 }
+ 
+.badge[ngClass] {
+  color: var(--text-dark); /* Default text color */
+}
+ 
+.badge-warning {
+  background-color: #fff3cd;
+  color: #856404;
+}
+.badge-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+.badge-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+.badge-secondary {
+  background-color: #e2e3e5;
+  color: #383d41;
+}
+ 
+/* --- Button Styling --- */
+.btn {
+  display: inline-block;
+  font-weight: 600;
+  color: var(--text-light);
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border-radius: var(--border-radius);
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+ 
+.btn:hover {
+  text-decoration: none;
+}
+ 
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+ 
+.btn-primary {
+  color: var(--text-light);
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+ 
+.btn-danger {
+  color: var(--text-light);
+  background-color: var(--danger-color);
+  border-color: var(--danger-color);
+}
+.btn-danger:hover {
+  background-color: var(--danger-hover);
+  border-color: var(--danger-hover);
+}
+ 
+.btn-secondary {
+  color: var(--text-light);
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+.btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+ 
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+ 
+.mr-2 {
+  margin-right: 0.5rem;
+}
+ 
+/* --- Pagination --- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding-left: 0;
+  list-style: none;
+  border-radius: var(--border-radius);
+  margin-top: 1.5rem;
+}
+ 
+.page-item .page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: var(--primary-color);
+  background-color: var(--background-white);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+}
+ 
+.page-item:first-child .page-link {
+  margin-left: 0;
+  border-top-left-radius: var(--border-radius);
+  border-bottom-left-radius: var(--border-radius);
+}
+ 
+.page-item:last-child .page-link {
+  border-top-right-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+ 
+.page-item.active .page-link {
+  z-index: 1;
+  color: var(--text-light);
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+ 
+.page-item.disabled .page-link {
+  color: var(--text-muted);
+  pointer-events: none;
+  background-color: var(--background-white);
+  border-color: var(--border-color);
+}
+ 
+/* --- Modal & Popup Styling (FIXED ALIGNMENT) --- */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+}
+ 
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  outline: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+ 
+.modal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 1.75rem auto;
+  background-color: var(--background-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+}
+ 
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+ 
+/* --- Modal Header (Neat Alignment) --- */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+ 
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+ 
+.modal-header .close {
+  padding: 0.5rem;
+  margin: -0.5rem -0.5rem -0.5rem auto;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  opacity: 0.5;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.modal-header .close:hover {
+  opacity: 0.8;
+}
+ 
+/* --- Modal Body (Neat Alignment) --- */
+.modal-body {
+  position: relative;
+  flex: 1 1 auto;
+  padding: 1.5rem;
+  text-align: left; /* Ensure form labels are left-aligned */
+}
+ 
+.modal-body .form-control[readonly] {
+  background-color: var(--background-light);
+}
+ 
+.modal-body .text-warning {
+  color: #856404 !important;
+  font-weight: 600;
+}
+ 
+/* --- Modal Footer (Neat Alignment) --- */
+.modal-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end; /* Aligns buttons to the right */
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+ 
+/* --- Form Validation --- */
+.invalid-feedback {
+  display: none;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: var(--danger-color);
+}
+ 
+/* Use d-block class (from HTML) to show the error */
+.invalid-feedback.d-block {
+  display: block;
+}
+ 
+/* --- Top-Right Notification Popups --- */
+.popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1060;
+  padding: 1rem 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  color: var(--text-light);
+  font-size: 1rem;
+  font-weight: 600;
+}
+ 
+.success-popup {
+  background-color: var(--success-color);
+}
+ 
+.error-popup {
+  background-color: var(--danger-color);
+}
+ 
+.close-popup {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  float: right;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-left: 15px;
+  line-height: 1;
+  opacity: 0.7;
+  cursor: pointer;
+}
+.close-popup:hover {
+  opacity: 1;
+}
+ 
+/* --- Misc --- */
+.alert {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+}
+.alert-info {
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+}
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+ 

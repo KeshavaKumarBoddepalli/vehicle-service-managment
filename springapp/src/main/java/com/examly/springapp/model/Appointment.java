@@ -22,6 +22,7 @@ public class Appointment {
 
     private String location;
 
+    
     private String status;
 
     @ManyToOne
@@ -30,6 +31,8 @@ public class Appointment {
     private User user;
 
     public Appointment() {}
+    
+
 
     public Appointment(VehicleMaintenance service, LocalDate appointmentDate, String location, User user, String status) {
         this.service = service;

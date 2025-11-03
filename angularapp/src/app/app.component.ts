@@ -40,21 +40,21 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent{
   userRole: string = '';
- 
+
   constructor(public authService: AuthService) {}
- 
+
   // ngOnInit(): void {
-  //   this.userRole = this.authService.getRole();
+  //   this.userRole = this.authService.getRole(); 
   // }
- 
+
   // isUserLoggedIn(): boolean {
   //   return this.authService.isLoggedIn();
   // }
- 
+
   // isAdmin(): boolean {
   //   return this.userRole === 'ADMIN';
   // }
- 
+
   // isUser(): boolean {
   //   return this.userRole === 'USER';
   // }

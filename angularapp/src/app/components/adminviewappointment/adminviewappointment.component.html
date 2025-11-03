@@ -5,86 +5,166 @@
     {{ errorMessage }}
   </div>
  
-  
-  <div *ngIf="appointments.length > 0; else noAppointments" class="table-wrapper">
-    <table class="appointment-table">
-      <thead>
-        <tr>
-          <th>S.No</th>
-          <th>Service Name</th>
-          <th>Price</th>
-          <th>Vehicle</th>
-          <th>Date</th>
-          <th>Location</th>
-          <th>Username</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-       
-        <tr *ngFor="let app of paginatedAppointments; let i = index">
-          <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-          <td>{{ app.service?.serviceName }}</td>
-          <td>{{ app.service?.servicePrice | currency:'INR':'symbol':'1.0-0' }}</td>
-          <td>{{ app.service?.typeOfVehicle || 'N/A' }}</td>
-          <td>{{ app.appointmentDate | date:'dd/MM/yyyy' }}</td>
-          <td>{{ app.location }}</td>
-          <td>{{ app.user?.username }}</td>
-         
-          
-          <td>
-            <select [(ngModel)]="app.status"
-                    [ngClass]="{
-                      'status-pending': app.status === 'Pending',
-                      'status-approved': app.status === 'Approved',
-                      'status-rejected': app.status === 'Rejected'
-                    }"
-                    class="status-dropdown">
-              <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
-            </select>
-          </td>
- 
-        
-          <td class="action-cell">
-           
-            <button (click)="onStatusChange(app)" class="action-button update-button">
-              Update
-            </button>
-          
-            <button (click)="requestDeleteAppointment(app.appointmentId)" class="action-button delete-button">
-              Delete
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- Loading Message -->
+  <div *ngIf="isLoading" class="loading-message">
+    <h3>Loading appointments...</h3>
   </div>
  
+  <div *ngIf="!isLoading">
+    <!-- Controls Wrapper -->
+    <div class="controls-wrapper">
+      <!-- Search Bar -->
+      <div class="search-container">
+        <input type="text"
+               class="search-input"
+               placeholder="Search by service, location or user"
+               [(ngModel)]="searchTerm"
+               (ngModelChange)="applyFiltersAndSort()">
+        <span class="search-icon">&#9906;</span>
+      </div>
   
-  <div *ngIf="totalPages > 1" class="pagination-controls">
-    <button (click)="prevPage()" [disabled]="currentPage === 1" class="pagination-button">
-      &laquo; Prev
-    </button>
-    <span class="pagination-info">
-      Page {{ currentPage }} of {{ totalPages }}
-    </span>
-    <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-button">
-      Next &raquo;
-    </button>
-  </div>
+      <!-- Filter by Status Dropdown -->
+      <div class="sort-container">
+        <label for="filterStatus" class="sort-label">Filter by:</label>
+        <select id="filterStatus"
+                class="sort-dropdown"
+                [(ngModel)]="filterStatus"
+                (change)="onFilterChange()">
+          <option *ngFor="let status of statusFilterOptions" [value]="status">
+            {{ status }}
+          </option>
+        </select>
+      </div>
+   
+      <!-- Sort Controls -->
+      <div class="sort-container">
+        <label for="sortField" class="sort-label">Sort by:</label>
+        <select id="sortField"
+                class="sort-dropdown"
+                [(ngModel)]="sortField"
+                (ngModelChange)="applyFiltersAndSort()">
+          <option *ngFor="let opt of sortOptions" [value]="opt.value">
+            {{ opt.label }}
+          </option>
+        </select>
+   
+        <label for="sortOrder" class="sort-label">Order:</label>
+        <select id="sortOrder"
+                class="sort-dropdown"
+                [(ngModel)]="sortOrder"
+                (ngModelChange)="applyFiltersAndSort()">
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+      </div>
+    </div>
+   
+    <!-- Main Content Table Wrapper -->
+    <div *ngIf="appointments.length > 0; else noAppointments" class="table-wrapper">
+   
+      <!-- This div checks if there are items to show after filtering -->
+      <div *ngIf="paginatedAppointments.length > 0; else noSearchResults">
+        <table class="appointment-table">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Service Name</th>
+              <th>Price</th>
+              <th>Vehicle</th>
+              <th>Date</th>
+              <th>Location</th>
+              <th>Username</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Loop over paginatedAppointments -->
+            <tr *ngFor="let app of paginatedAppointments; let i = index">
+              <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+              <td>{{ app.service?.serviceName || 'N/A' }}</td>
+              <td>{{ (app.service?.servicePrice | currency:'INR':'symbol':'1.0-0') || 'N/A' }}</td>
+              <td>{{ app.service?.typeOfVehicle || 'N/A' }}</td>
+              <td>{{ app.appointmentDate | date:'dd/MM/yyyy' }}</td>
+              <td>{{ app.location }}</td>
+              <td>{{ app.user?.username || 'N/A' }}</td>
+              
+              <td>
+                <select [(ngModel)]="app.status"
+                        [ngClass]="{
+                          'status-pending': app.status === 'Pending',
+                          'status-approved': app.status === 'Approved',
+                          'status-rejected': app.status === 'Rejected',
+                          'status-cancelled': app.status === 'Cancelled' 
+                        }"
+                        class="status-dropdown"
+                        [disabled]="app.status == 'Cancelled'"
+                        [title]="app.status == 'Cancelled' ? 'Status is final and cannot be changed' : 'Change Status'">
+                  
+                  <option *ngIf="!statuses.includes(app.status)" [value]="app.status">
+                    {{ app.status }}
+                  </option>
+                  
+                  <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+                </select>
+              </td>
+    
+              <td class="action-cell">
+                <!-- 
+                  *** THIS IS THE FIX ***
+                  The [disabled] attribute was removed from this button.
+                  The (click) event will now fire, and the onStatusChange()
+                  method in your .ts file will handle the security check.
+                -->
+                <button (click)="onStatusChange(app)" 
+                        class="action-button update-button"
+                        [title]="app.status == 'Cancelled' ? 'Status is final' : 'Update Status'">
+                  Update
+                </button>
+                
+                <button (click)="requestDeleteAppointment(app.appointmentId)" class="action-button delete-button">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+   
+      <!-- Pagination Controls -->
+      <div *ngIf="totalPages > 1" class="pagination-controls">
+        <button (click)="prevPage()" [disabled]="currentPage === 1" class="pagination-button">
+          &laquo; Prev
+        </button>
+        <span class="pagination-info">
+          Page {{ currentPage }} of {{ totalPages }}
+        </span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="pagination-button">
+          Next &raquo;
+        </button>
+      </div>
+   
+    </div> <!-- End of table-wrapper -->
+  </div> <!-- End of *ngIf="!isLoading" -->
  
-
+  <!-- Template for NO search results -->
+  <ng-template #noSearchResults>
+    <div class="no-appointments-message">
+      <h3>No appointments found matching your search criteria.</h3>
+    </div>
+  </ng-template>
+ 
+  <!-- Template for NO appointments at all -->
   <ng-template #noAppointments>
-    <div *ngIf="!errorMessage" class="no-appointments-message">
+    <div *ngIf="!isLoading && !errorMessage" class="no-appointments-message">
       <h3>Oops! No Appointment found.</h3>
     </div>
   </ng-template>
  
 </div>
  
-
-<!-- <div class="success-popup" [class.show]="showSuccessPopup">
+<!-- Success Popup -->
+<div class="success-popup" [class.show]="showSuccessPopup">
   {{ successMessage }}
   <button (click)="closeSuccessPopup()" class="close-popup-btn">&times;</button>
 </div> -->
@@ -103,8 +183,4 @@
     </div>
   </div>
 </div>
-
-<div class="status-success-popup" *ngIf="showSuccessPopup">
-  <span>Status updated successfully</span>
-  <button class="close-btn" (click)="closePopup()">×</button>
-</div>
+ 

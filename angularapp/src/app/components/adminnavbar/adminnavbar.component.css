@@ -3,17 +3,29 @@
   justify-content: space-between;
   align-items: center;
   background: linear-gradient(90deg, #1f1f1f, #2c2c2c);
+<<<<<<< HEAD
+  padding: 10px 20px;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+}
+ 
+=======
   padding: 10px 20px; 
   color: #fff;
   font-family: 'Segoe UI', sans-serif;
 }
 
+>>>>>>> origin/main
 .logo {
   font-size: 20px;
   font-weight: bold;
   color: #ffffff;
 }
+<<<<<<< HEAD
+ 
+=======
 
+>>>>>>> origin/main
 .nav-container ul {
   list-style: none;
   display: flex;
@@ -22,12 +34,21 @@
   margin: 0;
   padding: 0;
 }
+<<<<<<< HEAD
+ 
+.nav-container ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 14px;
+=======
 
 .nav-container ul li a {
   color: #fff;
   text-decoration: none;
   font-weight: 400; 
   font-size: 14px; 
+>>>>>>> origin/main
   padding: 6px 10px;
   transition: color 0.3s ease;
 }
@@ -35,9 +56,15 @@
 .nav-container ul li a:hover {
   color: #f39c12;
 }
+<<<<<<< HEAD
+ 
+ 
+ 
+=======
 
 
 
+>>>>>>> origin/main
 .admin-box {
   border: 1px solid #fff;
   padding: 6px 14px;
@@ -49,11 +76,19 @@
 .dropdown {
   position: relative;
 }
+<<<<<<< HEAD
+ 
+.service{
+  cursor: pointer;
+}
+ 
+=======
 
 .service{
   cursor: pointer;
 }
 
+>>>>>>> origin/main
 .dropdown ul {
   position: absolute;
   top: 100%;
@@ -85,7 +120,11 @@
   background-color: #f39c12;
   color: #000;
 }
+<<<<<<< HEAD
+ 
+=======
 
+>>>>>>> origin/main
 .profile-icon {
   display: inline-block;
   width: 20px;
@@ -111,7 +150,11 @@
 .logout-btn:hover {
   background-color: #d3a423;
 }
+<<<<<<< HEAD
+ 
+=======
 
+>>>>>>> origin/main
 .logout-popup {
   position: absolute;
   top: 70px;
@@ -138,6 +181,17 @@
   cursor: pointer;
   font-weight: 500;
 }
+<<<<<<< HEAD
+ 
+.logout-popup button:first-child {
+  background-color: #e74c3c;
+  color: #fff;
+}
+ 
+.logout-popup button:last-child {
+  background-color: #bdc3c7;
+  color: #333;
+=======
 
 
 
@@ -160,5 +214,6 @@
 
 .no-button:hover {
   background-color: #2980b9;
+>>>>>>> origin/main
 }
  

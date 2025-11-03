@@ -1,15 +1,15 @@
 package com.examly.springapp.config;
-
+ 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
+ 
 @Configuration
 @EnableWebMvc
 public class CrosConfig {
-
+ 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
@@ -20,7 +20,7 @@ public class CrosConfig {
                             "https://8081-cecdfddacafbdafffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/",
                             "http://127.0.0.1:3000"
                         )
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE","PATCH", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true)
                         .maxAge(3600);

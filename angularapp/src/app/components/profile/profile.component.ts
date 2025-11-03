@@ -19,15 +19,15 @@ export class ProfileComponent implements OnInit {
   usernameError = false;
   emailError = false;
   mobileError = false;
- 
+
   userId: number = 0;
   userRole = '';
   password = '';
- 
-  public apiUrl = "https://8080-cecdfddacafbdafffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/user";
- 
+
+  public apiUrl = "https://8080-dcaafddcbffffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/user";
+
   constructor(private http: HttpClient, public authservice: AuthService) {}
- 
+
   getRole(): string {
     const role = this.authservice.getRole()?.toUpperCase();
     const roleMap: { [key: string]: string } = {
@@ -36,7 +36,6 @@ export class ProfileComponent implements OnInit {
     };
     return roleMap[role] || 'Unknown';
   }
- 
   enableEdit(): void {
     this.isEditing = true;
   }
@@ -58,7 +57,6 @@ export class ProfileComponent implements OnInit {
  
     this.isEditing = false;
     this.showSuccess = true;
- 
     const updatedUser = {
       userId: this.userId,
       username: this.username,
@@ -67,7 +65,6 @@ export class ProfileComponent implements OnInit {
       password: this.password,
       userRole: this.userRole
     };
- 
     this.http.put(`${this.apiUrl}/view/profile`, updatedUser).subscribe({
       next: () => {
         console.log('Profile updated successfully');
@@ -76,15 +73,14 @@ export class ProfileComponent implements OnInit {
         console.error('Error updating profile:', err);
       }
     });
- 
+
     setTimeout(() => this.showSuccess = false, 3000);
   }
- 
+
   ngOnInit(): void {
     this.userId = this.authservice.getAuthenticatedUserId();
     this.fetchUserProfile();
   }
- 
   fetchUserProfile(): void {
     this.http.get<any>(`${this.apiUrl}/${this.userId}`).subscribe({
       next: (data) => {
@@ -98,5 +94,3 @@ export class ProfileComponent implements OnInit {
     });
   }
 }
-
-

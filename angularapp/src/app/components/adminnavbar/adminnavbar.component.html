@@ -1,14 +1,24 @@
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/main
 <div class="nav-container" (mouseleave)="closeDropdown()">
   <div class="logo">VehicleService</div>
  
   <ul *ngIf="isUserLoggedIn()">
    
     <li class="admin-box"> {{service.getAuthenticatedUser()}} / {{ service.getRole() }}</li>
+<<<<<<< HEAD
+   
+    <li><a routerLink="/"  (mouseenter)="cancelLogout()">Home</a></li>
+   
+ 
+=======
     
     <li><a routerLink="/"  (mouseenter)="cancelLogout()">Home</a></li>
     
 
+>>>>>>> origin/main
     <li class="dropdown" (mouseleave)="closeDropdown()">
       <a (mouseenter)="cancelLogout(); toggleSerDropdown()" role="button" aria-haspopup="true" aria-expanded="{{ showSerDropdown }}" class="service">
         Service
@@ -18,17 +28,35 @@
         <li><a routerLink="/adminviewservice"  (mouseenter)="cancelLogout()">View Service</a></li>
       </ul>
     </li>
+<<<<<<< HEAD
+ 
+    <li><a routerLink="/adminviewappointment" (mouseenter)="cancelLogout()">Appointments</a></li>
+    <li><a routerLink="/adminviewfeedback" (mouseenter)="cancelLogout()">Feedbacks</a></li>
+    <li><a routerLink="/adminviewuserdetails" (mouseenter)="cancelLogout()">Customer</a></li>
+ 
+=======
 
     <li><a routerLink="/adminviewappointment" (mouseenter)="cancelLogout()">Appointments</a></li>
     <li><a routerLink="/adminviewfeedback" (mouseenter)="cancelLogout()">Feedbacks</a></li>
     <li><a routerLink="/adminviewuserdetails" (mouseenter)="cancelLogout()">Customer</a></li>
 
+>>>>>>> origin/main
     <li>
       <a routerLink="/profile" class="profile-icon" (mouseenter)="cancelLogout()"></a>
     </li>
  
     <li><button class="logout-btn" (click)="confirmLogout()">Logout</button></li>
   </ul>
+<<<<<<< HEAD
+ 
+ 
+  <div *ngIf="showLogoutPopup" class="logout-popup" (mouseleave)="cancelLogout()">
+  <p>Are you sure you want to logout?</p>
+  <button (click)="logout()">Yes</button>
+  <button (click)="cancelLogout()">No</button>
+</div>
+ 
+=======
 
   <div *ngIf="showLogoutPopup" class="logout-popup" (mouseleave)="cancelLogout()">
     <p>Are you sure you want to logout?</p>
@@ -36,4 +64,5 @@
     <button class="no-button" (click)="cancelLogout()">No</button>
   </div>
 
+>>>>>>> origin/main
 </div>

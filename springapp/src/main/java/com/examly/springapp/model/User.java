@@ -1,16 +1,21 @@
 package com.examly.springapp.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name="user")
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue  
     @Column(name = "user_id")
     int userId;
     String email;
@@ -18,6 +23,18 @@ public class User {
     String username;
     String mobileNumber;
     String userRole;
+
+
+
+ // Cascade delete for appointments
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Appointment> appointments;
+
+    // Cascade delete for feedbacks
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Feedback> feedbacks;
+
+
     public User() {
     }
     public User(int userId, String email, String password, String username, String mobileNumber, String userRole) {
@@ -64,10 +81,6 @@ public class User {
     public void setUserRole(String userRole) {
         this.userRole = userRole;
     }
-
-
-    
-
 
     
 }

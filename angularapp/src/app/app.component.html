@@ -1,14 +1,3 @@
-<!--  
-<app-navbar *ngIf="!isUserLoggedIn()"></app-navbar>
- 
- 
-<app-adminnavbar *ngIf="isUserLoggedIn() && isAdmin()"></app-adminnavbar>
- 
-<app-usernavbar *ngIf="isUserLoggedIn() && isUser()"></app-usernavbar>
- 
-<router-outlet></router-outlet> -->
-
-
 <!--
   This template now controls which navbar is visible.
   It uses the 'async' pipe to subscribe to the observables
@@ -23,13 +12,13 @@
  
     <!-- USER IS LOGGED IN -->
     <ng-container *ngIf="(authService.userRole$ | async) as role">
-     
+      
       <!-- Show Admin Navbar if role is ADMIN -->
       <app-adminnavbar *ngIf="role === 'ADMIN'"></app-adminnavbar>
-     
+      
       <!-- Show User Navbar if role is USER -->
       <app-usernavbar *ngIf="role === 'USER'"></app-usernavbar>
-   
+    
     </ng-container>
    
   </ng-container>

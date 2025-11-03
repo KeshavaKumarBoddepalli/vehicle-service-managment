@@ -7,9 +7,9 @@
       <li>
         <a routerLink="/" (mouseenter)="cancelLogout()">Home</a>
       </li>
-  
-      <ng-container *ngIf="isCustomer()"> 
-        
+ 
+      <ng-container *ngIf="isCustomer()">
+       
         <li class="dropdown" (mouseleave)="closeAllDropdowns()">
           <a (mouseenter)="cancelLogout(); toggleAppointmentsDropdown()" role="button" aria-haspopup="true" aria-expanded="{{ showAppointmentsDropdown }}" class="app">
             Appointments
@@ -19,8 +19,8 @@
             <li><a routerLink="/userviewappointment"   (click)="cancelLogout()">View Appointments</a></li>
           </ul>
         </li>
-  
-        
+ 
+       
         <li class="dropdown"  (mouseleave)="closeAllDropdowns()">
           <a (mouseenter)="cancelLogout(); toggleFeedbackDropdown()" role="button" aria-haspopup="true" aria-expanded="{{ showFeedbackDropdown }}" class="feedback">
             Feedback
@@ -43,10 +43,11 @@
         <button class="logout-btn" (click)="confirmLogout()">Logout</button>
       </li>
     </ul>
-  
+ 
     <div *ngIf="showLogoutPopup" class="logout-popup" (mouseleave)="cancelLogout()">
       <p>Are you sure you want to logout?</p>
       <button class="yes-button" (click)="logout()">Yes</button>
       <button class="no-button"  (click)="cancelLogout()">No</button>
     </div>
 </div>
+ 
