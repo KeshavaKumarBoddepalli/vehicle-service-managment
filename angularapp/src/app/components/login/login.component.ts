@@ -57,6 +57,16 @@ export class LoginComponent implements OnInit {
       });
     }
   }
+
+  handleKeyPress(event: KeyboardEvent): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      this.toggleDropdown();
+      event.preventDefault(); // optional: prevents scrolling on spacebar
+    }
+  }
+  toggleDropdown() {
+    //throw new Error('Method not implemented.');
+  }
  
   // --- NEW ---
   togglePasswordVisibility(): void {
