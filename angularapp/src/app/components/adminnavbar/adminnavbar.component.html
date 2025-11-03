@@ -1,7 +1,7 @@
 
 <div class="nav-container" (mouseleave)="closeDropdown()">
   <div class="logo">VehicleService</div>
-
+ 
   <ul *ngIf="isUserLoggedIn()">
    
     <li class="admin-box"> {{service.getAuthenticatedUser()}} / {{ service.getRole() }}</li>
@@ -26,7 +26,7 @@
     <li>
       <a routerLink="/profile" class="profile-icon" (mouseenter)="cancelLogout()"></a>
     </li>
-
+ 
     <li><button class="logout-btn" (click)="confirmLogout()">Logout</button></li>
   </ul>
 

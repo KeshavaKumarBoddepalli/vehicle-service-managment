@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-
+ 
 @Component({
   selector: 'app-usernavbar',
   templateUrl: './usernavbar.component.html',

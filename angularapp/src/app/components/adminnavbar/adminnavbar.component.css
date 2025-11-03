@@ -31,7 +31,7 @@
   padding: 6px 10px;
   transition: color 0.3s ease;
 }
-
+ 
 .nav-container ul li a:hover {
   color: #f39c12;
 }
@@ -69,7 +69,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
-
+ 
 .dropdown ul li a {
   display: block;
   padding: 10px 16px;
@@ -80,7 +80,7 @@
   border-radius: 6px;
   transition: background 0.3s ease;
 }
-
+ 
 .dropdown ul li a:hover {
   background-color: #f39c12;
   color: #000;
@@ -95,7 +95,7 @@
   background-size: cover;
   cursor: pointer;
 }
-
+ 
 .logout-btn {
   background-color: #e74c3c;
   color: #fff;
@@ -107,7 +107,7 @@
   font-size: 14px;
   transition: background 0.3s ease;
 }
-
+ 
 .logout-btn:hover {
   background-color: #d3a423;
 }
@@ -124,12 +124,12 @@
   text-align: center;
   z-index: 100;
 }
-
+ 
 .logout-popup p {
   margin-bottom: 12px;
   font-size: 1rem;
 }
-
+ 
 .logout-popup button {
   margin: 0 8px;
   padding: 6px 12px;
@@ -161,3 +161,4 @@
 .no-button:hover {
   background-color: #2980b9;
 }
+ 
