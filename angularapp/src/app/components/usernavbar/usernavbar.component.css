@@ -9,11 +9,10 @@
   }
   
 
-  .nav-container::before {
-    content: "Vehicle Service";
+  .logo {
     font-size: 20px;
     font-weight: bold;
-    color: #fff;
+    color: #ffffff;
   }
  
   .nav-container ul {
@@ -45,7 +44,16 @@
     color: #f39c12;
   }
   
-.dropdown {
+  .user-box {
+    border: 1px solid #fff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    background-color: transparent;
+  }
+  
+  .dropdown {
     position: relative; 
   }
  
@@ -77,8 +85,12 @@
     background-color: #f39c12; 
     color: #000;
   }
-  
 
+  .app, .feedback{
+    cursor:pointer;
+  }
+  
+ 
   
 .profile-icon {
     display: inline-block;
@@ -104,21 +116,24 @@
   }
   
   .logout-btn:hover {
-    background-color: #c0392b;
-  }
+    background-color: #d3a423; 
+   }
   
 
   .logout-popup {
-    position: fixed;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -30%);
+    position: absolute;
+    top: 70px;
+    right: 20px;
     background-color: #fff;
-    padding: 20px;
+    color: #333;
+    padding: 16px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     text-align: center;
+    z-index: 100;
   }
+
+
   .logout-popup button {
     margin: 0 10px;
     padding: 8px 16px;
@@ -126,10 +141,23 @@
     border-radius: 4px;
     cursor: pointer;
   }
-  .logout-popup button:first-child {
-    background-color: #e74c3c;
-    color: #fff;
+
+
+  .yes-button {
+    background-color: #e74c3c; /* red */
+    color: white;
   }
-  .logout-popup button:last-child {
-    background-color: #bdc3c7;
+  
+  .yes-button:hover {
+    background-color: #c0392b;
+  }
+  
+  .no-button {
+    background-color: #3498db;
+   
+    color: white;
+  }
+  
+  .no-button:hover {
+    background-color: #2980b9;
   }

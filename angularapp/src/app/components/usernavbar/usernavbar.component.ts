@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -7,48 +7,59 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './usernavbar.component.html',
   styleUrls: ['./usernavbar.component.css']
 })
-export class UsernavbarComponent {
-    showLogoutPopup = false;
+export class UsernavbarComponent implements OnInit {
+  showLogoutPopup = false;
+  showAppointmentsDropdown = false;
+  showFeedbackDropdown = false;
 
-    constructor(public service: AuthService , private router:Router) {}
-  
-    isUserLoggedIn(): boolean {
-      return this.service.isLoggedIn();
-    }
-  
-    isCustomer(): boolean {
-      return this.service.getRole() === 'USER';
-    }
-  
-    confirmLogout(): void {
-      this.showLogoutPopup = true;
-    }
-  
-    cancelLogout(): void {
-      this.showLogoutPopup = false;
-    }
-    showAppointmentsDropdown = false;
-    showFeedbackDropdown = false;
+  constructor(public service: AuthService, private router: Router) {}
 
-  toggleAppointmentsDropdown() {
+  ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.showLogoutPopup = false;
+      }
+    });
+  }
+
+  isUserLoggedIn(): boolean {
+    return this.service.isLoggedIn();
+  }
+
+  isCustomer(): boolean {
+    return this.service.getRole() === 'USER';
+  }
+
+  confirmLogout(): void {
+    this.showLogoutPopup = true;
+  }
+
+  cancelLogout(): void {
+    this.showLogoutPopup = false;
+  }
+
+  toggleAppointmentsDropdown(): void {
+    this.cancelLogout();
     this.showAppointmentsDropdown = !this.showAppointmentsDropdown;
     this.showFeedbackDropdown = false;
+   
   }
 
-  toggleFeedbackDropdown() {
+  toggleFeedbackDropdown(): void {
+    this.cancelLogout();
     this.showFeedbackDropdown = !this.showFeedbackDropdown;
     this.showAppointmentsDropdown = false;
-  }
-  
-  logout(): void {
-      this.service.logout();
-      this.showLogoutPopup = false;
-      this.router.navigate(['/home'])
+    
   }
 
-  closeAllDropdowns() {
+  logout(): void {
+    this.service.logout();
+    this.showLogoutPopup = false;
+    this.router.navigate(['/home']);
+  }
+
+  closeAllDropdowns(): void {
     this.showAppointmentsDropdown = false;
     this.showFeedbackDropdown = false;
   }
-  
 }
