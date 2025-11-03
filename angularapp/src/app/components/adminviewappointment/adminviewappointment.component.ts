@@ -31,6 +31,21 @@ export class AdminviewappointmentComponent implements OnInit {
   ngOnInit(): void {
     this.loadAllAppointments();
   }
+
+  
+
+    updateStatus() {
+      
+      this.showSuccessPopup = true;
+      setTimeout(() => {
+        this.showSuccessPopup = false;
+      }, 3000);
+    }
+
+    closePopup() {
+      this.showSuccessPopup = false;
+    }
+
  
   loadAllAppointments(): void {
     this.appointmentService.getAppointments().subscribe(
@@ -201,5 +216,5 @@ export class AdminviewappointmentComponent implements OnInit {
       }
     );
   }
- 
+
 }

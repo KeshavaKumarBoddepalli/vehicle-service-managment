@@ -3,17 +3,17 @@
   justify-content: space-between;
   align-items: center;
   background: linear-gradient(90deg, #1f1f1f, #2c2c2c);
-  padding: 10px 20px;
+  padding: 10px 20px; 
   color: #fff;
   font-family: 'Segoe UI', sans-serif;
 }
- 
+
 .logo {
   font-size: 20px;
   font-weight: bold;
   color: #ffffff;
 }
- 
+
 .nav-container ul {
   list-style: none;
   display: flex;
@@ -22,12 +22,12 @@
   margin: 0;
   padding: 0;
 }
- 
+
 .nav-container ul li a {
   color: #fff;
   text-decoration: none;
-  font-weight: 400;
-  font-size: 14px;
+  font-weight: 400; 
+  font-size: 14px; 
   padding: 6px 10px;
   transition: color 0.3s ease;
 }
@@ -35,9 +35,9 @@
 .nav-container ul li a:hover {
   color: #f39c12;
 }
- 
- 
- 
+
+
+
 .admin-box {
   border: 1px solid #fff;
   padding: 6px 14px;
@@ -49,11 +49,11 @@
 .dropdown {
   position: relative;
 }
- 
+
 .service{
   cursor: pointer;
 }
- 
+
 .dropdown ul {
   position: absolute;
   top: 100%;
@@ -85,7 +85,7 @@
   background-color: #f39c12;
   color: #000;
 }
- 
+
 .profile-icon {
   display: inline-block;
   width: 20px;
@@ -109,9 +109,9 @@
 }
  
 .logout-btn:hover {
-  background-color: #c0392b;
+  background-color: #d3a423;
 }
- 
+
 .logout-popup {
   position: absolute;
   top: 70px;
@@ -138,14 +138,27 @@
   cursor: pointer;
   font-weight: 500;
 }
- 
-.logout-popup button:first-child {
-  background-color: #e74c3c;
-  color: #fff;
+
+
+
+
+
+.yes-button {
+  background-color: #e74c3c; 
+  color: white;
 }
+
+.yes-button:hover {
+  background-color: #c0392b;
+}
+
+.no-button {
+  background-color: #3498db;
  
-.logout-popup button:last-child {
-  background-color: #bdc3c7;
-  color: #333;
+  color: white;
+}
+
+.no-button:hover {
+  background-color: #2980b9;
 }
  

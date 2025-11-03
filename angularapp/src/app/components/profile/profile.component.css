@@ -9,50 +9,19 @@
 }
 
 .profile-container input {
-width: 100%;
-padding: 10px;
-margin-bottom: 8px;
-border: 1px solid #ccc;
-border-radius: 4px;
-box-sizing: border-box;
+  width: 100%; 
+  padding: 10px;
+  margin-bottom: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; 
 }
 
 .profile-container label {
-display: block;      
-margin-bottom: 6px;
-font-weight: bold;
-text-align: left;    
-}
-
-
-.profile-img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin-bottom: 15px;
-}
-
-.edit-icon {
-  color: #007bff;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.hidden {
-  display: none;
-}
-
-.error {
-  display:block;
-  margin-top:4px;
-  margin-bottom:8px;
-  color: red;
-  font-size: 12px;
-}
-
-.success {
-  color: green;
+  display: block;       
+  margin-bottom: 6px;
   font-weight: bold;
+  text-align: left;    
 }
 
 input {

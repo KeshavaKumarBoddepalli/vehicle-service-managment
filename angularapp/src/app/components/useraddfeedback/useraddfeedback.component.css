@@ -1,4 +1,4 @@
-/* Container */
+
 .feedback-form-container {
     max-width: 600px;
     margin: 40px auto;
@@ -9,7 +9,10 @@
     font-family: 'Segoe UI', Tahoma, sans-serif;
   }
   
-  /* Heading */
+  .error{
+    color : red ;
+  }
+  
   h2 {
     text-align: center;
     color: #2c3e50;
@@ -18,14 +21,14 @@
     font-weight: 600;
   }
   
-  /* Form */
+
   .feedback-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
   }
   
-  /* Form Group */
+
   .form-group {
     display: flex;
     flex-direction: column;
@@ -53,7 +56,7 @@
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
   }
   
-  /* Submit Button */
+  
   .btn-submit {
     padding: 12px;
     background-color: #007bff;
@@ -75,7 +78,6 @@
     cursor: not-allowed;
   }
   
-  /* Responsive */
   @media (max-width: 480px) {
     .feedback-form-container {
       padding: 15px;
@@ -93,4 +95,6 @@
     .btn-submit {
       font-size: 14px;
     }
+
+    
   }

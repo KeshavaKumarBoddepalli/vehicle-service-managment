@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -10,9 +11,9 @@ import { AuthService } from 'src/app/services/auth.service';
 export class AdminnavbarComponent implements OnInit {
   showLogoutPopup = false;
   showSerDropdown: boolean;
- 
+
   constructor(public service: AuthService, private router: Router) {}
- 
+
   ngOnInit(): void {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
@@ -20,7 +21,7 @@ export class AdminnavbarComponent implements OnInit {
       }
     });
   }
- 
+
   isUserLoggedIn(): boolean {
     return this.service.isLoggedIn();
   }
@@ -42,12 +43,12 @@ export class AdminnavbarComponent implements OnInit {
     this.showLogoutPopup = false;
     this.router.navigate(['/']);
   }
- 
+
   toggleSerDropdown(): void {
     this.cancelLogout;
     this.showSerDropdown = !this.showSerDropdown;
   }
- 
+
   closeDropdown(): void {
     this.showSerDropdown = false;
   }
