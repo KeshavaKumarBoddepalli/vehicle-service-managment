@@ -11,7 +11,8 @@
       <ng-container *ngIf="isCustomer()">
        
         <li class="dropdown" (mouseleave)="closeAllDropdowns()">
-          <a (mouseenter)="cancelLogout(); toggleAppointmentsDropdown()" role="button" aria-haspopup="true" aria-expanded="{{ showAppointmentsDropdown }}" class="app">
+          <a (mouseenter)="cancelLogout(); toggleAppointmentsDropdown()" role="button" aria-haspopup="true" aria-expanded="{{ showAppointmentsDropdown }}" class="app" (keydown)="handleKeyPress($event)">
+
             Appointments
           </a>
           <ul *ngIf="showAppointmentsDropdown">
@@ -22,7 +23,7 @@
  
        
         <li class="dropdown"  (mouseleave)="closeAllDropdowns()">
-          <a (mouseenter)="cancelLogout(); toggleFeedbackDropdown()" role="button" aria-haspopup="true" aria-expanded="{{ showFeedbackDropdown }}" class="feedback">
+          <a (mouseenter)="cancelLogout(); toggleFeedbackDropdown()" role="button" aria-haspopup="true" aria-expanded="{{ showFeedbackDropdown }}" class="feedback" (keydown)="handleKeyPress($event)">
             Feedback
           </a>
           <ul *ngIf="showFeedbackDropdown">
@@ -33,7 +34,7 @@
  
        
         <li>
-          <a routerLink="/profile" (mouseenter)="cancelLogout()" class="profile-icon"></a>
+          <a routerLink="/profile" (mouseenter)="cancelLogout()" class="profile-icon">Profile</a>
         </li>
  
  

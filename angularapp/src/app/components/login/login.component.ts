@@ -35,13 +35,14 @@ export class LoginComponent implements OnInit {
           
           // Navigate based on role from the (now reactive) auth service
           const role = this.authService.getRole();
-          if (role === 'ADMIN') {
-            this.router.navigate(['/home']); // Or wherever admin goes
-          } else if (role === 'USER') {
-            this.router.navigate(['/home']); // Or wherever user goes
-          } else {
-            this.router.navigate(['/home']);
-          }
+          // if (role === 'ADMIN') {
+          //   this.router.navigate(['/home']); // Or wherever admin goes
+          // } else if (role === 'USER') {
+          //   this.router.navigate(['/home']); // Or wherever user goes
+          // } else {
+          //   this.router.navigate(['/home']);
+          // }
+          this.router.navigate(['/home']);
         },
         error: (error: HttpErrorResponse) => { // Type the error
           this.isSubmitting = false;
@@ -56,6 +57,16 @@ export class LoginComponent implements OnInit {
         }
       });
     }
+  }
+
+  handleKeyPress(event: KeyboardEvent): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      this.toggleDropdown();
+      event.preventDefault(); // optional: prevents scrolling on spacebar
+    }
+  }
+  toggleDropdown() {
+    //throw new Error('Method not implemented.');
   }
  
   // --- NEW ---

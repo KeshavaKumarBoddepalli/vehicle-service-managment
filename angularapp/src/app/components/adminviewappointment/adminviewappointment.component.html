@@ -22,7 +22,7 @@
                (ngModelChange)="applyFiltersAndSort()">
         <span class="search-icon">&#9906;</span>
       </div>
-  
+ 
       <!-- Filter by Status Dropdown -->
       <div class="sort-container">
         <label for="filterStatus" class="sort-label">Filter by:</label>
@@ -88,40 +88,40 @@
               <td>{{ app.appointmentDate | date:'dd/MM/yyyy' }}</td>
               <td>{{ app.location }}</td>
               <td>{{ app.user?.username || 'N/A' }}</td>
-              
+             
               <td>
                 <select [(ngModel)]="app.status"
                         [ngClass]="{
                           'status-pending': app.status === 'Pending',
                           'status-approved': app.status === 'Approved',
                           'status-rejected': app.status === 'Rejected',
-                          'status-cancelled': app.status === 'Cancelled' 
+                          'status-cancelled': app.status === 'Cancelled'
                         }"
                         class="status-dropdown"
                         [disabled]="app.status == 'Cancelled'"
                         [title]="app.status == 'Cancelled' ? 'Status is final and cannot be changed' : 'Change Status'">
-                  
+                 
                   <option *ngIf="!statuses.includes(app.status)" [value]="app.status">
                     {{ app.status }}
                   </option>
-                  
+                 
                   <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
                 </select>
               </td>
-    
+   
               <td class="action-cell">
-                <!-- 
+                <!--
                   *** THIS IS THE FIX ***
                   The [disabled] attribute was removed from this button.
                   The (click) event will now fire, and the onStatusChange()
                   method in your .ts file will handle the security check.
                 -->
-                <button (click)="onStatusChange(app)" 
+                <button (click)="onStatusChange(app)"
                         class="action-button update-button"
                         [title]="app.status == 'Cancelled' ? 'Status is final' : 'Update Status'">
                   Update
                 </button>
-                
+               
                 <button (click)="requestDeleteAppointment(app.appointmentId)" class="action-button delete-button">
                   Delete
                 </button>
@@ -168,7 +168,7 @@
   {{ successMessage }}
   <button (click)="closeSuccessPopup()" class="close-popup-btn">&times;</button>
 </div>
-
+ 
 <div *ngIf="showDeleteModal" class="modal-overlay">
   <div class="modal-content">
     <h3 class="modal-title">Confirm Deletion</h3>
@@ -183,4 +183,3 @@
     </div>
   </div>
 </div>
- 

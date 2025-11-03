@@ -62,22 +62,19 @@ button:first-child {
 
 button:last-child {
   background: #ccc;
-  color: #333;
 }
 
-.error {
-  color: #dc3545;
-  font-size: 13px;
-  display: block;
-  margin-bottom: 10px;
-  text-align: left;
-}
 
-.success-message {
-  color: #28a745;
-  background-color: #e6f4ea;
-  padding: 10px;
-  border-radius: 6px;
-  font-weight: 600;
-  margin-top: 15px;
+
+
+.profile-img {
+  
+width: 80px;       /* Adjust width as needed */
+height: 80px;      /* Adjust height to maintain aspect ratio */
+border-radius: 50%; /* Optional: makes the image circular */
+object-fit: cover;  /* Ensures the image fits nicely */
+margin-bottom: 10px;
+
+  border: 2px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

@@ -1,2 +1,6 @@
 /angularapp/node_modules
 /springapp/target 
+/springapp/src/main/resources/application.properties
+/angularapp/src/test.ts
+/angularapp/src/app/models/login.model.spec.ts
+/angularapp/src/app/models/user.model.spec.ts

@@ -44,11 +44,18 @@ export class AdminnavbarComponent implements OnInit {
   }
  
   toggleSerDropdown(): void {
-    this.cancelLogout;
+    this.cancelLogout();
     this.showSerDropdown = !this.showSerDropdown;
   }
  
   closeDropdown(): void {
     this.showSerDropdown = false;
+  }
+
+  handleKeyPress(event: KeyboardEvent): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      this.toggleSerDropdown();
+      event.preventDefault(); // optional: prevents scrolling on spacebar
+    }
   }
 }

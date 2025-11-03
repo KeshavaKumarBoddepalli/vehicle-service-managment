@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
   userRole = '';
   password = '';
 
-  public apiUrl = "https://8080-dcaafddcbffffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/user";
+  public apiUrl = "https://8080-cddcccedbacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/user";
 
   constructor(private http: HttpClient, public authservice: AuthService) {}
 
@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
   }
  
   updateProfile(): void {
-    this.emailError = !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email);
+    this.emailError = !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(this.email);
     this.mobileError = !/^\d{10}$/.test(this.mobileNumber);
  
     if (this.usernameError || this.emailError || this.mobileError) {
@@ -92,5 +92,9 @@ export class ProfileComponent implements OnInit {
       },
       error: (err) => console.error('Error fetching profile:', err)
     });
+  }
+
+  handleKeyPress(event: KeyboardEvent): void {
+    
   }
 }
