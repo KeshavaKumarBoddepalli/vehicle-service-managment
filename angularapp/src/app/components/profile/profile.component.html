@@ -1,9 +1,9 @@
   <div class="profile-container">
     <h2>{{getRole()}} Profile <span class="edit-icon" (click)="enableEdit()" (keydown)="handleKeyPress($event)">&#9998;</span></h2>
-    
+
   
   <div *ngIf="!isEditing">
-    <img [src]="profileImage" alt="ProfileImage" class="profile-img" />
+    <img [src]="profileImage" alt="Profile" class="profile-img" />
     <p><strong>Username:</strong> {{ username }}</p>
     <p><strong>Email:</strong> {{ email }}</p>
     <p><strong>Mobile Number:</strong> {{ mobileNumber }}</p>
