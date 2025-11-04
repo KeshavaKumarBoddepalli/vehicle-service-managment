@@ -110,13 +110,8 @@
               </td>
    
               <td class="action-cell">
-                <!--
-                  *** THIS IS THE FIX ***
-                  The [disabled] attribute was removed from this button.
-                  The (click) event will now fire, and the onStatusChange()
-                  method in your .ts file will handle the security check.
-                -->
-                <button (click)="onStatusChange(app)"
+           
+                <button (click)="onStatusChange(app)" 
                         class="action-button update-button"
                         [title]="app.status == 'Cancelled' ? 'Status is final' : 'Update Status'">
                   Update
@@ -145,7 +140,8 @@
       </div>
    
     </div> <!-- End of table-wrapper -->
-  </div> <!-- End of *ngIf="!isLoading" -->
+  </div> 
+
  
   <!-- Template for NO search results -->
   <ng-template #noSearchResults>
@@ -167,8 +163,8 @@
 <div class="success-popup" [class.show]="showSuccessPopup">
   {{ successMessage }}
   <button (click)="closeSuccessPopup()" class="close-popup-btn">&times;</button>
-</div>
- 
+</div> 
+
 <div *ngIf="showDeleteModal" class="modal-overlay">
   <div class="modal-content">
     <h3 class="modal-title">Confirm Deletion</h3>
@@ -177,9 +173,7 @@
       <button (click)="cancelDelete()" class="modal-button cancel-button">
         Cancel
       </button>
-      <button (click)="confirmDelete()" class="modal-button confirm-delete-button">
-        Confirm Delete
-      </button>
+      <button type="button" [disabled]="!feedbackIdToDelete" (click)="confirmDelete()">Yes</button>
     </div>
   </div>
 </div>
