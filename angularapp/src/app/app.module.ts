@@ -25,6 +25,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthService } from './services/auth.service';
+import { ChatbotComponent } from './chatbot/chatbot.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { AuthService } from './services/auth.service';
     UseraddfeedbackComponent,
     UsernavbarComponent,
     UserviewappointmentComponent,
-    UserviewfeedbackComponent
+    UserviewfeedbackComponent,
   ],
   imports: [
     BrowserModule,
