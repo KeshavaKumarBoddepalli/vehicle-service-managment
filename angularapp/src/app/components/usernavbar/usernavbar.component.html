@@ -12,7 +12,7 @@
        
         <li class="dropdown" (mouseleave)="closeAllDropdowns()">
           <a (mouseenter)="cancelLogout(); toggleAppointmentsDropdown()" role="button" aria-haspopup="true" aria-expanded="{{ showAppointmentsDropdown }}" class="app" (keydown)="handleKeyPress($event)">
-
+ 
             Appointments
           </a>
           <ul *ngIf="showAppointmentsDropdown">
@@ -51,4 +51,6 @@
       <button class="no-button"  (click)="cancelLogout()">No</button>
     </div>
 </div>
+ 
+ 
  

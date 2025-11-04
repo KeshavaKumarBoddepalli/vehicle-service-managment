@@ -89,10 +89,12 @@
           class="form-control"
           [(ngModel)]="serviceToEdit.serviceName"
           #serviceNameVar="ngModel"
+          pattern="^[A-Za-z ]+[0-9]*$"
           required
         />
         <div *ngIf="serviceNameVar.invalid && (serviceNameVar.dirty || serviceNameVar.touched)" class="error-message">
           <small *ngIf="serviceNameVar.errors?.required">Service Name is required.</small>
+          <small *ngIf="serviceNameVar.errors?.pattern">Only letters followed by optional numbers are allowed.</small>
         </div>
       </div>
 
@@ -105,12 +107,14 @@
           class="form-control"
           [(ngModel)]="serviceToEdit.servicePrice"
           #servicePriceVar="ngModel"
+          pattern="^[0-9]+$"
           required
           min="0"
         />
         <div *ngIf="servicePriceVar.invalid && (servicePriceVar.dirty || servicePriceVar.touched)" class="error-message">
           <small *ngIf="servicePriceVar.errors?.required">Price is required.</small>
           <small *ngIf="servicePriceVar.errors?.min">Price must be 0 or more.</small>
+          <small *ngIf="servicePriceVar.errors?.pattern">Only positive numbers are allowed.</small>
         </div>
       </div>
 

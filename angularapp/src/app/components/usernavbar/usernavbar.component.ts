@@ -66,7 +66,7 @@ export class UsernavbarComponent implements OnInit {
   handleKeyPress(event: KeyboardEvent): void {
     if (event.key === 'Enter' || event.key === ' ') {
       this.toggleDropdown();
-      event.preventDefault(); // optional: prevents scrolling on spacebar
+      event.preventDefault(); 
     }
   }
   toggleDropdown() {

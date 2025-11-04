@@ -157,3 +157,20 @@
   background-color: #2980b9;
 }
  
+.yes-button {
+  background-color: #e74c3c;
+  color: white;
+}
+ 
+.yes-button:hover {
+  background-color: #c0392b;
+}
+ 
+.no-button {
+  background-color: #3498db;
+  color: white;
+}
+ 
+.no-button:hover {
+  background-color: #2980b9;
+}

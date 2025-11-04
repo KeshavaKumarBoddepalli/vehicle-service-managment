@@ -48,6 +48,7 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
  
     @PostMapping("/register")
+    
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         
         // --- START OF UPDATED VALIDATION ---

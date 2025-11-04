@@ -1,7 +1,6 @@
 <div class="container-fluid mt-4">
   <h2 class="text-center mb-4">My Appointments</h2>
  
-  <!-- Filter Dropdown -->
   <div class="row mb-3">
     <div class="col-md-4">
       <div class="form-group">
@@ -13,17 +12,14 @@
     </div>
   </div>
  
-  <!-- Loading Message (Replaces spinner) -->
   <div *ngIf="isLoading" class="alert alert-info" role="alert">
     Loading your appointments...
   </div>
  
-  <!-- No Appointments Message -->
   <div *ngIf="!isLoading && filteredAppointments.length === 0" class="alert alert-info" role="alert">
     You have no appointments.
   </div>
  
-  <!-- Appointments Table -->
   <div *ngIf="!isLoading && filteredAppointments.length > 0" class="table-responsive">
     <table class="table table-striped table-hover">
       <thead class="thead-dark">
@@ -32,7 +28,7 @@
           <th>Vehicle Type</th>
           <th>Price</th>
           <th>Appointment Date</th>
-          <th>Location</th>
+          <th>Time Slot</th> <th>Location</th>
           <th>Status</th>
           <th>Actions</th>
         </tr>
@@ -43,7 +39,7 @@
           <td>{{ app.service?.typeOfVehicle }}</td>
           <td>{{ app.service?.servicePrice | currency:'INR' }}</td>
           <td>{{ app.appointmentDate | date:'longDate' }}</td>
-          <td>{{ app.location }}</td>
+          <td>{{ app.timeSlot }}</td> <td>{{ app.location }}</td>
           <td>
             <span class="badge" [ngClass]="{
               'badge-warning': app.status === 'Pending',
@@ -56,7 +52,6 @@
           </td>
           
           <td>
-            <!-- Edit button -->
             <button class="btn btn-primary btn-sm mr-2" 
                     (click)="openEditModal(app)" 
                     [disabled]="app.status !== 'Pending'"
@@ -64,7 +59,6 @@
               Edit
             </button>
             
-            <!-- Cancel button -->
             <button class="btn btn-danger btn-sm" 
                     (click)="openCancelConfirm(app)"
                     [disabled]="app.status === 'Rejected' || app.status === 'Cancelled'"
@@ -77,7 +71,6 @@
     </table>
   </div>
  
-  <!-- Pagination Controls -->
   <nav *ngIf="!isLoading && totalPages > 1" aria-label="Page navigation">
     <ul class="pagination justify-content-center">
       <li class="page-item" [class.disabled]="currentPage === 1">
@@ -95,7 +88,6 @@
 </div>
  
  
-<!-- Edit Appointment Modal -->
 <div class="modal-backdrop" *ngIf="showEditModal"></div>
 <div class="modal" *ngIf="showEditModal" tabindex="-1" style="display: block;">
   <div class="modal-dialog modal-dialog-centered">
@@ -109,29 +101,49 @@
       <div class="modal-body">
         
         <form #editForm="ngForm" (ngSubmit)="onUpdateAppointment(editForm)">
-          <!-- Service Info (Read-only) -->
           <div class="form-group">
             <label for="service">Service:</label>
             <input id="service" type="text" class="form-control" [value]="currentEditingAppointment?.service?.serviceName" readonly>
           </div>
           
-          <!-- Appointment Date -->
           <div class="form-group">
             <label for="appointmentDate">Appointment Date</label>
             <input type="date" class="form-control" id="appointmentDate" name="appointmentDate"
                    [(ngModel)]="editFormData.appointmentDate"
                    [min]="today"
                    required
-                   #dateInput="ngModel">
+                   (change)="onEditDateChange()" #dateInput="ngModel">
             <div *ngIf="dateInput.invalid && dateInput.touched" class="invalid-feedback d-block">
               <span *ngIf="dateInput.errors?.required">Date is required.</span>
             </div>
-            <div *ngIf="isPastDate(editFormData.appointmentDate) && dateInput.touched" class="invalid-feedback d-block">
-              Please select today or a future date.
-            </div>
           </div>
  
-          <!-- Location -->
+          <div class="form-group">
+            <label>Available Time Slots</label>
+            
+            <div *ngIf="editIsLoadingSlots" class="text-center">
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+              <span class_="ml-2">Loading slots...</span>
+            </div>
+ 
+            <div *ngIf="!editIsLoadingSlots && editAvailableSlots.length > 0" class="slot-container">
+              <button
+                type="button"
+                *ngFor="let slot of editAvailableSlots"
+                class="btn slot-btn"
+                [class.btn-primary]="slot === editFormData.timeSlot"
+                [class.btn-outline-primary]="slot !== editFormData.timeSlot"
+                (click)="selectEditSlot(slot)"
+              >
+                {{ slot }}
+              </button>
+            </div>
+            
+            <input type="hidden" name="timeSlot" [(ngModel)]="editFormData.timeSlot" required>
+          </div>
+ 
           <div class="form-group">
             <label for="location">Location</label>
             <input type="text" class="form-control" id="location" name="location"
@@ -141,22 +153,20 @@
                    [pattern]="LOCATION_REGEX.source"
                    #locationInput="ngModel">
             <div *ngIf="locationInput.invalid && locationInput.touched" class="invalid-feedback d-block">
-              <!-- Updated to use errors?.['required'] etc. -->
               <span *ngIf="locationInput.errors?.required">Location is required.</span>
               <span *ngIf="locationInput.errors?.minlength">Location must be at least 3 characters</span>
               <span *ngIf="locationInput.errors?.pattern">Location can only contain letters and spaces.</span>
             </div>
           </div>
  
-          <!-- Error Message -->
-          <div *ngIf="errorMessage" class="alert alert-danger mt-3">
-            {{ errorMessage }}
+          <div *ngIf="editErrorMessage" class="alert alert-danger mt-3">
+            {{ editErrorMessage }}
           </div>
  
-          <!-- Action Buttons (Spinners Removed) -->
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Close</button>
-            <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid || isProcessing">
+            <button type="submit" class="btn btn-primary" 
+                    [disabled]="editForm.invalid || !editFormData.timeSlot || isProcessing">
               {{ isProcessing ? 'Saving...' : 'Save Changes' }}
             </button>
           </div>
@@ -168,7 +178,6 @@
 </div>
  
  
-<!-- Cancel Confirmation Popup -->
 <div class="modal-backdrop" *ngIf="showCancelConfirm"></div>
 <div class="modal" *ngIf="showCancelConfirm" tabindex="-1" style="display: block;">
   <div class="modal-dialog modal-dialog-centered">
@@ -182,13 +191,13 @@
       <div class="modal-body">
         <p>Are you sure you want to cancel your appointment for 
            <strong>{{ appointmentToCancel?.service?.serviceName }}</strong> on 
-           <strong>{{ appointmentToCancel?.appointmentDate | date:'longDate' }}</strong>?
+           <strong>{{ appointmentToCancel?.appointmentDate | date:'longDate' }}</strong> at
+           <strong>{{ appointmentToCancel?.timeSlot }}</strong>?
         </p>
         <p *ngIf="appointmentToCancel?.status === 'Approved'" class="text-warning font-weight-bold">
           This appointment has already been approved.
         </p>
       </div>
-      <!-- Action Buttons (Spinners Removed) -->
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="closeCancelConfirm()" [disabled]="isProcessing">
           No, Keep It
@@ -202,7 +211,6 @@
 </div>
  
  
-<!-- Success/Error Popups -->
 <div class="popup success-popup" *ngIf="showSuccessPopup">
   {{ successMessage }}
   <button class="close-popup" (click)="closeSuccessPopup()">&times;</button>
