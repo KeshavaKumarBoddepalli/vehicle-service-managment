@@ -1,5 +1,5 @@
 /* Keep your existing form styles as they are */
-
+ 
 .feedback-form-container {
   max-width: 600px;
   margin: 40px auto;
@@ -9,11 +9,11 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   font-family: 'Segoe UI', Tahoma, sans-serif;
 }
-
+ 
 .error{
   color : red ;
 }
-
+ 
 h2 {
   text-align: center;
   color: #2c3e50;
@@ -21,26 +21,26 @@ h2 {
   font-size: 26px;
   font-weight: 600;
 }
-
-
+ 
+ 
 .feedback-form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-
-
+ 
+ 
 .form-group {
   display: flex;
   flex-direction: column;
 }
-
+ 
 label {
   font-weight: 500;
   margin-bottom: 8px;
   color: #333;
 }
-
+ 
 textarea,
 input[type="number"] {
   padding: 10px;
@@ -49,15 +49,15 @@ input[type="number"] {
   font-size: 14px;
   resize: none;
 }
-
+ 
 textarea:focus,
 input[type="number"]:focus {
   outline: none;
   border-color: #007bff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
-
-
+ 
+ 
 .btn-submit {
   padding: 12px;
   background-color: #007bff;
@@ -69,35 +69,35 @@ input[type="number"]:focus {
   cursor: pointer;
   transition: background 0.3s ease;
 }
-
+ 
 .btn-submit:hover {
   background-color: #0056b3;
 }
-
+ 
 .btn-submit:disabled {
   background-color: #6c757d;
   cursor: not-allowed;
 }
-
+ 
 @media (max-width: 480px) {
   .feedback-form-container {
     padding: 15px;
   }
-
+ 
   h2 {
     font-size: 22px;
   }
-
+ 
   textarea,
   input[type="number"] {
     font-size: 13px;
   }
-
+ 
   .btn-submit {
     font-size: 14px;
   }
 }
-
+ 
 /* Star Rating Styles */
 .star-rating {
   display: flex;
@@ -105,20 +105,20 @@ input[type="number"]:focus {
   font-size: 24px;
   cursor: pointer;
 }
-
+ 
 .star {
   color: #ccc;
   transition: color 0.2s;
 }
-
+ 
 .star.filled {
   color: #ffc107; /* Gold for selected stars */
 }
-
+ 
 .star:hover {
   color: #ff9800; /* Orange on hover */
 }
-
+ 
 /* Popup Styles */
 .popup-overlay {
   position: fixed;
@@ -132,7 +132,7 @@ input[type="number"]:focus {
   align-items: center;
   z-index: 999;
 }
-
+ 
 .popup-content {
   background: #fff;
   padding: 25px 30px;
@@ -142,12 +142,12 @@ input[type="number"]:focus {
   max-width: 400px;
   width: 90%;
 }
-
+ 
 .popup-content h2 {
   margin-bottom: 10px;
   color: #28a745;
 }
-
+ 
 .popup-content button {
   padding: 10px 20px;
   background-color: #007bff;
@@ -156,7 +156,8 @@ input[type="number"]:focus {
   border-radius: 6px;
   cursor: pointer;
 }
-
+ 
 .popup-content button:hover {
   background-color: #0056b3;
 }
+ 

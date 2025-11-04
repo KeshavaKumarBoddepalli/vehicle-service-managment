@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { VehicleMaintenance } from '../models/vehicle-maintenance.model';
+import { BASE_URL } from '../config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehicleService {
 
-  public apiUrl = "https://8080-cecdfddacafbdafffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/services";
+  public apiUrl = `${BASE_URL}/api/services`;
 
   constructor(private http: HttpClient) {}
 

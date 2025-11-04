@@ -14,12 +14,12 @@ export class UseraddfeedbackComponent implements OnInit {
     message: '',
     rating: null
   };
-
+ 
   showSuccessPopup: boolean = false;
   stars: number[] = [1, 2, 3, 4, 5];
-
+ 
   constructor(private feedbackService: FeedbackService, private router: Router) {}
-
+ 
   ngOnInit(): void {
     const userId = localStorage.getItem('userId');
     if (userId) {
@@ -28,7 +28,7 @@ export class UseraddfeedbackComponent implements OnInit {
       console.error('User ID not found in localStorage');
     }
   }
-
+ 
   submitFeedback() {
     this.feedbackService.createFeedback(this.newFeedback).subscribe({
       next: () => {
@@ -41,18 +41,17 @@ export class UseraddfeedbackComponent implements OnInit {
       }
     });
   }
-
+ 
   closePopup(): void {
     this.showSuccessPopup = false;
     this.router.navigate(['/userviewfeedback']);
   }
-
+ 
   setRating(rating: number): void {
     this.newFeedback.rating = rating;
   }
-
+ 
   isStarFilled(star: number): boolean {
     return star <= this.newFeedback.rating;
   }
 }
-``

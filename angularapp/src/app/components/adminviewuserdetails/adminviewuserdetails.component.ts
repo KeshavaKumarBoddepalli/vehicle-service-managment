@@ -14,22 +14,22 @@ export class AdminviewuserdetailsComponent implements OnInit {
   filteredCustomers: User[] = [];
   searchForm: FormGroup;
   userNotFound: boolean = false;
-
+ 
   // Popup states
   showConfirmPopup: boolean = false;
   showSuccessPopup: boolean = false;
   userIdToDelete: number | null = null;
   successMessage: string = '';
-
+ 
   constructor(private fb: FormBuilder, private userService: UserdetailsService) {}
-
+ 
   ngOnInit(): void {
     this.searchForm = this.fb.group({
       username: ['']
     });
     this.loadCustomers();
   }
-
+ 
   loadCustomers(): void {
     this.userService.getAllUsers().subscribe({
       next: (users: User[]) => {
@@ -41,7 +41,7 @@ export class AdminviewuserdetailsComponent implements OnInit {
       }
     });
   }
-
+ 
   onSearch(): void {
     const searchTerm = this.searchForm.get('username')?.value.toLowerCase().trim();
     if (!searchTerm) {
@@ -54,7 +54,7 @@ export class AdminviewuserdetailsComponent implements OnInit {
     );
     this.userNotFound = this.filteredCustomers.length === 0;
   }
-
+ 
   // Show confirmation popup
   onDeleteUser(userId: number | undefined): void {
     if (!userId) {
@@ -64,7 +64,7 @@ export class AdminviewuserdetailsComponent implements OnInit {
     this.userIdToDelete = userId;
     this.showConfirmPopup = true;
   }
-
+ 
   // Confirm deletion
   confirmDelete(): void {
     if (this.userIdToDelete !== null) {
@@ -84,13 +84,14 @@ export class AdminviewuserdetailsComponent implements OnInit {
       });
     }
   }
-
+ 
   cancelDelete(): void {
     this.showConfirmPopup = false;
     this.userIdToDelete = null;
   }
-
+ 
   closePopup(): void {
     this.showSuccessPopup = false;
   }
 }
+ 

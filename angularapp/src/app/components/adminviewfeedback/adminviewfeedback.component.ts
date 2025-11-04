@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Feedback } from 'src/app/models/feedback.model';
 import { FeedbackService } from 'src/app/services/feedback.service';
-
+ 
 @Component({
   selector: 'app-adminviewfeedback',
   templateUrl: './adminviewfeedback.component.html',
@@ -12,13 +12,13 @@ export class AdminviewfeedbackComponent implements OnInit {
   showSuccessPopup: boolean = false;
   feedbackIdToDelete: number | null = null;
   allFeedbacks: Feedback[] = [];
-
+ 
   constructor(private feedbackService: FeedbackService) {}
-
+ 
   ngOnInit(): void {
     this.loadFeedbacks();
   }
-
+ 
   loadFeedbacks() {
     this.feedbackService.getAllFeedback().subscribe({
       next: (data) => {
@@ -29,14 +29,14 @@ export class AdminviewfeedbackComponent implements OnInit {
       }
     });
   }
-
-  
-  
+ 
+ 
+ 
   promptDelete(id: number) {
     this.feedbackIdToDelete = id;
     this.showConfirmPopup = true;
   }
-  
+ 
   confirmDelete() {
     if (this.feedbackIdToDelete !== null) {
       this.feedbackService.deleteFeedback(this.feedbackIdToDelete).subscribe({
@@ -51,13 +51,14 @@ export class AdminviewfeedbackComponent implements OnInit {
       });
     }
   }
-  
+ 
   cancelDelete() {
     this.showConfirmPopup = false;
     this.feedbackIdToDelete = null;
   }
-  
+ 
   closePopup() {
     this.showSuccessPopup = false;
   }
 }
+ 

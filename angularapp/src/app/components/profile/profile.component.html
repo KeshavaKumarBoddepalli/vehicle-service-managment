@@ -9,7 +9,7 @@
     <p><strong>Mobile Number:</strong> {{ mobileNumber }}</p>
   </div>
 
-  
+  <!-- Edit Mode -->
   <div *ngIf="isEditing">
     <label for="name">Username:</label>
     <input id="name" type="text" [(ngModel)]="username" disabled />
@@ -26,5 +26,6 @@
     <button (click)="cancelEdit()">Cancel</button>
   </div>
 
-  <p *ngIf="showSuccess" class="success">✅ Profile updated successfully!</p>
+  <!-- Success Message -->
+  <p *ngIf="showSuccess" class="success-message">✅ Profile updated successfully!</p>
 </div>

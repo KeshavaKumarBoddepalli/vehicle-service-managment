@@ -1,6 +1,6 @@
 <div class="feedback-container">
   <h2>All Feedbacks</h2>
-
+ 
   <table class="feedback-table" *ngIf="allFeedbacks.length > 0; else noFeedback">
     <thead>
       <tr>
@@ -23,12 +23,12 @@
       </tr>
     </tbody>
   </table>
-
+ 
   <ng-template #noFeedback>
     <p class="no-data">No feedback available.</p>
   </ng-template>
 </div>
-
+ 
 <!-- Confirmation Popup -->
 <div *ngIf="showConfirmPopup" class="popup-overlay">
   <div class="popup-content confirmation">
@@ -40,7 +40,7 @@
     </div>
   </div>
 </div>
-
+ 
 <!-- Success Popup -->
 <div *ngIf="showSuccessPopup" class="popup-overlay">
   <div class="popup-content success">

@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 @Table(name="vehicle_maintenance")
 public class VehicleMaintenance {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "service_id")
     private long serviceId;
 

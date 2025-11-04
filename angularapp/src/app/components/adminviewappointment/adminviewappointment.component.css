@@ -16,9 +16,10 @@
   padding-bottom: 10px;
 }
  
+/* Search and Sort Controls  */
 .controls-wrapper {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; 
   justify-content: space-between;
   align-items: center;
   gap: 20px;
@@ -30,22 +31,22 @@
   border: 1px solid #eef;
 }
  
-/* --- Search --- */
+/*  Search  */
 .search-container {
   position: relative;
-  flex-grow: 1; /* Takes up available space */
-  min-width: 280px; /* Minimum width before wrapping */
+  flex-grow: 1; 
+  min-width: 280px;
 }
  
 .search-input {
   width: 100%;
-  padding: 12px 15px 12px 40px; /* Padding for icon */
+  padding: 12px 15px 12px 40px; 
   font-size: 15px;
   border: 1px solid #ddd;
   border-radius: 6px;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
-  box-sizing: border-box; /* Ensures padding doesn't affect width */
+  box-sizing: border-box; 
 }
  
 .search-input:focus {
@@ -63,7 +64,7 @@
   pointer-events: none; /* Allows click-through */
 }
  
-/* --- Sort --- */
+/*  Sort  */
 .sort-container {
   display: flex;
   flex-wrap: wrap;
@@ -92,7 +93,7 @@
   border-color: #007bff;
 }
  
-/* --- Table Styles --- */
+/*  Table Styles  */
 .table-wrapper {
   overflow-x: auto; /* Allows horizontal scrolling on small screens */
 }
@@ -133,7 +134,7 @@
   background-color: #f1f5f9;
 }
  
-/* ... all of your existing admin styles ... */
+/* admin styles */
  
 .status-dropdown {
   border: 1px solid #ccc;
@@ -146,11 +147,11 @@
   background-position: right 2px center;
   background-repeat: no-repeat;
   background-size: 16px;
-  /* Add a subtle down-arrow icon */
+  /* down-arrow icon */
   background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
 }
  
-/* --- ADD THIS NEW CLASS --- */
+
 .status-cancelled {
   background-color: #e2e3e5;
   color: #383d41;
@@ -171,13 +172,13 @@
   color: #721c24;
 }
  
-/* Style for disabled dropdowns */
+
 .status-dropdown:disabled {
   opacity: 0.8;
   cursor: not-allowed;
-  background-image: none; /* Remove arrow when disabled */
+  background-image: none; 
 }
-/* --- Action Buttons --- */
+
 .action-cell {
   display: flex;
   gap: 8px;
@@ -198,7 +199,7 @@
   font-size: 14px;
   transition: all 0.2s ease-in-out;
   color: white;
-  white-space: nowrap; /* Prevents button text from wrapping */
+  white-space: nowrap; 
 }
  
 .action-button:hover {
@@ -216,7 +217,7 @@
   box-shadow: 0 2px 4px rgba(220, 53, 69, 0.2);
 }
  
-/* --- Pagination Controls --- */
+/*  Pagination Controls  */
 .pagination-controls {
   display: flex;
   justify-content: center;
@@ -251,7 +252,7 @@
   cursor: not-allowed;
 }
  
-/* --- Misc Messages --- */
+/*  Misc Messages  */
 .alert-danger {
   color: #721c24;
   background-color: #f8d7da;
@@ -281,9 +282,7 @@
   font-size: 18px;
 }
  
-/* --- Modal & Popup Styles --- */
- 
-/* --- Modal Overlay --- */
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -297,7 +296,7 @@
   z-index: 1000;
 }
  
-/* --- Modal Content --- */
+/*  Modal Content  */
 .modal-content {
   background-color: white;
   padding: 24px 30px;
@@ -357,7 +356,7 @@
   background-color: #c82333;
 }
  
-/* --- Success Popup (Toast) --- */
+/*  Success Popup (Toast)  */
 .success-popup {
   position: fixed;
   bottom: 30px;
@@ -398,15 +397,16 @@
 .status-success-popup .close-btn:hover {
   opacity: 1;
 }
- 
- 
-/* --- *** ADD THIS NEW STYLE for the Cancelled Badge *** --- */
-/* (Assuming you have a <span> for status on this page) */
- 
+
 .badge-secondary,
 .status-cancelled {
   background-color: #e2e3e5;
   color: #383d41;
   border: 1px solid #d6d8db;
-  /* Add other .badge styles you have (padding, radius) */
+}
+
+
+.action-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }

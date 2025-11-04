@@ -64,16 +64,16 @@
   padding: 5px 0;
   margin: 0;
   display: flex;
-  flex-direction: column; 
-  gap: 8px; 
+  flex-direction: column;
+  gap: 8px;
   z-index: 1000;
-  min-width: 105px; 
+  min-width: 105px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
-
-
-
+ 
+ 
+ 
 .dropdown ul li a {
   display: block;
   padding: 12px 18px;
@@ -90,12 +90,12 @@
   background-color: #f39c12;
   color: #000;
 }
-
-
+ 
+ 
 .app, .feedback{
   cursor:pointer;
 }
-
+ 
 .profile-icon {
   display: inline-block;
   width: 32px;
@@ -145,10 +145,10 @@
   border-radius: 4px;
   cursor: pointer;
 }
-
-
+ 
+ 
 .yes-button {
-  background-color: #e74c3c; 
+  background-color: #e74c3c;
   color: white;
 }
  

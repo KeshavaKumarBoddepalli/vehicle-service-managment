@@ -32,12 +32,13 @@
         placeholder="0"
         [(ngModel)]="service.servicePrice"
         #servicePriceVar="ngModel"
+        pattern="^[0-9]+$"
         required
         min="0"
       />
       <div *ngIf="servicePriceVar.invalid && (servicePriceVar.dirty || servicePriceVar.touched)" class="error-message">
         <small *ngIf="servicePriceVar.errors?.required">Service Price is required.</small>
-        <small *ngIf="servicePriceVar.errors?.min">Price must be positive.</small>
+        <small *ngIf="servicePriceVar.errors?.pattern">Price must be positive.</small>
       </div>
     </div>
 

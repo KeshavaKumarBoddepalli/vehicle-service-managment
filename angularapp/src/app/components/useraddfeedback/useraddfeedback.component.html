@@ -33,13 +33,13 @@
         Rating is required.
       </div>
     </div>
-
+ 
     <button type="submit" class="btn-submit" [disabled]="feedbackForm.invalid || !newFeedback.rating">
       Submit Feedback
     </button>
   </form>
 </div>
-
+ 
 <!-- Success Popup -->
 <div *ngIf="showSuccessPopup" class="popup-overlay">
   <div class="popup-content">

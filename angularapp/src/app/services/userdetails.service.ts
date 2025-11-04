@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
+import { BASE_URL } from '../config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserdetailsService {
-  apiUrl="https://8080-cecdfddacafbdafffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/user";
+  apiUrl=`${BASE_URL}/api/user`;
 
   constructor(private http:HttpClient) { }
 

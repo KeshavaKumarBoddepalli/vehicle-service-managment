@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs'; // Import BehaviorSubject and Observable
 import { map } from 'rxjs/operators';
 import { User } from '../models/user.model';
+import { BASE_URL } from '../config';
  
 // Constants for localStorage keys
 export const AUTHENTICATED_USER = 'authenticatedUser';
@@ -16,7 +17,7 @@ export const ROLE = 'role';
 })
 export class AuthService {
  
-  public baseUrl = "https://8080-cecdfddacafbdafffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api";
+  public baseUrl = `${BASE_URL}/api`;
  
   // --- START OF REACTIVE CHANGES ---
  

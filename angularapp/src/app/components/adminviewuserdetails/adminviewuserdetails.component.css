@@ -10,7 +10,7 @@
   justify-content: center;
   z-index: 1000;
 }
-
+ 
 .popup-content {
   background: #fff;
   padding: 30px;
@@ -20,21 +20,21 @@
   max-width: 400px;
   width: 90%;
 }
-
+ 
 .popup-content.confirmation h2 {
   color: #dc3545; /* Red for confirmation */
 }
-
+ 
 .popup-content.success h2 {
   color: #28a745; /* Green for success */
 }
-
+ 
 .popup-buttons {
   display: flex;
   justify-content: center;
   gap: 10px;
 }
-
+ 
 .confirm-btn {
   background-color: #dc3545;
   color: #fff;
@@ -43,7 +43,7 @@
   border-radius: 4px;
   cursor: pointer;
 }
-
+ 
 .cancel-btn {
   background-color: #6c757d;
   color: #fff;
@@ -52,7 +52,7 @@
   border-radius: 4px;
   cursor: pointer;
 }
-
+ 
 .ok-btn {
   background-color: #28a745;
   color: #fff;
@@ -61,23 +61,23 @@
   border-radius: 4px;
   cursor: pointer;
 }
-
+ 
 .container {
   width: 80%;
   margin: auto;
   text-align: center;
 }
-
+ 
 .search-box {
   margin-bottom: 15px;
 }
-
+ 
 input {
   padding: 8px;
   width: 250px;
   margin-right: 10px;
 }
-
+ 
 button {
   padding: 8px 12px;
   background-color: #007bff;
@@ -85,23 +85,23 @@ button {
   border: none;
   cursor: pointer;
 }
-
+ 
 button.delete-btn {
   background-color: #dc3545;
 }
-
+ 
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
 }
-
+ 
 th, td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
 }
-
+ 
 th {
   background-color: #f2f2f2;
 }
@@ -117,13 +117,13 @@ th {
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  overflow: hidden; /* Ensures border-radius applies to children */
+  overflow: hidden; 
 }
  
 /* Card header with title and search */
 .card-header {
   display: flex;
-  flex-wrap: wrap; /* Allows search to wrap on small screens */
+  flex-wrap: wrap; 
   justify-content: space-between;
   align-items: center;
   padding: 20px 25px;
@@ -141,7 +141,7 @@ th {
   display: flex;
   border: 1px solid #ccc;
   border-radius: 6px;
-  overflow: hidden; /* To keep button and input attached */
+  overflow: hidden; 
 }
  
 .search-form input[type="text"] {
@@ -162,7 +162,7 @@ th {
   font-weight: 500;
   display: inline-flex;
   align-items: center;
-  gap: 6px; /* Space between icon and text */
+  gap: 6px;
   transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
  
@@ -179,21 +179,21 @@ th {
  
 /* Delete button styling */
 .btn-delete {
-  background-color: #f8d7da; /* Light red background */
-  color: #721c24; /* Dark red text */
+  background-color: #f8d7da; 
+  color: #721c24;
   border: 1px solid #f5c6cb;
   border-radius: 5px;
 }
  
 .btn-delete:hover {
-  background-color: #dc3545; /* Solid red on hover */
+  background-color: #dc3545; 
   color: white;
   box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
 }
  
 /* Table styling */
 .table-wrapper {
-  overflow-x: auto; /* Responsive: allows horizontal scroll on small screens */
+  overflow-x: auto; 
   padding: 0;
 }
  
@@ -221,19 +221,18 @@ th {
  
 /* Table body */
 tbody tr:last-child td {
-  border-bottom: none; /* Remove border from last row */
+  border-bottom: none; 
 }
  
 tbody tr:hover {
   background-color: #f5f5f5;
 }
  
-/* Center-align action buttons */
 .action-column {
   text-align: center;
 }
  
-/* "Not Found" message styling */
+
 .not-found-message {
   text-align: center;
   padding: 40px 20px;
@@ -247,5 +246,6 @@ tbody tr:hover {
  
 .not-found-message .fas {
   font-size: 20px;
-  color: #dc3545; /* Red icon for warning */
+  color: #dc3545; 
 }
+ 

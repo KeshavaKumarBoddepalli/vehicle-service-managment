@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Feedback } from '../models/feedback.model';
+import { BASE_URL } from '../config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeedbackService {
-  private apiUrl = "https://8080-cecdfddacafbdafffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/feedback";
+  private apiUrl = `${BASE_URL}/api/feedback`;
 
   constructor(private http: HttpClient) {}
 

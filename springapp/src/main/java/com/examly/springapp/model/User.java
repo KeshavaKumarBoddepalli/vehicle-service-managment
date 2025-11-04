@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 @Table(name="user")
 public class User {
     @Id
-    @GeneratedValue  
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
     @Column(name = "user_id")
     int userId;
     String email;

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { BASE_URL } from 'src/app/config';
 import { AuthService } from 'src/app/services/auth.service';
  
 @Component({
@@ -24,7 +25,7 @@ export class ProfileComponent implements OnInit {
   userRole = '';
   password = '';
 
-  public apiUrl = "https://8080-facafcdbdfacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io/api/user";
+  public apiUrl = `${BASE_URL}/api/user`;
 
   constructor(private http: HttpClient, public authservice: AuthService) {}
 
