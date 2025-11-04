@@ -69,8 +69,9 @@ export class UserviewappointmentComponent implements OnInit {
     this.appointmentService.getAppointmentsByUser(userId).subscribe({
       next: (data) => {
         this.allMyAppointments = data.sort((a, b) =>
-          new Date(b.appointmentDate).getTime() - new Date(a.appointmentDate).getTime()
+          (b.appointmentId ?? 0) - (a.appointmentId ?? 0)
         );
+ 
         this.onFilterChange();
         this.isLoading = false;
       },
@@ -81,6 +82,7 @@ export class UserviewappointmentComponent implements OnInit {
       }
     });
   }
+ 
  
   onFilterChange(): void {
     if (this.selectedStatus === 'All') {
@@ -184,10 +186,10 @@ export class UserviewappointmentComponent implements OnInit {
     });
   }
  
-  // --- CANCEL METHODS ---
+
  
   openCancelConfirm(appointment: Appointment): void {
-    // Allow cancelling 'Pending' OR 'Approved'
+   
     if (appointment.status === 'Rejected' || appointment.status === 'Cancelled') return;
     this.appointmentToCancel = appointment;
     this.showCancelConfirm = true;
@@ -197,22 +199,21 @@ export class UserviewappointmentComponent implements OnInit {
     this.showCancelConfirm = false;
     this.appointmentToCancel = null;
   }
- 
-  /** *** UPDATED: Calls the NEW updateAppointmentStatus *** */
+
   confirmCancel(): void {
     if (!this.appointmentToCancel) return;
  
     this.isProcessing = true;
     
-    // Calls PATCH /api/appointment/{id}/status
+    
     this.appointmentService.updateAppointmentStatus(this.appointmentToCancel.appointmentId!, 'Cancelled').subscribe({
       next: (response) => {
-        // 'response' is the updated appointment
+      
         const index = this.allMyAppointments.findIndex(
           app => app.appointmentId === this.appointmentToCancel!.appointmentId
         );
         if (index !== -1) {
-          this.allMyAppointments[index] = response; // Update list
+          this.allMyAppointments[index] = response;
         }
         
         this.onFilterChange();
@@ -231,7 +232,7 @@ export class UserviewappointmentComponent implements OnInit {
   }
  
  
-  // --- VALIDATION HELPERS (Unchanged) ---
+  
   private isPastDate(dateStr: string | undefined | null): boolean {
     if (!dateStr) return true;
     return dateStr < this.today;
@@ -242,7 +243,7 @@ export class UserviewappointmentComponent implements OnInit {
     return trimmed.length > 0 && this.LOCATION_REGEX.test(trimmed);
   }
  
-  // --- POPUP HANDLERS (Unchanged) ---
+ 
   showSuccess(message: string): void {
     this.successMessage = message;
     this.showSuccessPopup = true;

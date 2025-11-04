@@ -77,6 +77,8 @@ export class ProfileComponent implements OnInit {
     setTimeout(() => this.showSuccess = false, 3000);
   }
 
+  
+
   ngOnInit(): void {
     this.userId = this.authservice.getAuthenticatedUserId();
     this.fetchUserProfile();

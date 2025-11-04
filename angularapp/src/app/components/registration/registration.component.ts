@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-// Import HttpErrorResponse to catch backend errors
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
-// The User model isn't used in this component, so I've commented it out
-// import { User } from 'src/app/models/user.model';
- 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -15,7 +11,6 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RegistrationComponent implements OnInit {
   registerForm: FormGroup;
   
-  // These new properties will hold our success/error messages
   public errorMessage: string | null = null;
   public successMessage: string | null = null;
   passwordFieldType: string = 'password';
@@ -54,25 +49,25 @@ export class RegistrationComponent implements OnInit {
     return password === confirmPassword ? null : { mismatch: true };
   }
   onSubmit() {
-    // Clear any previous messages on a new submit
+   
     this.errorMessage = null;
     this.successMessage = null;
  
     if (this.registerForm.valid) {
      this.service.register(this.registerForm.value).subscribe(
          
-        // --- UPDATED SUCCESS HANDLER ---
+        
          (result) => {
            this.successMessage = "Registration successful! Redirecting to login...";
            this.registerForm.reset();
            
-           // Navigate to login after a 2-second delay so user can read the message
+         
            setTimeout(() => {
              this.router.navigate(['/login']);
            }, 2000);
          },
  
-         // --- UPDATED ERROR HANDLER ---
+        
          (error: HttpErrorResponse) => {
            // We DON'T reset the form, so the user can fix their mistake.
            
