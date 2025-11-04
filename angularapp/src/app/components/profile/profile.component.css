@@ -69,10 +69,10 @@ button:last-child {
 
 .profile-img {
   
-width: 80px;       /* Adjust width as needed */
-height: 80px;      /* Adjust height to maintain aspect ratio */
-border-radius: 50%; /* Optional: makes the image circular */
-object-fit: cover;  /* Ensures the image fits nicely */
+width: 80px;       
+height: 80px;      
+border-radius: 50%; 
+object-fit: cover;  
 margin-bottom: 10px;
 
   border: 2px solid #ccc;

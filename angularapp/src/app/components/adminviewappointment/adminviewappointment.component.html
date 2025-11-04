@@ -154,9 +154,7 @@
       <button (click)="cancelDelete()" class="modal-button cancel-button">
         Cancel
       </button>
-      <button (click)="confirmDelete()" class="modal-button confirm-delete-button">
-        Confirm Delete
-      </button>
+      <button type="button" [disabled]="!feedbackIdToDelete" (click)="confirmDelete()">Yes</button>
     </div>
   </div>
 </div>

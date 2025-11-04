@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { UserdetailsService } from 'src/app/services/userdetails.service';
- 
+
 @Component({
   selector: 'app-adminviewuserdetails',
   templateUrl: './adminviewuserdetails.component.html',
   styleUrls: ['./adminviewuserdetails.component.css']
 })
 export class AdminviewuserdetailsComponent implements OnInit {
- 
+
   allCustomers: User[] = [];
   filteredCustomers: User[] = [];
   searchForm: FormGroup;
