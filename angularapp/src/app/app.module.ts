@@ -46,7 +46,7 @@ import { AuthService } from './services/auth.service';
     UseraddfeedbackComponent,
     UsernavbarComponent,
     UserviewappointmentComponent,
-    UserviewfeedbackComponent
+    UserviewfeedbackComponent,
   ],
   imports: [
     BrowserModule,

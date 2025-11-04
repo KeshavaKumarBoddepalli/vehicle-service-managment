@@ -87,7 +87,6 @@ export class UserviewappointmentComponent implements OnInit {
         this.allMyAppointments = data.sort((a, b) =>
           (b.appointmentId ?? 0) - (a.appointmentId ?? 0)
         );
-
         this.onFilterChange();
         this.isLoading = false;
       },

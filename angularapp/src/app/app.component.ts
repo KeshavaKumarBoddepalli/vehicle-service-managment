@@ -42,6 +42,7 @@ export class AppComponent{
   userRole: string = '';
 
   constructor(public authService: AuthService) {}
+  showChat: boolean = false;
 
   // ngOnInit(): void {
   //   this.userRole = this.authService.getRole(); 
