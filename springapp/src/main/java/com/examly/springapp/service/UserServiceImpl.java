@@ -1,37 +1,37 @@
 package com.examly.springapp.service;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.examly.springapp.config.UserPrinciple;
-import org.springframework.security.core.userdetails.UserDetails;
 import com.examly.springapp.model.User;
 
 import com.examly.springapp.repository.UserRepo;
-import com.examly.springapp.config.UserPrinciple;
 
 @Service
 public class UserServiceImpl implements UserService , UserDetailsService {
-    @Autowired
-    private UserRepo urepo;
+    
+    public UserServiceImpl(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
+
+    private UserRepo userRepo;
 
     @Override
     public User createUser(User user) {
-        return urepo.save(user);
+        return userRepo.save(user);
     }
 
     @Override
     public boolean deleteUser(int userId) {
-          User found= urepo.findById(userId).orElse(null);
+          User found= userRepo.findById(userId).orElse(null);
             if (found != null){
 
-            urepo.delete(found);
+            userRepo.delete(found);
             return true;
         }
         return false;
@@ -40,12 +40,12 @@ public class UserServiceImpl implements UserService , UserDetailsService {
 
     @Override
     public List<User> findAllUsers() {
-        return urepo.findAll();
+        return userRepo.findAll();
     }
 
     @Override
     public User getByUserId(int userId) {
-        User found= urepo.findById(userId).orElse(null);
+        User found= userRepo.findById(userId).orElse(null);
         if(found==null){
             return null;
         }
@@ -54,13 +54,13 @@ public class UserServiceImpl implements UserService , UserDetailsService {
 
     @Override
     public User findByUsername(String username) {
-        return urepo.findByUsername(username);
+        return userRepo.findByUsername(username);
     }
 
     
 @Override
 public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    User user = urepo.findByUsername(username);
+    User user = userRepo.findByUsername(username);
     if (user == null) {
         System.out.println("User not found: " + username);
         throw new UsernameNotFoundException("User not found: " + username);
@@ -71,26 +71,26 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
 
     @Override
     public User updateUser(User user) {
-        User found=urepo.findById(user.getUserId()).orElse(null);
+        User found=userRepo.findById(user.getUserId()).orElse(null);
         if(found==null){
             return null;
         }
-        return urepo.save(user);
+        return userRepo.save(user);
     }
    
 
     @Override
     public boolean existsByUsername(String username) {
-        return urepo.existsByUsername(username);
+        return userRepo.existsByUsername(username);
     }
  
     @Override
     public boolean existsByEmail(String email) {
-        return urepo.existsByEmail(email);
+        return userRepo.existsByEmail(email);
     }
  
     @Override
     public boolean existsByMobileNumber(String mobileNumber) {
-        return urepo.existsByMobileNumber(mobileNumber);
+        return userRepo.existsByMobileNumber(mobileNumber);
     }
 }

@@ -139,13 +139,21 @@
   font-weight: 500;
 }
  
-.logout-popup button:first-child {
-  background-color: #e74c3c;
-  color: #fff;
+.yes-button {
+  background-color: #e74c3c; 
+  color: white;
 }
  
-.logout-popup button:last-child {
-  background-color: #bdc3c7;
-  color: #333;
+.yes-button:hover {
+  background-color: #c0392b;
+}
+ 
+.no-button {
+  background-color: #3498db;
+  color: white;
+}
+ 
+.no-button:hover {
+  background-color: #2980b9;
 }
  
