@@ -22,6 +22,7 @@ public class Appointment {
 
     private String location;
 
+    private String timeSlot;
     
     private String status;
 
@@ -34,12 +35,13 @@ public class Appointment {
     
 
 
-    public Appointment(VehicleMaintenance service, LocalDate appointmentDate, String location, User user, String status) {
+    public Appointment(VehicleMaintenance service, LocalDate appointmentDate, String location, User user, String status,String timeSlot) {
         this.service = service;
         this.appointmentDate = appointmentDate;
         this.location = location;
         this.status = status;
         this.user = user;
+        this.timeSlot=timeSlot;
     }
 
     public Long getAppointmentId() {
@@ -88,5 +90,17 @@ public class Appointment {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+
+
+    public String getTimeSlot() {
+        return timeSlot;
+    }
+
+
+
+    public void setTimeSlot(String timeSlot) {
+        this.timeSlot = timeSlot;
     }
 }

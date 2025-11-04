@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Feedback {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long feedbackId;
     @ManyToOne
     @JoinColumn(name = "userId")

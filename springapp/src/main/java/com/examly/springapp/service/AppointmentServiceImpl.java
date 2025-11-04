@@ -1,130 +1,162 @@
 package com.examly.springapp.service;
- 
 import com.examly.springapp.model.Appointment;
 import com.examly.springapp.model.User;
 import com.examly.springapp.model.VehicleMaintenance;
 import com.examly.springapp.repository.AppointmentRepo;
 import com.examly.springapp.repository.UserRepo;
 import com.examly.springapp.repository.VehicleServiceRepo;
- 
-// *** IMPORT THESE ***
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.access.AccessDeniedException; // Use standard exception
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects; // For safe ID comparison
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Optional;
- 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
- 
     private final AppointmentRepo appointmentRepo;
     private final UserRepo userRepo;
     private final VehicleServiceRepo vehicleServiceRepo;
- 
+    private static final List<String> ALL_AVAILABLE_SLOTS = Arrays.asList(
+        "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
+        "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM"
+    );
     public AppointmentServiceImpl(AppointmentRepo appointmentRepo, UserRepo userRepo,
                                    VehicleServiceRepo vehicleServiceRepo) {
         this.appointmentRepo = appointmentRepo;
         this.userRepo = userRepo;
         this.vehicleServiceRepo = vehicleServiceRepo;
     }
- 
-    // --- *** NEW: HELPER TO GET LOGGED-IN USER *** ---
+    @Override
+    public List<String> getAvailableSlots(LocalDate date, Long serviceId) {
+        List<String> bookedSlots = appointmentRepo.findBookedTimeSlotsByServiceIdAndDate(serviceId, date);
+        List<String> availableSlots = new ArrayList<>(ALL_AVAILABLE_SLOTS);
+        availableSlots.removeAll(bookedSlots);
+        return availableSlots;
+    }
+    @Override
+    public boolean checkUserBooking(Long userId, Long serviceId, LocalDate date) {
+        return appointmentRepo.existsByUserAndServiceAndDate(userId, serviceId, date);
+    }
     private User getAuthenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated()) {
             throw new AccessDeniedException("User is not authenticated");
         }
         String currentUsername = authentication.getName();
-
         User user = userRepo.findByUsername(currentUsername);
-if (user == null) {
-    throw new jakarta.persistence.EntityNotFoundException("User not found: " + currentUsername);
-}
-  return user;
+        if (user == null) {
+            throw new jakarta.persistence.EntityNotFoundException("User not found: " + currentUsername);
+        }
+        return user;
     }
- 
-    // --- *** NEW: HELPER TO FIND APPOINTMENT *** ---
     private Appointment findAppointmentById(Long appointmentId) {
          return appointmentRepo.findById(appointmentId)
             .orElseThrow(() -> new jakarta.persistence.EntityNotFoundException("Appointment not found: " + appointmentId));
     }
- 
     @Override
     public Appointment addAppointment(Appointment appointment) {
-        // ... (Your existing add logic is fine) ...
-        // Note: It's safer to get the user from getAuthenticatedUser()
-        // than to trust the appointment object, but this works for now.
-        
-        Integer userId = appointment.getUser().getUserId();
+        User currentUser = getAuthenticatedUser();
+        appointment.setUser(currentUser);
         Long serviceId = appointment.getService().getServiceId();
- 
-        User user = userRepo.findById(userId).orElseThrow(() ->
-            new IllegalArgumentException("User not found in DB"));
- 
         VehicleMaintenance service = vehicleServiceRepo.findById(serviceId).orElseThrow(() ->
             new IllegalArgumentException("Service not found in DB"));
- 
-        appointment.setUser(user);
         appointment.setService(service);
- 
+        boolean slotTaken = appointmentRepo.existsByServiceIdAndDateAndTimeSlot(
+            serviceId,
+            appointment.getAppointmentDate(),
+            appointment.getTimeSlot()
+        );
+        if (slotTaken) {
+            throw new IllegalStateException("This time slot is no longer available. Please select another slot.");
+        }
+        appointment.setStatus("Pending");
         return appointmentRepo.save(appointment);
     }
- 
     @Override
     public void deleteAppointment(Long appointmentId) {
-        // This is an ADMIN-only action.
         appointmentRepo.deleteById(appointmentId);
     }
     
-    // ... (getAppointmentById, getAllAppointments, getAppointmentsByUserId are fine) ...
     @Override
     public Optional<Appointment> getAppointmentById(Long appointmentId) {
         return appointmentRepo.findById(appointmentId);
     }
- 
+    // --- *** HERE IS THE FIX *** ---
     @Override
     public List<Appointment> getAllAppointments() {
-        return appointmentRepo.findAll();
+        // 1. Get the data
+        List<Appointment> data = appointmentRepo.findAll();
+        
+        // 2. FORCE Hibernate to load the service data
+        data.forEach(a -> {
+            if (a.getService() != null) {
+                a.getService().getServiceName(); // This line forces the load
+            }
+        });
+        
+        // 3. Return the fully loaded data
+        return data;
     }
- 
+    // --- *** HERE IS THE FIX *** ---
     @Override
     public List<Appointment> getAppointmentsByUserId(Long userId) {
-        return appointmentRepo.findByUserUserId(userId);
+        // 1. Get the data using the CORRECT method name
+        List<Appointment> data = appointmentRepo.findByUserUserId(userId);
+        
+        // 2. FORCE Hibernate to load the service data
+        data.forEach(a -> {
+            if (a.getService() != null) {
+                a.getService().getServiceName(); // This line forces the load
+            }
+        });
+        
+        // 3. Return the fully loaded data
+        return data;
     }
- 
- 
-    // --- *** MODIFIED: updateAppointment (FOR USER EDIT) *** ---
     @Override
     public Appointment updateAppointment(Long appointmentId, Appointment updateRequest) {
-        
         User currentUser = getAuthenticatedUser();
         Appointment existingAppointment = findAppointmentById(appointmentId);
- 
-        // --- *** SECURITY CHECK 1: IS THIS THE USER'S APPOINTMENT? *** ---
         boolean isAdmin = "ADMIN".equals(currentUser.getUserRole());
-        
         if (!isAdmin && !Objects.equals(existingAppointment.getUser().getUserId(), currentUser.getUserId())) {
             throw new AccessDeniedException("You are not authorized to update this appointment.");
         }
- 
-        // --- BUSINESS LOGIC: Users can only edit 'Pending' appointments ---
         if (!isAdmin && !"Pending".equalsIgnoreCase(existingAppointment.getStatus())) {
             throw new IllegalStateException("Only 'Pending' appointments can be edited.");
         }
         
-        // --- LOGIC FOR PARTIAL UPDATE ---
-        // User/Admin can update date/location
-        if (updateRequest.getAppointmentDate() != null) {
+        LocalDate oldDate = existingAppointment.getAppointmentDate();
+        String oldSlot = existingAppointment.getTimeSlot();
+        boolean dateOrSlotChanged = false;
+        if (updateRequest.getAppointmentDate() != null && !updateRequest.getAppointmentDate().equals(oldDate)) {
             existingAppointment.setAppointmentDate(updateRequest.getAppointmentDate());
+            dateOrSlotChanged = true;
         }
         if (updateRequest.getLocation() != null) {
             existingAppointment.setLocation(updateRequest.getLocation());
         }
- 
-        // --- SECURITY: PREVENT USER FROM CHANGING OTHER FIELDS ---
-        // Only Admins can change status, user, or service via this endpoint
+        if (updateRequest.getTimeSlot() != null && !updateRequest.getTimeSlot().equals(oldSlot)) {
+            existingAppointment.setTimeSlot(updateRequest.getTimeSlot());
+            dateOrSlotChanged = true;
+        }
+        if (dateOrSlotChanged) {
+            Long serviceId = existingAppointment.getService().getServiceId();
+            
+            Optional<Appointment> clash = appointmentRepo.findClashingAppointment(
+                serviceId,
+                existingAppointment.getAppointmentDate(),
+                existingAppointment.getTimeSlot(),
+                existingAppointment.getAppointmentId()
+            );
+            
+            if (clash.isPresent()) {
+                throw new IllegalStateException("This time slot is no longer available. Please select another slot.");
+            }
+        }
         if (isAdmin) {
             if (updateRequest.getService() != null) {
                 existingAppointment.setService(updateRequest.getService());
@@ -136,42 +168,28 @@ if (user == null) {
                 existingAppointment.setUser(updateRequest.getUser());
             }
         }
- 
         return appointmentRepo.save(existingAppointment);
     }
- 
-    // --- *** MODIFIED: updateAppointmentStatus (FOR USER CANCEL) *** ---
     @Override
     public Appointment updateAppointmentStatus(Long appointmentId, String status) {
-        
         User currentUser = getAuthenticatedUser();
         Appointment appointment = findAppointmentById(appointmentId);
- 
-        // --- *** SECURITY CHECK: IS THIS THE USER'S APPOINTMENT? *** ---
         boolean isAdmin = "ADMIN".equals(currentUser.getUserRole());
         
         if (!isAdmin && !Objects.equals(appointment.getUser().getUserId(), currentUser.getUserId())) {
             throw new AccessDeniedException("You are not authorized to update this appointment.");
         }
- 
-        // --- BUSINESS LOGIC: ---
         if (isAdmin) {
-            // Admin can set any status
             appointment.setStatus(status);
         } else {
-            // A regular user can ONLY set the status to "Cancelled"
             if (!"Cancelled".equalsIgnoreCase(status)) {
                 throw new AccessDeniedException("You are only authorized to 'Cancel' this appointment.");
             }
-            
-            // User can cancel 'Pending' or 'Approved' appointments
             if (!"Pending".equalsIgnoreCase(appointment.getStatus()) && !"Approved".equalsIgnoreCase(appointment.getStatus())) {
                  throw new IllegalStateException("Only 'Pending' or 'Approved' appointments can be cancelled.");
             }
-            
-            appointment.setStatus(status); // Set to "Cancelled"
+            appointment.setStatus(status);
         }
- 
         return appointmentRepo.save(appointment);
     }
 }
