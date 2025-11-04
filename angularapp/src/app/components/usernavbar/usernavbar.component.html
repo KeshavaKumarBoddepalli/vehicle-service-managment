@@ -12,12 +12,12 @@
        
         <li class="dropdown" (mouseleave)="closeAllDropdowns()">
           <a (mouseenter)="cancelLogout(); toggleAppointmentsDropdown()" role="button" aria-haspopup="true" aria-expanded="{{ showAppointmentsDropdown }}" class="app" (keydown)="handleKeyPress($event)">
-
+ 
             Appointments
           </a>
           <ul *ngIf="showAppointmentsDropdown">
-            <li><a routerLink="/useraddappointment" (click)="cancelLogout()">Book Appointment</a></li>
-            <li><a routerLink="/userviewappointment"   (click)="cancelLogout()">View Appointments</a></li>
+            <li><a routerLink="/useraddappointment" (click)="cancelLogout()">Book</a></li>
+            <li><a routerLink="/userviewappointment"   (click)="cancelLogout()">View</a></li>
           </ul>
         </li>
  
@@ -27,8 +27,8 @@
             Feedback
           </a>
           <ul *ngIf="showFeedbackDropdown">
-            <li><a routerLink="/useraddfeedback" (click)="cancelLogout()">Add Feedback</a></li>
-            <li><a routerLink="/userviewfeedback"  (click)="cancelLogout()">View Feedback</a></li>
+            <li><a routerLink="/useraddfeedback" (click)="cancelLogout()">Add</a></li>
+            <li><a routerLink="/userviewfeedback"  (click)="cancelLogout()">View</a></li>
           </ul>
         </li>
  
@@ -51,4 +51,6 @@
       <button class="no-button"  (click)="cancelLogout()">No</button>
     </div>
 </div>
+ 
+ 
  
