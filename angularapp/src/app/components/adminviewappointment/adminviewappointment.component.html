@@ -5,15 +5,14 @@
     {{ errorMessage }}
   </div>
  
-  <!-- Loading Message -->
   <div *ngIf="isLoading" class="loading-message">
     <h3>Loading appointments...</h3>
   </div>
  
   <div *ngIf="!isLoading">
-    <!-- Controls Wrapper -->
+    
     <div class="controls-wrapper">
-      <!-- Search Bar -->
+     
       <div class="search-container">
         <input type="text"
                class="search-input"
@@ -23,7 +22,7 @@
         <span class="search-icon">&#9906;</span>
       </div>
  
-      <!-- Filter by Status Dropdown -->
+      
       <div class="sort-container">
         <label for="filterStatus" class="sort-label">Filter by:</label>
         <select id="filterStatus"
@@ -36,7 +35,7 @@
         </select>
       </div>
    
-      <!-- Sort Controls -->
+   
       <div class="sort-container">
         <label for="sortField" class="sort-label">Sort by:</label>
         <select id="sortField"
@@ -59,10 +58,10 @@
       </div>
     </div>
    
-    <!-- Main Content Table Wrapper -->
+   
     <div *ngIf="appointments.length > 0; else noAppointments" class="table-wrapper">
    
-      <!-- This div checks if there are items to show after filtering -->
+     
       <div *ngIf="paginatedAppointments.length > 0; else noSearchResults">
         <table class="appointment-table">
           <thead>
@@ -79,7 +78,7 @@
             </tr>
           </thead>
           <tbody>
-            <!-- Loop over paginatedAppointments -->
+         
             <tr *ngFor="let app of paginatedAppointments; let i = index">
               <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
               <td>{{ app.service?.serviceName || 'N/A' }}</td>
@@ -144,17 +143,17 @@
         </button>
       </div>
    
-    </div> <!-- End of table-wrapper -->
-  </div> <!-- End of *ngIf="!isLoading" -->
+    </div> 
+  </div>
  
-  <!-- Template for NO search results -->
+
   <ng-template #noSearchResults>
     <div class="no-appointments-message">
       <h3>No appointments found matching your search criteria.</h3>
     </div>
   </ng-template>
  
-  <!-- Template for NO appointments at all -->
+ 
   <ng-template #noAppointments>
     <div *ngIf="!isLoading && !errorMessage" class="no-appointments-message">
       <h3>Oops! No Appointment found.</h3>
@@ -163,7 +162,7 @@
  
 </div>
  
-<!-- Success Popup -->
+
 <div class="success-popup" [class.show]="showSuccessPopup">
   {{ successMessage }}
   <button (click)="closeSuccessPopup()" class="close-popup-btn">&times;</button>

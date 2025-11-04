@@ -71,11 +71,19 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
 
     @Override
     public User updateUser(User user) {
-        User found=urepo.findById(user.getUserId()).orElse(null);
-        if(found==null){
+        Optional<User> optionalUser = urepo.findById(user.getUserId());
+        if (optionalUser.isEmpty()) {
             return null;
         }
-        return urepo.save(user);
+    
+        User existingUser = optionalUser.get();
+    
+        // Update only the fields that are allowed to change
+        existingUser.setUsername(user.getUsername());
+        existingUser.setEmail(user.getEmail());
+        existingUser.setMobileNumber(user.getMobileNumber());
+    
+        return urepo.save(existingUser);
     }
    
 

@@ -1,3 +1,4 @@
+
 .nav-container {
   background-color: #1f1f1f;
   display: flex;
@@ -25,7 +26,6 @@
 
 
 .nav-container li:first-child {
-  border: 1px solid #fff;
   padding: 6px 12px;
   border-radius: 6px;
   color: #fff;
@@ -45,7 +45,7 @@
 
 .user-box {
   border: 1px solid #fff;
-  padding: 6px 12px;
+  padding: 5px 8px;
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 600;
@@ -61,23 +61,29 @@
   top: 100%;
   left: 0;
   background-color: #2c2c2c;
-  padding: 0;
+  padding: 5px 0;
   margin: 0;
   display: flex;
-  flex-direction: column;
-  gap: 5px;
+  flex-direction: column; 
+  gap: 8px; 
   z-index: 1000;
+  min-width: 105px; 
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
+
 
 
 .dropdown ul li a {
   display: block;
-  padding: 8px 16px;
+  padding: 12px 18px;
   background-color: #444;
   color: #fff;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 6px;
+  font-size: 14px;
   transition: background 0.3s ease;
+  text-align: center;
 }
 
 .dropdown ul li a:hover {
@@ -85,11 +91,10 @@
   color: #000;
 }
 
+
 .app, .feedback{
   cursor:pointer;
 }
-
-
 
 .profile-icon {
   display: inline-block;
@@ -140,10 +145,22 @@
   border-radius: 4px;
   cursor: pointer;
 }
-.logout-popup button:first-child {
-  background-color: #e74c3c;
-  color: #fff;
+
+
+.yes-button {
+  background-color: #e74c3c; 
+  color: white;
 }
-.logout-popup button:last-child {
-  background-color: #bdc3c7;
+ 
+.yes-button:hover {
+  background-color: #c0392b;
+}
+ 
+.no-button {
+  background-color: #3498db;
+  color: white;
+}
+ 
+.no-button:hover {
+  background-color: #2980b9;
 }

@@ -31,9 +31,9 @@
  
  
   <div *ngIf="showLogoutPopup" class="logout-popup" (mouseleave)="cancelLogout()">
-  <p>Are you sure you want to logout?</p>
-  <button (click)="logout()">Yes</button>
-  <button (click)="cancelLogout()">No</button>
-</div>
+    <p>Are you sure you want to logout?</p>
+    <button class="yes-button" (click)="logout()">Yes</button>
+    <button class="no-button"  (click)="cancelLogout()">No</button>
+  </div>
  
 </div>
