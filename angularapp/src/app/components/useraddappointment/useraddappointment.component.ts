@@ -28,11 +28,10 @@ export class UseraddappointmentComponent implements OnInit, OnDestroy {
   globalErrorMessage: string = ''; // For table loading
   successMessage: string = '';
   showSuccessPopup: boolean = false;
-  
+ 
   // Date helpers
   today: string = ''; // 'YYYY-MM-DD'
  
-  // Popup auto-close
   private popupTimer: any = null;
  
   // --- Booking Modal State ---
@@ -44,7 +43,7 @@ export class UseraddappointmentComponent implements OnInit, OnDestroy {
   public modalAvailableSlots: string[] = [];
   public modalIsLoadingSlots = false;
   public modalErrorMessage: string | null = null;
-  
+ 
   private readonly LOCATION_REGEX = /^[A-Za-z ]+$/;
  
   constructor(
@@ -66,19 +65,19 @@ export class UseraddappointmentComponent implements OnInit, OnDestroy {
     }
   }
  
-  // ---------- Data loading (No changes) ----------
+  // ---------- Data loading ----------
  
   loadCurrentUser(): void {
     const userId = this.authService.getAuthenticatedUserId();
     const username = this.authService.getAuthenticatedUser();
-    const email = this.authService.getAuthenticatedUser(); 
+    const email = this.authService.getAuthenticatedUser();
     const userRole = this.authService.getAuthenticatedUser();
  
     if (userId && username && email && userRole) {
       this.currentUser = {
         userId: userId,
         username: username,
-        email: email, 
+        email: email,
         userRole: userRole
       };
     } else {
@@ -108,7 +107,7 @@ export class UseraddappointmentComponent implements OnInit, OnDestroy {
     });
   }
  
-  // ---------- Validation helpers (No changes) ----------
+  // ---------- Validation helpers ----------
  
   private isPastDate(dateStr: string): boolean {
     return dateStr < this.today;
@@ -119,7 +118,7 @@ export class UseraddappointmentComponent implements OnInit, OnDestroy {
     return trimmed.length > 0 && this.LOCATION_REGEX.test(trimmed);
   }
  
-  // ---------- Modal Control (No changes) ----------
+  // ---------- Modal Control ----------
  
   public openBookingModal(service: VehicleMaintenance): void {
     if (!this.currentUser) {
@@ -128,7 +127,7 @@ export class UseraddappointmentComponent implements OnInit, OnDestroy {
     }
     this.selectedServiceForBooking = service;
     this.showBookingModal = true;
-    
+   
     // Reset all modal fields
     this.modalAppointmentDate = '';
     this.modalLocation = '';
@@ -143,7 +142,7 @@ export class UseraddappointmentComponent implements OnInit, OnDestroy {
     this.selectedServiceForBooking = null;
   }
  
-  // ---------- *** UPDATED LOGIC HERE *** ----------
+ 
   public onModalDateChange(): void {
     this.modalAvailableSlots = [];
     this.modalTimeSlot = '';
@@ -160,7 +159,7 @@ export class UseraddappointmentComponent implements OnInit, OnDestroy {
     const userId = this.currentUser.userId;
     const date = this.modalAppointmentDate;
  
-    // 1. Check if user already booked this service today
+    // Check if user already booked this service today
     this.modalIsLoadingSlots = true;
     this.appointmentService.checkUserBooking(userId, serviceId, date).subscribe({
       next: (hasBooked) => {
@@ -168,8 +167,7 @@ export class UseraddappointmentComponent implements OnInit, OnDestroy {
           this.modalErrorMessage = `You have already booked "${this.selectedServiceForBooking!.serviceName}" for this day.`;
           this.modalIsLoadingSlots = false;
         } else {
-          // 2. If no duplicate, fetch available slots
-          // --- UPDATED CALL: Pass the serviceId ---
+     
           this.fetchAvailableSlots(date, serviceId);
         }
       },
@@ -181,12 +179,12 @@ export class UseraddappointmentComponent implements OnInit, OnDestroy {
     });
   }
  
-  // ---------- *** UPDATED LOGIC HERE *** ----------
+ 
   private fetchAvailableSlots(date: string, serviceId: number): void {
-    // --- UPDATED CALL: Pass serviceId to the service ---
+ 
     this.appointmentService.getAvailableSlots(date, serviceId).subscribe({
       next: (slots) => {
-        this.modalAvailableSlots = slots; // Corrected this line
+        this.modalAvailableSlots = slots;
         if (slots.length === 0) {
           this.modalErrorMessage = 'Sorry, there are no available slots for this date.';
         }
@@ -202,11 +200,11 @@ export class UseraddappointmentComponent implements OnInit, OnDestroy {
  
   public selectModalSlot(slot: string): void {
     this.modalTimeSlot = slot;
-    this.modalErrorMessage = null; 
+    this.modalErrorMessage = null;
   }
  
  
-  // ---------- Form submission (No changes) ----------
+  // ---------- Form submission  ----------
   public onModalSubmit(form: NgForm): void {
     if (form.invalid) {
       this.modalErrorMessage = 'Please fill in all required fields.';
@@ -228,8 +226,11 @@ export class UseraddappointmentComponent implements OnInit, OnDestroy {
       appointmentDate: this.modalAppointmentDate,
       timeSlot: this.modalTimeSlot,
       location: this.modalLocation.trim(),
-      user: this.currentUser!, 
-      status: 'Pending'
+      user: this.currentUser!,
+      status: 'Pending',
+      bookedServiceName:this.selectedServiceForBooking.serviceName,
+      bookedServicePrice:this.selectedServiceForBooking.servicePrice,
+      bookedVehicleType:this.selectedServiceForBooking.typeOfVehicle
     };
  
     this.appointmentService.addAppointment(newAppointment).subscribe({
@@ -248,7 +249,7 @@ export class UseraddappointmentComponent implements OnInit, OnDestroy {
     });
   }
  
-  // ---------- Popup control (No changes) ----------
+  // ---------- Popup control  ----------
   private showSuccessPopupWith(message: string): void {
     this.successMessage = message;
     this.showSuccessPopup = true;
@@ -268,7 +269,7 @@ export class UseraddappointmentComponent implements OnInit, OnDestroy {
     this.router.navigate(['/userviewappointment']);
   }
  
-  // ---------- Pagination (No changes) ----------
+  // ---------- Pagination  ----------
   updatePaginatedItems(): void {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
@@ -291,5 +292,3 @@ export class UseraddappointmentComponent implements OnInit, OnDestroy {
     }
   }
 }
-
- 

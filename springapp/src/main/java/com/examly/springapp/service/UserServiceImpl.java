@@ -1,6 +1,7 @@
 package com.examly.springapp.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -71,7 +72,7 @@ public UserDetails loadUserByUsername(String username) throws UsernameNotFoundEx
 
 @Override
 public User updateUser(User user) {
-    Optional<User> optionalUser = urepo.findById(user.getUserId());
+    Optional<User> optionalUser = userRepo.findById(user.getUserId());
     if (optionalUser.isEmpty()) {
         return null;
     }
@@ -83,7 +84,7 @@ public User updateUser(User user) {
     existingUser.setEmail(user.getEmail());
     existingUser.setMobileNumber(user.getMobileNumber());
 
-    return urepo.save(existingUser);
+    return userRepo.save(existingUser);
 }
 
    

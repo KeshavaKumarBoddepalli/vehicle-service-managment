@@ -25,6 +25,8 @@ export class UserviewappointmentComponent implements OnInit {
 
   isLoading: boolean = true;
 
+  public searchTerm:string='';
+
   // Pagination
   currentPage: number = 1;
   pageSize: number = 5;
@@ -87,6 +89,7 @@ export class UserviewappointmentComponent implements OnInit {
         this.allMyAppointments = data.sort((a, b) =>
           (b.appointmentId ?? 0) - (a.appointmentId ?? 0)
         );
+
         this.onFilterChange();
         this.isLoading = false;
       },
@@ -99,18 +102,40 @@ export class UserviewappointmentComponent implements OnInit {
   }
 
 
-
   onFilterChange(): void {
-    if (this.selectedStatus === 'All') {
-      this.filteredAppointments = [...this.allMyAppointments];
-    } else {
-      this.filteredAppointments = this.allMyAppointments.filter(
+    let tempAppointments = [...this.allMyAppointments];
+ 
+    // Apply Status Filter
+    if (this.selectedStatus !== 'All') {
+      tempAppointments = tempAppointments.filter(
         app => app.status === this.selectedStatus
       );
     }
+ 
+    // Apply Search Filter
+    if (this.searchTerm.trim() !== '') {
+      const lowerTerm = this.searchTerm.toLowerCase();
+ 
+      tempAppointments = tempAppointments.filter(app => {
+        // Use snapshot data for searching
+        const serviceName = app.bookedServiceName ? app.bookedServiceName.toLowerCase() : '';
+        const location = app.location ? app.location.toLowerCase() : '';
+        const status = app.status ? app.status.toLowerCase() : '';
+        const timeSlot = app.timeSlot ? app.timeSlot.toLowerCase() : '';
+ 
+        return serviceName.includes(lowerTerm) ||
+               location.includes(lowerTerm) ||
+               status.includes(lowerTerm) ||
+               timeSlot.includes(lowerTerm);
+      });
+    }
+ 
+    this.filteredAppointments = tempAppointments;
     this.currentPage = 1;
     this.setupPagination();
   }
+
+
   setupPagination(): void {
     this.totalPages = Math.ceil(this.filteredAppointments.length / this.pageSize);
     this.totalPagesArray = Array(this.totalPages).fill(0).map((_, i) => i + 1);
@@ -147,8 +172,7 @@ export class UserviewappointmentComponent implements OnInit {
 
 
 
-    // --- THIS IS THE CHECK THAT SHOWS THE ERROR ---
-    // It verifies that the backend sent the service data
+  
     if (appointment.service && appointment.service.serviceId) {
       // If data is present, fetch slots
       this.fetchEditSlots(appointment.appointmentDate, appointment.service.serviceId);

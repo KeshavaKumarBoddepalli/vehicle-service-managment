@@ -1,16 +1,26 @@
 <div class="container-fluid mt-4">
   <h2 class="text-center mb-4">My Appointments</h2>
  
-  <div class="row mb-3">
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="statusFilter">Filter by Status:</label>
-        <select id="statusFilter" class="form-control" [(ngModel)]="selectedStatus" (change)="onFilterChange()">
-          <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
-        </select>
-      </div>
+  <div class="filter-search-row">
+    <div class="form-group">
+      <label for="statusFilter">Filter by Status:</label>
+      <select id="statusFilter" class="form-control" [(ngModel)]="selectedStatus" (change)="onFilterChange()">
+        <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="searchInput">Search:</label>
+      <input type="text"
+             id="searchInput"
+             class="form-control search-input"
+             placeholder="Search by service, location, status..."
+             [(ngModel)]="searchTerm"
+             (ngModelChange)="onFilterChange()">
     </div>
   </div>
+  
+  
  
   <div *ngIf="isLoading" class="alert alert-info" role="alert">
     Loading your appointments...
@@ -35,11 +45,17 @@
       </thead>
       <tbody>
         <tr *ngFor="let app of paginatedAppointments">
-          <td>{{ app.service?.serviceName }}</td>
-          <td>{{ app.service?.typeOfVehicle }}</td>
-          <td>{{ app.service?.servicePrice | currency:'INR' }}</td>
+          <td>
+            <span *ngIf="app.service; else notAvailable" >
+            {{ app.bookedServiceName }}</span>
+            <ng-template #notAvailable> 
+              <span style="color: rgb(245, 80, 80); font-style: italic;">Service Not Available</span>
+            </ng-template>
+          </td>
+          <td>{{ app.bookedVehicleType  }}</td>
+          <td>{{ app.bookedServicePrice | currency:'INR'}}</td>
           <td>{{ app.appointmentDate | date:'longDate' }}</td>
-          <td>{{ app.timeSlot }}</td> <td>{{ app.location }}</td>
+          <td>{{ app.timeSlot}}</td> <td>{{ app.location }}</td>
           <td>
             <span class="badge" [ngClass]="{
               'badge-warning': app.status === 'Pending',
@@ -54,14 +70,14 @@
           <td>
             <button class="btn btn-primary btn-sm mr-2" 
                     (click)="openEditModal(app)" 
-                    [disabled]="app.status !== 'Pending'"
-                    title="Edit (Only for 'Pending')">
+                    [disabled]="app.status !== 'Pending' || !app.service "
+                    title="Edit">
               Edit
             </button>
             
             <button class="btn btn-danger btn-sm" 
                     (click)="openCancelConfirm(app)"
-                    [disabled]="app.status === 'Rejected' || app.status === 'Cancelled'"
+                    [disabled]="app.status === 'Rejected' || app.status === 'Cancelled'|| !app.service "
                     title="Cancel (Not allowed for 'Rejected' or 'Cancelled')">
               Cancel
             </button>
@@ -220,4 +236,3 @@
   {{ errorMessage }}
   <button class="close-popup" (click)="closeErrorPopup()">&times;</button>
 </div>
- 
