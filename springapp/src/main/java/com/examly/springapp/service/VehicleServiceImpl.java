@@ -3,86 +3,86 @@ package com.examly.springapp.service;
 import java.util.List;
 import java.util.Optional;
 
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.examly.springapp.model.Appointment;
 import com.examly.springapp.model.VehicleMaintenance;
 import com.examly.springapp.repository.AppointmentRepo;
 import com.examly.springapp.repository.VehicleServiceRepo;
 
-@Service
-public class VehicleServiceImpl implements VehicleService {
 
-    private VehicleServiceRepo vrepo;
+@Service
+public class VehicleServiceImpl implements VehicleService{
+
+    private VehicleServiceRepo vehicleServiceRepo;
     private AppointmentRepo appointmentRepo;
     
-
-
-
-    public VehicleServiceImpl(VehicleServiceRepo vrepo, AppointmentRepo appointmentRepo) {
-        this.vrepo = vrepo;
-        this.appointmentRepo = appointmentRepo;
-    }
-
-    public VehicleServiceRepo getVrepo() {
-        return vrepo;
-    }
-
-    public void setVrepo(VehicleServiceRepo vrepo) {
-        this.vrepo = vrepo;
-    }
-
-    public AppointmentRepo getAppointmentRepo() {
-        return appointmentRepo;
-    }
-
-    public void setAppointmentRepo(AppointmentRepo appointmentRepo) {
+    public VehicleServiceImpl(VehicleServiceRepo vehicleServiceRepo, AppointmentRepo appointmentRepo) {
+        this.vehicleServiceRepo = vehicleServiceRepo;
         this.appointmentRepo = appointmentRepo;
     }
 
     @Override
     public VehicleMaintenance addService(VehicleMaintenance service) {
-        return vrepo.save(service);
+       return vehicleServiceRepo.save(service);
     }
+    
+    // @Transactional
+    // @Override
+    // public void deleteService(Long serviceId) {
+    //     // Delete all appointments linked to this service
+    //     appointmentRepo.deleteByServiceId(serviceId);
+    
+    //     // Delete the service itself
+    //     VehicleMaintenance found = vehicleServiceRepo.findById(serviceId).orElse(null);
+    //     if (found != null) {
+    //         vehicleServiceRepo.delete(found);
+    //     }
+    // }
 
-    @Transactional
-    @Override
-    public void deleteService(Long serviceId) {
-        // Step 1: Delete all appointments linked to this service
-        appointmentRepo.deleteByServiceId(serviceId);
-
-        // Step 2: Delete the service itself
-        VehicleMaintenance found = vrepo.findById(serviceId).orElse(null);
-        if (found != null) {
-            vrepo.delete(found);
-        }
-    }
 
     @Override
     public List<VehicleMaintenance> getAllServices() {
-        return vrepo.findAll();
+        return vehicleServiceRepo.findAll();
     }
 
     @Override
     public Optional<VehicleMaintenance> getServiceById(Long serviceId) {
-        return vrepo.findById(serviceId);
+        return vehicleServiceRepo.findById(serviceId);
     }
-
+ 
     @Override
-    public VehicleMaintenance updateService(Long serviceId, VehicleMaintenance service) {
-        VehicleMaintenance found = vrepo.findById(serviceId).orElse(null);
-        if (found != null) {
+    public VehicleMaintenance updateService(Long serviceId , VehicleMaintenance service) {
+        VehicleMaintenance found=vehicleServiceRepo.findById(serviceId).orElse(null);
+        if(found!=null)
+        {           
             found.setServiceName(service.getServiceName());
             found.setServicePrice(service.getServicePrice());
             found.setTypeOfVehicle(service.getTypeOfVehicle());
-            return vrepo.save(found);
+            return vehicleServiceRepo.save(found);
         }
         return null;
     }
 
+    
     @Override
     public List<VehicleMaintenance> findByServiceName(String serviceName) {
-        return vrepo.findByServiceName(serviceName);
+        return vehicleServiceRepo.findByServiceName(serviceName);
+    }
+
+    @Override
+    public void deleteServiceAndSetAppointmentToNull(long serviceId) {
+       List<Appointment> appointmentsToUpdate =appointmentRepo.findByServiceServiceId(serviceId);
+       //loop and set service link to null
+       for(Appointment app:appointmentsToUpdate){
+        app.setService(null);
+       }
+       //save updated appointment to break tha link
+       appointmentRepo.saveAll(appointmentsToUpdate);
+
+       vehicleServiceRepo.deleteById(serviceId);
     }
 
 }

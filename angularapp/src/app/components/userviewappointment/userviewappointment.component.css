@@ -1,5 +1,4 @@
-/* --- Global & Typography --- */
-* { box-sizing: border-box; }
+*{ box-sizing: border-box; }
  
 .container-fluid {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
@@ -110,8 +109,7 @@ h2.text-center {
  
 .btn-secondary { background-color: #6c757d; border-color: #6c757d; }
 .btn-secondary:hover { background-color: #5a6268; }
- 
-/* --- NEW: Outline button style for unselected slots --- */
+
 .btn-outline-primary {
   color: #007bff;
   background-color: transparent;
@@ -172,21 +170,21 @@ h2.text-center {
   z-index: 1040;
 }
  
-/* --- Modal (center aligned) --- */
+/* --- Modal  --- */
 .modal {
   position: fixed;
   inset: 0;
   z-index: 1050;
   display: grid;
-  place-items: center;   /* Centers dialog perfectly */
+  place-items: center;  
   padding: 1rem;
-  overflow: auto;        /* Allow scroll for long content */
+  overflow: auto;        
   outline: 0;
 }
  
 .modal-dialog {
   width: min(100%, 520px);
-  margin: 0;            /* Remove auto margins to prevent off-centering */
+  margin: 0;         
   background-color: #fff;
   border-radius: 0.375rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
@@ -226,7 +224,7 @@ h2.text-center {
 }
 .modal-body .form-control[readonly] { background-color: #f8f9fa; }
  
-/* --- NEW: Slot selection container in modal --- */
+
 .modal-body .slot-container {
   display: flex;
   flex-wrap: wrap;
@@ -235,7 +233,7 @@ h2.text-center {
  
 .modal-body .slot-btn {
   flex-grow: 1;
-  min-width: 80px; /* Prevents buttons from getting too narrow */
+  min-width: 80px; 
 }
  
 .modal-footer {
@@ -248,13 +246,13 @@ h2.text-center {
   border-top: 1px solid #dee2e6;
 }
  
-/* --- Popup (center aligned) --- */
+
 .popup {
   position: fixed;
   z-index: 1060;
-  top: 50%;
+  bottom: 2rem;
   left: 50%;
-  transform: translate(-50%, -50%);  /* Center on screen */
+  transform: translateX(-50%); 
   padding: 1rem 1.25rem;
   border-radius: 0.375rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
@@ -281,7 +279,7 @@ h2.text-center {
 }
 .close-popup:hover { opacity: 1; }
  
-/* Optional: top-right variant if needed again */
+
 .popup--top-right {
   top: 20px;
   left: auto;
@@ -299,7 +297,7 @@ h2.text-center {
 .alert-info   { color: #0c5460; background-color: #d1ecf1; border-color: #bee5eb; }
 .alert-danger { color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; }
  
-/* --- NEW: Utility classes used in modal --- */
+
 .text-center {
   text-align: center;
 }
@@ -327,3 +325,33 @@ h2.text-center {
 }
 .invalid-feedback.d-block { display: block; }
  
+
+.search-container {
+  position: relative;
+}
+ 
+.search-input {
+  padding-right: 2.5rem; /* Make space for icon */
+}
+ 
+.search-container::after {
+  position: absolute;
+  right: 15px;
+  bottom: 8px;
+  top: 40px; 
+  pointer-events: none;
+  font-size: 1.1rem;
+  color: #6c757d;
+  opacity: 0.6;
+}
+
+.filter-search-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem; /* Adds space between inputs */
+  margin-bottom: 1.5rem;
+}
+
+.filter-search-row .form-group {
+  flex: 1 1 250px; /* Minimum width and flexible growth */
+}

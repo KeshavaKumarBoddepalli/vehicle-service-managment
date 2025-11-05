@@ -7,16 +7,16 @@
       class="search-input"
       placeholder="Enter Service Name"
       [(ngModel)]="searchQuery"
-      (keyup.enter)="searchServices()"
+      (ngModelChange)="searchServices()"
     />
-    <button class="btn btn-search" (click)="searchServices()">Search</button>
+    <!-- <button class="btn btn-search" (click)="searchServices()">Search</button>
     <button
       *ngIf="showSearchClear"
       class="btn btn-show-all"
       (click)="showAll()"
     >
       Show All
-    </button>
+    </button> -->
   </div>
 
   <!-- Service Table -->

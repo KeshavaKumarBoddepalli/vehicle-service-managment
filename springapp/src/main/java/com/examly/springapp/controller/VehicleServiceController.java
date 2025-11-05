@@ -18,8 +18,11 @@ import java.util.Optional;
 @RequestMapping("/api/services")
 public class VehicleServiceController {
 
-    @Autowired
     private VehicleService vehicleService;
+
+    public VehicleServiceController(VehicleService vehicleService) {
+        this.vehicleService = vehicleService;
+    }
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
@@ -31,7 +34,6 @@ public class VehicleServiceController {
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
-   
     @GetMapping
     public ResponseEntity<List<VehicleMaintenance>> getAllServices() {
         List<VehicleMaintenance> services = vehicleService.getAllServices();
@@ -50,10 +52,10 @@ public class VehicleServiceController {
         return ResponseEntity.ok(services);
     }
 
-   
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<VehicleMaintenance> updateService(@PathVariable Long id, @RequestBody VehicleMaintenance service) {
+    public ResponseEntity<VehicleMaintenance> updateService(@PathVariable Long id,
+            @RequestBody VehicleMaintenance service) {
         VehicleMaintenance updated = vehicleService.updateService(id, service);
         if (updated == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -61,24 +63,17 @@ public class VehicleServiceController {
         return ResponseEntity.ok(updated);
     }
 
-    // ✅ Admin-only: Delete a service
-    
-@DeleteMapping("/{id}")
-@PreAuthorize("hasRole('ADMIN')")
-public ResponseEntity<Void> deleteService(@PathVariable Long id) {
-    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    System.out.println("User roles: " + auth.getAuthorities());
-
-    Optional<VehicleMaintenance> serviceOpt = vehicleService.getServiceById(id);
-    if (serviceOpt.isEmpty()) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> deleteService(@PathVariable Long id) {
+        Optional<VehicleMaintenance> serviceOpt = vehicleService.getServiceById(id);
+        if (serviceOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        vehicleService.deleteServiceAndSetAppointmentToNull(id);
+        return ResponseEntity.noContent().build();
     }
-    vehicleService.deleteService(id);
-    return ResponseEntity.noContent().build();
-}
 
-
-   
     @GetMapping("/{id}")
     public ResponseEntity<VehicleMaintenance> getServiceById(@PathVariable Long id) {
         Optional<VehicleMaintenance> found = vehicleService.getServiceById(id);

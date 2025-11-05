@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 public class Appointment {
 
@@ -14,6 +17,7 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "serviceId")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private VehicleMaintenance service;
 
@@ -26,6 +30,15 @@ public class Appointment {
     
     private String status;
 
+    //----new fields
+    private String bookedServiceName;
+    private int bookedServicePrice;
+    private String bookedVehicleType;
+    
+    
+
+
+
     @ManyToOne
     @JoinColumn(name = "userId")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -33,8 +46,6 @@ public class Appointment {
 
     public Appointment() {}
     
-
-
     public Appointment(VehicleMaintenance service, LocalDate appointmentDate, String location, User user, String status,String timeSlot) {
         this.service = service;
         this.appointmentDate = appointmentDate;
@@ -102,5 +113,29 @@ public class Appointment {
 
     public void setTimeSlot(String timeSlot) {
         this.timeSlot = timeSlot;
+    }
+
+    public String getBookedServiceName() {
+        return bookedServiceName;
+    }
+
+    public void setBookedServiceName(String bookedServiceName) {
+        this.bookedServiceName = bookedServiceName;
+    }
+
+    public int getBookedServicePrice() {
+        return bookedServicePrice;
+    }
+
+    public void setBookedServicePrice(int bookedServicePrice) {
+        this.bookedServicePrice = bookedServicePrice;
+    }
+
+    public String getBookedVehicleType() {
+        return bookedVehicleType;
+    }
+
+    public void setBookedVehicleType(String bookedVehicleType) {
+        this.bookedVehicleType = bookedVehicleType;
     }
 }

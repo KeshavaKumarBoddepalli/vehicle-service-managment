@@ -14,7 +14,7 @@ export class AdminviewappointmentComponent implements OnInit {
   isLoading: boolean = true;
   errorMessage: string = '';
   private errorPopupTimer: any;
-  
+
   statuses: string[] = ['Pending', 'Approved', 'Rejected'];
   filterStatus: string = 'All';
   statusFilterOptions: string[] = ['All', 'Pending', 'Approved', 'Rejected', 'Cancelled'];
@@ -24,15 +24,15 @@ export class AdminviewappointmentComponent implements OnInit {
   searchTerm: string = '';
   sortField: string = '';
   sortOrder: 'asc' | 'desc' = 'asc';
-  
+
 
   sortOptions: { value: string, label: string }[] = [
-    { value: '', label: 'Default Order' },
+   // { value: '', label: 'Default Order' },
     { value: 'appointmentId', label: 'Booking ID' },
     { value: 'appointmentDate', label: 'Date' },
     { value: 'timeSlot', label: 'Time Slot' }, // <-- NEW
-    { value: 'service.serviceName', label: 'Service Name' },
-    { value: 'service.servicePrice', label: 'Price' },
+    { value: 'bookedServiceName', label: 'Service Name' },
+    { value: 'bookedServicePrice', label: 'Price' },
     { value: 'location', label: 'Location' },
     { value: 'user.username', label: 'Username' },
     { value: 'status', label: 'Status' }
@@ -48,21 +48,24 @@ export class AdminviewappointmentComponent implements OnInit {
   constructor(private appointmentService: AppointmentService) { }
 
   ngOnInit(): void {
+
+    this.sortField = 'appointmentId';
+    this.sortOrder = 'desc';
     this.loadAllAppointments();
   }
 
   loadAllAppointments(): void {
     this.errorMessage = '';
     this.isLoading = true;
-    
-    
+
+
     this.appointmentService.getAppointments().subscribe(
       (data) => {
         this.appointments = data.map(app => ({
           ...app,
           selectedStatus: app.status
         }));
-        
+
         this.applyFiltersAndSort();
         this.isLoading = false;
       },
@@ -76,22 +79,23 @@ export class AdminviewappointmentComponent implements OnInit {
   applyFiltersAndSort(): void {
     this.errorMessage = '';
     let tempAppointments = [...this.appointments];
-   
+
     if (this.filterStatus !== 'All') {
       tempAppointments = tempAppointments.filter(app => app.status === this.filterStatus);
     }
-    
+
     if (this.searchTerm.trim() !== '') {
       const lowerTerm = this.searchTerm.toLowerCase();
       tempAppointments = tempAppointments.filter(app =>
-        (app.service?.serviceName && app.service.serviceName.toLowerCase().includes(lowerTerm)) ||
+        (app.bookedServiceName && app.bookedServiceName.toLowerCase().includes(lowerTerm)) ||
+        
         (app.location && app.location.toLowerCase().includes(lowerTerm)) ||
         (app.user?.username && app.user.username.toLowerCase().includes(lowerTerm)) ||
         (app.status && app.status.toLowerCase().includes(lowerTerm)) ||
         (app.timeSlot && app.timeSlot.toLowerCase().includes(lowerTerm)) // <-- NEW
       );
     }
-    
+
     if (this.sortField) {
       tempAppointments.sort((a, b) => {
         const valA = this.getNestedPropertyValue(a, this.sortField);
@@ -115,7 +119,7 @@ export class AdminviewappointmentComponent implements OnInit {
     this.currentPage = 1;
     this.updatePaginatedAppointments();
   }
-  
+
   private getNestedPropertyValue(obj: any, path: string): any {
     if (!obj || !path) return null;
     return path.split('.').reduce((acc, part) => (acc && acc[part] !== undefined) ? acc[part] : null, obj);
@@ -245,7 +249,7 @@ export class AdminviewappointmentComponent implements OnInit {
             selectedStatus: updatedFromServer.status
           };
         }
-        
+
         this.applyFiltersAndSort();
         this.triggerSuccessPopup('Status updated successfully!');
       },
@@ -260,3 +264,4 @@ export class AdminviewappointmentComponent implements OnInit {
     this.applyFiltersAndSort();
   }
 }
+

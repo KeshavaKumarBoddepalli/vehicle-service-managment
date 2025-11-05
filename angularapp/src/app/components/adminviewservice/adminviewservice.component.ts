@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import { VehicleMaintenance } from 'src/app/models/vehicle-maintenance.model';
@@ -59,20 +60,29 @@ export class AdminviewserviceComponent implements OnInit {
   }
 
   searchServices(): void {
-    if (!this.searchQuery.trim()) return;
+    const query = this.searchQuery.trim().toLowerCase();
+  
+    if (!query) {
+      // Reset to full list when search is cleared
+      this.displayedServices = [...this.services];
+      this.showSearchClear = false;
+      this.setupPagination();
+      return;
+    }
+  
     this.showSearchClear = true;
     this.displayedServices = this.services.filter(service =>
-      service.serviceName.toLowerCase().includes(this.searchQuery.toLowerCase())
+      service.serviceName.toLowerCase().includes(query)
     );
     this.setupPagination();
   }
 
-  showAll(): void {
-    this.searchQuery = '';
-    this.showSearchClear = false;
-    this.displayedServices = [...this.services];
-    this.setupPagination();
-  }
+  // showAll(): void {
+  //   this.searchQuery = '';
+  //   this.showSearchClear = false;
+  //   this.displayedServices = [...this.services];
+  //   this.setupPagination();
+  // }
 
   setupPagination(): void {
     this.totalPages = Math.ceil(this.displayedServices.length / this.pageSize);
