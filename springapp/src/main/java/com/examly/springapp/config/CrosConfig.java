@@ -17,7 +17,7 @@ public class CrosConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins(
-                            "https://8081-cddcccedbacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io",
+                            "http://localhost:8081",
                             "http://127.0.0.1:3000"
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE","PATCH", "OPTIONS")

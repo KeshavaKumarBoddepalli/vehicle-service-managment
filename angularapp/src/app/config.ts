@@ -1,1 +1,1 @@
-export const BASE_URL = "https://8080-cddcccedbacfffceebfaeeaaeddacfffbcfdda.premiumproject.examly.io";
+export const BASE_URL = "http://localhost:8080";
